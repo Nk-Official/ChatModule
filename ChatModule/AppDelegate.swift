@@ -1,0 +1,96 @@
+//
+//  AppDelegate.swift
+//  ChatModule
+//
+//  Created by Namrata Khanduri on 18/11/19.
+//  Copyright © 2019 Namrata Khanduri. All rights reserved.
+//
+
+import UIKit
+import IQKeyboardManagerSwift
+import Firebase
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    override init() {
+        FirebaseApp.configure()
+    }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        IQKeyboardManager.shared.enable = true
+//        FirebaseApp.configure()
+        openApp()
+        return true
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        
+    }
+}
+
+extension AppDelegate{
+    func openApp(){
+        let nvc = UINavigationController()
+        if FireBaseManager().isUserLogIn{
+            let contactsCoordinator = ContactsScreenCoordinator(navigationController: nvc, delegate: nil, dataSource: self, datemanager: nil)
+            contactsCoordinator.start()
+        }else{
+            let vc = LogInViewController.initiatefromStoryboard(.main)
+            nvc.viewControllers = [vc]
+        }
+        let keywindow = window ?? UIWindow(frame: UIScreen.main.bounds)
+        window = keywindow
+        keywindow.rootViewController = nvc
+        keywindow.makeKeyAndVisible()
+    }
+}
+
+//MARK: - ContactsDataSource
+extension AppDelegate: ContactsDataSource{
+
+    func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
+        FireBaseManager().getAllUsers { (users) in
+            list(users)
+        }
+    }
+    
+    func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at indexPath: IndexPath) -> UITableViewCell? {
+        return nil
+    }
+    
+    func startRefreshing(_ viewController: ContactsViewController, completion: @escaping ([Channel]) -> ()) {
+        FireBaseManager().getAllUsers { (channels) in
+            completion(channels)
+        }
+    }
+    
+}
+
+extension AppDelegate: ContactsDelegate{
+    func createGroup(_ viewController: ContactsViewController, group channel: Channel) {
+        FireBaseManager().createGroup(group: channel)
+    }
+    
+    func didSelectContact(_ viewController: ContactsViewController, contact: Channel) {
+        
+    }
+    
+}

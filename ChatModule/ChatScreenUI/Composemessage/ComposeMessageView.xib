@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeMessageView" customModule="ChatModule" customModuleProvider="target">
+            <connections>
+                <outlet property="contentV" destination="iN0-l3-epB" id="Hll-e0-aOd"/>
+                <outlet property="microphnBtn" destination="EGp-lp-cum" id="Bbx-Yv-qOD"/>
+                <outlet property="msgTextV" destination="OSU-ZS-KuF" id="B1w-nk-UUo"/>
+                <outlet property="msgTextVHeightConstraint" destination="euY-IY-OI8" id="yos-Rc-Y3j"/>
+                <outlet property="sendMsgBtn" destination="hc7-ga-8G1" id="oqD-Q8-usH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="408" height="77"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TlC-DL-2rB">
+                    <rect key="frame" x="0.0" y="0.0" width="408" height="77"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQa-KF-8SW">
+                            <rect key="frame" x="5" y="8.5" width="337" height="60"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OSU-ZS-KuF" customClass="CustomTextView" customModule="ChatModule" customModuleProvider="target">
+                                    <rect key="frame" x="10" y="10" width="237" height="40"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="euY-IY-OI8"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Type a message"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </textView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e7z-RY-ETh">
+                                    <rect key="frame" x="257" y="5" width="75" height="50"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fav-sE-iXe">
+                                            <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="35" id="Fzq-i0-k4Q"/>
+                                            </constraints>
+                                            <state key="normal" image="attachmentIcon"/>
+                                            <connections>
+                                                <action selector="attachMnetBtn:" destination="-1" eventType="touchUpInside" id="n7U-cA-365"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8n-H1-J11">
+                                            <rect key="frame" x="40" y="0.0" width="35" height="50"/>
+                                            <state key="normal" image="cameraIcon"/>
+                                            <connections>
+                                                <action selector="cameraBtn:" destination="-1" eventType="touchUpInside" id="QXz-3e-RCt"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="DSB-Xl-AMc"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="e7z-RY-ETh" secondAttribute="bottom" constant="5" id="EJ2-D3-LUv"/>
+                                <constraint firstItem="OSU-ZS-KuF" firstAttribute="top" secondItem="rQa-KF-8SW" secondAttribute="top" constant="10" id="GSe-nY-pJ1"/>
+                                <constraint firstItem="e7z-RY-ETh" firstAttribute="leading" secondItem="OSU-ZS-KuF" secondAttribute="trailing" constant="10" id="RE4-Xc-UZa"/>
+                                <constraint firstItem="OSU-ZS-KuF" firstAttribute="leading" secondItem="rQa-KF-8SW" secondAttribute="leading" constant="10" id="Rnp-XP-uLW"/>
+                                <constraint firstAttribute="trailing" secondItem="e7z-RY-ETh" secondAttribute="trailing" constant="5" id="u4N-KB-vcJ"/>
+                                <constraint firstAttribute="bottom" secondItem="OSU-ZS-KuF" secondAttribute="bottom" constant="10" id="zMa-iX-PKf"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="30"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hc7-ga-8G1">
+                            <rect key="frame" x="350" y="18.5" width="50" height="50"/>
+                            <color key="backgroundColor" red="0.0010214187204837799" green="0.53187435865402222" blue="0.47943949699401855" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="4mx-3Q-b0b"/>
+                                <constraint firstAttribute="height" constant="50" id="LiN-6u-w2x"/>
+                            </constraints>
+                            <inset key="contentEdgeInsets" minX="12" minY="10" maxX="7" maxY="10"/>
+                            <state key="normal" image="sendMessage"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="sendMsgBtn:" destination="-1" eventType="touchUpInside" id="i1b-18-CUB"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGp-lp-cum">
+                            <rect key="frame" x="350" y="18.5" width="50" height="50"/>
+                            <color key="backgroundColor" red="0.00102141872" green="0.53187435869999999" blue="0.47943949699999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="microphnIcon"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="microPhnBtn:" destination="-1" eventType="touchUpInside" id="PZG-Iu-XEd"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="rQa-KF-8SW" secondAttribute="bottom" constant="8.5" id="4hO-Xx-S2R"/>
+                        <constraint firstItem="EGp-lp-cum" firstAttribute="centerX" secondItem="hc7-ga-8G1" secondAttribute="centerX" id="4zC-ZN-t1w"/>
+                        <constraint firstItem="hc7-ga-8G1" firstAttribute="bottom" secondItem="rQa-KF-8SW" secondAttribute="bottom" id="DJ8-JU-mmD"/>
+                        <constraint firstItem="rQa-KF-8SW" firstAttribute="leading" secondItem="TlC-DL-2rB" secondAttribute="leading" constant="5" id="Dsp-If-eIX"/>
+                        <constraint firstItem="EGp-lp-cum" firstAttribute="centerY" secondItem="hc7-ga-8G1" secondAttribute="centerY" id="Ffi-MU-EbA"/>
+                        <constraint firstAttribute="trailing" secondItem="hc7-ga-8G1" secondAttribute="trailing" constant="8" id="SKq-GS-ZJj"/>
+                        <constraint firstItem="hc7-ga-8G1" firstAttribute="leading" secondItem="rQa-KF-8SW" secondAttribute="trailing" constant="8" id="ePx-Gw-Ed7"/>
+                        <constraint firstItem="EGp-lp-cum" firstAttribute="height" secondItem="hc7-ga-8G1" secondAttribute="height" id="mSd-0W-bzJ"/>
+                        <constraint firstItem="EGp-lp-cum" firstAttribute="width" secondItem="hc7-ga-8G1" secondAttribute="width" id="xbb-Ig-UxA"/>
+                        <constraint firstItem="rQa-KF-8SW" firstAttribute="top" secondItem="TlC-DL-2rB" secondAttribute="top" constant="8.5" id="y0f-zc-lBx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="TlC-DL-2rB" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="BBS-B7-eGm"/>
+                <constraint firstItem="TlC-DL-2rB" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="IaL-5j-0lq"/>
+                <constraint firstItem="TlC-DL-2rB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Qxe-rX-P61"/>
+                <constraint firstItem="TlC-DL-2rB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wwq-H0-WsH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="153.62318840579712" y="433.59375"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="attachmentIcon" width="16" height="16"/>
+        <image name="cameraIcon" width="21.333333969116211" height="19.666666030883789"/>
+        <image name="microphnIcon" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="sendMessage" width="32" height="32"/>
+    </resources>
+</document>
