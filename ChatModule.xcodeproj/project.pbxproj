@@ -55,6 +55,7 @@
 		1BE2C50C23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C50B23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift */; };
 		1BE2C50F23FD03800045F251 /* ImageMessageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C50E23FD03800045F251 /* ImageMessageViewerViewController.swift */; };
 		1BE2C51123FD068A0045F251 /* Example.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE2C51023FD068A0045F251 /* Example.storyboard */; };
+		1BE2C51323FD39FC0045F251 /* ChatPrefrences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C51223FD39FC0045F251 /* ChatPrefrences.swift */; };
 		1BEFC5192383B49300DC6964 /* AttachmentActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEFC5182383B49300DC6964 /* AttachmentActionSheet.swift */; };
 		1BEFC51B2383B66500DC6964 /* AttachmentActionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEFC51A2383B66500DC6964 /* AttachmentActionsList.swift */; };
 		1BEFC5202383CF9D00DC6964 /* AudioRecorderManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEFC51F2383CF9D00DC6964 /* AudioRecorderManger.swift */; };
@@ -119,6 +120,7 @@
 		1BE2C50B23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutGoingMessageBubbleTableViewCell.swift; sourceTree = "<group>"; };
 		1BE2C50E23FD03800045F251 /* ImageMessageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageViewerViewController.swift; sourceTree = "<group>"; };
 		1BE2C51023FD068A0045F251 /* Example.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Example.storyboard; sourceTree = "<group>"; };
+		1BE2C51223FD39FC0045F251 /* ChatPrefrences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPrefrences.swift; sourceTree = "<group>"; };
 		1BEFC5182383B49300DC6964 /* AttachmentActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentActionSheet.swift; sourceTree = "<group>"; };
 		1BEFC51A2383B66500DC6964 /* AttachmentActionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentActionsList.swift; sourceTree = "<group>"; };
 		1BEFC51C2383C21700DC6964 /* ChatModule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatModule.entitlements; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				1B10EE3E2382578E005A94E2 /* ChatTheme.swift */,
 				1B10EE4023825E21005A94E2 /* DataBase.swift */,
 				1B10EE422382615F005A94E2 /* UserDefaultsKeys.swift */,
+				1BE2C51223FD39FC0045F251 /* ChatPrefrences.swift */,
 			);
 			path = "Chat Theme";
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				1B0D64F423F5115800D16134 /* ContactsPrefrences.swift in Sources */,
 				1BEFC52A2384108F00DC6964 /* AudioBubbleTableViewCell.swift in Sources */,
 				1B1B09CA23F28740009238B7 /* FireBaseManager.swift in Sources */,
+				1BE2C51323FD39FC0045F251 /* ChatPrefrences.swift in Sources */,
 				1B3BD52A23F55CF4005A3C35 /* ChatDelegate.swift in Sources */,
 				1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */,
 				1B10EE5E23828279005A94E2 /* ComposeMessageView.swift in Sources */,

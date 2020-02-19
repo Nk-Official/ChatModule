@@ -101,10 +101,11 @@ class ChatViewController: UIViewController {
         tableView.rx.setDelegate(self).disposed(by: disposablebag)
         tableView.rx.setDataSource(self).disposed(by: disposablebag)
     }
-    func openImage(image : UIImage, date: String){
+    func openImage(image : UIImage,username: String, date: String){
         let vc = ImageMessageViewerViewController.initiatefromStoryboard(.main)
         vc.image = image
         vc.date = date
+        vc.name = username
         present(vc, animated: true, completion: nil)
     }
 }
@@ -158,13 +159,21 @@ extension ChatViewController : UITableViewDataSource{
                 else{ let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingImageCell, for: indexPath) as! ImageMsgTableViewCell
                     cell.imageTap = {
                         (_,image) in
-                        self.openImage(image: image)
+                        let name = message.senderId == self.receiver.id ? self.receiver.name : "You"
+                        self.openImage(image: image, username: name, date: message.sendDateTime)
                     }
                     messageCell = cell
                 }
             }else{
                 if let cell = dataSource.outgoingImageMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingImageCell, for: indexPath) as! MessageTableViewCell}
+                else{  let cell  = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingImageCell, for: indexPath) as! ImageMsgTableViewCell
+                    cell.imageTap = {
+                        (_,image) in
+                        let name = message.senderId == self.receiver.id ? self.receiver.name : "You"
+                        self.openImage(image: image, username: name, date: message.sendDateTime)
+                    }
+                    messageCell = cell
+                }
             }
         case .video:
             if incoming{
