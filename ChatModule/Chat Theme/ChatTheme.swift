@@ -6,7 +6,6 @@
 //  Copyright © 2019 Namrata Khanduri. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 enum ChatTheme: String{
