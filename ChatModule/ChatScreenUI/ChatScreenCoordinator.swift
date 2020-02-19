@@ -16,56 +16,37 @@ class ChatScreenCoordinator {
     //MARK: - PROPERTIES
 
     private var navigationController :UINavigationController!
-    private var receiverId : String
-    private var chatDelegate : ChatDelegate?
+    private var receiver : Channel
+    private var chatDelegate : ChatDelegate
     private var chatDataSource : ChatDataSource
 
     var dateManager : DateManager!
-    
+    var backCoordinator: BackNavigateDelegate
     
     //MARK: - INITIALIZATION
     init(navigationController : UINavigationController,
-         receiverId : String,
-         delegate : ChatDelegate? = nil,
-         dataSource: ChatDataSource){
-       self.navigationController = navigationController
-        self.receiverId = receiverId
+         receiver : Channel,
+         delegate : ChatDelegate,
+         dataSource: ChatDataSource,
+         backNavigator: BackNavigateDelegate ){
+        
+        self.navigationController = navigationController
+        self.receiver = receiver
         chatDelegate = delegate
         chatDataSource = dataSource
+        self.backCoordinator = backNavigator
+        
    }
     //MARK: - METHOD
     func start(){
         let vc = ChatViewController.initiatefromStoryboard(.main)
-        vc.receiverId = receiverId
+        vc.receiver = receiver
         vc.dateManager = dateManager
+        vc.delegate = chatDelegate
+        vc.dataSource = chatDataSource
+        vc.backDelegate = backCoordinator
         navigationController.pushViewController(vc, animated: true)
     }
 }
 
-//MARK: - ChatDataSource
-protocol ChatDataSource {
-    
-    func messages(_ viewcontroller: ChatViewController,receiver id : String, messages: ([DayMessages])->())
-    
-    func incomingTextMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func incomingAudioMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func incomingVideoMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func incomingImageMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    
-    func outgoingTextMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func outgoingAudioMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func outgoingVideoMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    func outgoingImageMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
-    
-}
 
-//MARK: - ChatDelegate
-protocol ChatDelegate{
-    
-
-    func didSelect(_ viewController: ChatViewController, message bubble: MessageBubble, message : Message)
-    func didLongPress(_ viewController: ChatViewController, message bubble: MessageBubble, message : Message)
-    
-    func didSendMessage(_ viewController: ChatViewController, message : Message)
-
-}

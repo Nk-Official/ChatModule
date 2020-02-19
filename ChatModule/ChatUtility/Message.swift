@@ -13,7 +13,7 @@ struct Message: Codable{
     var senderId : String
     var receiverId: String
     
-    var message : String?
+    var message : String? = nil
     var audioMsg : String? = nil
     var videoMsg: String? = nil
     var imageMsg: String? = nil
@@ -44,6 +44,12 @@ struct Message: Codable{
     func getMessageType()->MessageType{
         if self.audioMsg != nil{
             return .audio
+        }
+        if imageMsg != nil{
+            return .image
+        }
+        if videoMsg != nil{
+            return .video
         }
         return .text
     }

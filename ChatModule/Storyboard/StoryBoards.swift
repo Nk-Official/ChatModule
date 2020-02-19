@@ -11,6 +11,7 @@ import UIKit
 enum Storyboards: String {
     
     case main = "ChatModule"
+    case example = "Example"
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
     }

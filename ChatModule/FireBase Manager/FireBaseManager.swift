@@ -51,7 +51,7 @@ struct FireBaseManager {
                 }else{
                     print(result?.additionalUserInfo?.profile as Any)
                     print("uid ",result?.user.uid  as Any)
-                    self.addUserToDataBase()
+//                    self.addUserToDataBase()
                     completion(.success(true))
                 }
             }
@@ -112,7 +112,7 @@ struct FireBaseManager {
         var messages = [Message]()
         databaseRefrence.child(chat).child(udid).child(friendId).observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.exists(){
-                if let userData = snapshot.value as? NSDictionary{
+                if let userData = snapshot.value as? [String:Any]{
                     for (_,value) in userData {
                         if let message: Message = CommonFunctions.dictionaryDecode(dictionary: value as! Dictionary<AnyHashable, Any>){
                             messages.append(message)
@@ -130,7 +130,6 @@ struct FireBaseManager {
             if snapshot.exists(){
                 if let userData = snapshot.value as? NSDictionary{
                     for (_,value) in userData {
-                        print("user \n\n",value)
                         if let user:Channel = CommonFunctions.dictionaryDecode(dictionary: value as! Dictionary<AnyHashable, Any>){
                             if user.id != self.udid{ // user himself not visible in chat list
                                 users.append(user)
@@ -148,7 +147,7 @@ struct FireBaseManager {
         
         var dayMessages = [DayMessages]()
         
-        var dateMngr = DateManager()
+        var dateMngr = DateManager(inputDateFormat: "MMM dd, yyyy hh:mm a", outputDateFormat: "MMM dd, yyyy", outputTimeFormat: "hh:mm a")
         let allDateTimeMessageSent = messages.compactMap({$0.sendDateTime}) as [String]
         let allDatesMessageSent: [String] = allDateTimeMessageSent.compactMap({dateMngr.getDate(from: $0) ?? ""})
         var dates = Array(Set(allDatesMessageSent))
@@ -159,10 +158,25 @@ struct FireBaseManager {
             for message in messages where message.sendDateTime.contains(date){
                 dayMsg.messages.append(message)
             }
+            dayMsg.messages.sort(by: {$0.sendDateTime<$1.sendDateTime})
             dayMessages.append(dayMsg)
         }
-        
-        
         return dayMessages
+    }
+    
+    func addMessage( message: Message, ofdate : String, to list : [DayMessages])->[DayMessages]{
+        
+        var allmessages = list
+        if allmessages.contains(where: {$0.date.contains(ofdate)}){
+            for i in 0..<allmessages.count where allmessages[i].date.contains(ofdate){
+                allmessages[i].messages.append(message)
+            }
+        }
+        else{
+            let dayMessage = DayMessages(date: ofdate, messages: [message])
+            allmessages.append(dayMessage)
+        }
+        
+        return allmessages
     }
 }

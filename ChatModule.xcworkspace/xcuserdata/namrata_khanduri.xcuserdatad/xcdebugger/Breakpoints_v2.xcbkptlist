@@ -7,80 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "77E3CB8A-753E-4BBD-BFD7-266A16CC49D6"
+            uuid = "23A8D35D-817E-4172-9C86-A622A4CFAF24"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/DateManager/DateManager.swift"
+            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "DateManager"
-            landmarkType = "14">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "481B0C04-3651-4141-9672-0CB349CE2C99"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatModule/Contacts/ContactTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "configureCell(channel:)"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "getAllChat(of:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "215EFC9D-8A5B-4269-9158-1337598A0596"
+            uuid = "90CCAAC5-D048-4D4B-80ED-9AE7E73FB681"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/DateManager/DateManager.swift"
+            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "daysFromTodaysDate(from:)"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "getAllChat(of:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FA8AB71F-0F3D-47F5-B58A-ED613D4DA34F"
+            uuid = "A5DEA9B8-FD1C-46EB-8D36-2B266E3163E2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/DateManager/DateManager.swift"
+            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "daysFromTodaysDate(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "41B79D3B-21E9-4AAF-9572-7AF7D1A6787D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatModule/Contacts/ContactsScreenCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "navigateToChat(_:receiverId:)"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "getAllChat(of:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

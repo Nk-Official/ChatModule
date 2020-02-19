@@ -6,7 +6,7 @@
 //  Copyright © 2020 Namrata Khanduri. All rights reserved.
 //
 
-import UIKit
+import SkeletonView
 
 class ContactTableViewCell: UITableViewCell {
 
@@ -16,7 +16,8 @@ class ContactTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLbl : UILabel!
     @IBOutlet weak var unreadMsgCountLbl : UILabel!
     @IBOutlet weak var muteImageView : UIImageView!
-    
+    @IBOutlet weak var msgTypeImageView : UIImageView!
+
     var dateManager : DateManager!
     var prefrences: ContactsPrefrences =  ContactsPrefrences()
     
@@ -24,7 +25,10 @@ class ContactTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.layoutSkeletonIfNeeded()
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -38,13 +42,32 @@ class ContactTableViewCell: UITableViewCell {
     func configureCell(channel : Channel){
         configureUI()
         usernameLbl.text = channel.name
-        lastMsgLbl.text = channel.lastMessage?.message
         userImageView.setImage(from: channel.profile,placeholderImage: UIImage(named:"placeholderUserImg") )
-        dateLbl.text = nil
-        guard let dateDiff = dateManager.daysFromTodaysDate(from: channel.lastMessage?.sendDateTime ?? "")else{
+        guard let recentMessage = channel.lastMessage else{
             return
         }
-    
+        lastMsgLbl.text = recentMessage.message
+        dateLbl.text = nil
+        let msgType = recentMessage.getMessageType()
+        msgTypeImageView.isHidden = false
+        switch msgType {
+        case .text:msgTypeImageView.isHidden = true
+        case .audio:
+            msgTypeImageView.image = UIImage(named: "microphoneGray")
+            lastMsgLbl.text = "Audio"
+        case .image:
+            msgTypeImageView.image = UIImage(named: "cameraGray")
+            lastMsgLbl.text = "Photo"
+        case .video:
+            msgTypeImageView.image = UIImage(named: "videoGray")
+            lastMsgLbl.text = "Video"
+        case .file:
+            msgTypeImageView.image = UIImage(named: "fileGray")
+            lastMsgLbl.text = "File"
+        }
+        guard let dateDiff = dateManager.daysFromTodaysDate(from: recentMessage.sendDateTime)else{
+            return
+        }
         switch dateDiff {
         case .today:
             let time = dateManager.getTime(from: channel.lastMessage?.sendDateTime ?? "")
@@ -79,4 +102,18 @@ class ContactTableViewCell: UITableViewCell {
         unreadMsgCountLbl.backgroundColor = prefrences.unreadMessageCountBackgroundColor
         
     }
+}
+//SEKLTON
+
+extension ContactTableViewCell {
+    
+    
+    func showLoaderSkelton(){
+        [usernameLbl,lastMsgLbl,userImageView,dateLbl,unreadMsgCountLbl,muteImageView,dateLbl].forEach({$0?.isSkeletonable = true})
+        [usernameLbl,lastMsgLbl,userImageView,dateLbl,unreadMsgCountLbl,muteImageView,dateLbl].forEach({$0?.showAnimatedSkeleton()})
+    }
+    func hideLoaderSkelton(){
+        [usernameLbl,lastMsgLbl,userImageView,dateLbl,unreadMsgCountLbl,muteImageView,dateLbl].forEach({$0?.hideSkeleton()})
+    }
+    
 }

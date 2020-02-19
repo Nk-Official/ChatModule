@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-//        FirebaseApp.configure()
         openApp()
         return true
     }
@@ -53,7 +52,7 @@ extension AppDelegate{
             let contactsCoordinator = ContactsScreenCoordinator(navigationController: nvc, delegate: nil, dataSource: self, datemanager: nil)
             contactsCoordinator.start()
         }else{
-            let vc = LogInViewController.initiatefromStoryboard(.main)
+            let vc = LogInViewController.initiatefromStoryboard(.example)
             nvc.viewControllers = [vc]
         }
         let keywindow = window ?? UIWindow(frame: UIScreen.main.bounds)
@@ -65,16 +64,18 @@ extension AppDelegate{
 
 //MARK: - ContactsDataSource
 extension AppDelegate: ContactsDataSource{
+    func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at row: Int) -> UITableViewCell? {
+        return nil
+    }
 
     func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
+        viewController.showAnimation()
         FireBaseManager().getAllUsers { (users) in
+            viewController.hideAnimation()
             list(users)
         }
     }
     
-    func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at indexPath: IndexPath) -> UITableViewCell? {
-        return nil
-    }
     
     func startRefreshing(_ viewController: ContactsViewController, completion: @escaping ([Channel]) -> ()) {
         FireBaseManager().getAllUsers { (channels) in
@@ -92,5 +93,4 @@ extension AppDelegate: ContactsDelegate{
     func didSelectContact(_ viewController: ContactsViewController, contact: Channel) {
         
     }
-    
 }

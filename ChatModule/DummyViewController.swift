@@ -16,7 +16,7 @@ class DummyViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-let audiomng = AudioRecorderManager(audioName: "recording", typeExt: "m4a")
+    let audiomng = AudioRecorderManager(audioName: "recording", typeExt: "mpeg")
     @IBAction func record(){
         audiomng.startRecording()
     }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Log In View Controller-->
+        <scene sceneID="VCL-Dv-607">
+            <objects>
+                <viewController storyboardIdentifier="LogInViewController" id="hnL-DP-C2P" customClass="LogInViewController" customModule="ChatModule" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aN1-pP-LTe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBG" translatesAutoresizingMaskIntoConstraints="NO" id="3Ot-ay-SCy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAZ-hO-72j">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.47567958049999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGU-ZF-fQj">
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="j5W-gb-5CR"/>
+                                    <constraint firstAttribute="width" constant="100" id="t1y-R2-5yt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="LogIn">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logIn:" destination="hnL-DP-C2P" eventType="touchUpInside" id="S2p-SI-7k8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3Ot-ay-SCy" firstAttribute="trailing" secondItem="a4Y-ke-Tta" secondAttribute="trailing" id="6nB-vV-lpU"/>
+                            <constraint firstItem="3Ot-ay-SCy" firstAttribute="leading" secondItem="a4Y-ke-Tta" secondAttribute="leading" id="ANy-7C-35i"/>
+                            <constraint firstItem="DGU-ZF-fQj" firstAttribute="centerX" secondItem="aN1-pP-LTe" secondAttribute="centerX" id="H99-IS-ryf"/>
+                            <constraint firstAttribute="bottom" secondItem="3Ot-ay-SCy" secondAttribute="bottom" id="Os1-00-5GP"/>
+                            <constraint firstItem="hAZ-hO-72j" firstAttribute="leading" secondItem="a4Y-ke-Tta" secondAttribute="leading" id="Rco-R8-Imv"/>
+                            <constraint firstItem="DGU-ZF-fQj" firstAttribute="centerY" secondItem="aN1-pP-LTe" secondAttribute="centerY" id="SCN-Dt-F3F"/>
+                            <constraint firstAttribute="bottom" secondItem="hAZ-hO-72j" secondAttribute="bottom" id="VZH-pS-XSv"/>
+                            <constraint firstItem="3Ot-ay-SCy" firstAttribute="top" secondItem="aN1-pP-LTe" secondAttribute="top" id="e8b-1O-vS1"/>
+                            <constraint firstItem="a4Y-ke-Tta" firstAttribute="trailing" secondItem="hAZ-hO-72j" secondAttribute="trailing" id="jt7-Vf-ed3"/>
+                            <constraint firstItem="hAZ-hO-72j" firstAttribute="top" secondItem="aN1-pP-LTe" secondAttribute="top" id="vuu-my-shI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a4Y-ke-Tta"/>
+                    </view>
+                    <connections>
+                        <outlet property="logInButton" destination="DGU-ZF-fQj" id="rVK-QX-Q9L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cvw-Iq-3Bc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1262.3188405797102" y="-245.08928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="loginBG" width="994" height="993"/>
+    </resources>
+</document>

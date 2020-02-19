@@ -53,7 +53,7 @@ struct DateManager{
         return dateformattor.string(from: Date())
     }
     mutating func getDate(from string : String)->Date?{
-         return inputDateFormattor.date(from: string)
+        inputDateFormattor.date(from: string)
     }
     mutating func getTime(from string : String)->String?{
         convertFormat(from: string, fromFormat: inputDateFormat, toFormat: outputTimeFormat)
@@ -77,7 +77,7 @@ struct DateManager{
         return dateFormattor.string(from: date)
     }
     mutating func convertToDate(from string : String)->Date?{ // input string is in input date format
-        return inputDateFormattor.date(from: string)
+        inputDateFormattor.date(from: string)
     }
     
     mutating func daysFromTodaysDate(from date : String)->Day?{

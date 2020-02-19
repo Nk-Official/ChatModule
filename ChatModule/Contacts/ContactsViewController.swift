@@ -12,6 +12,8 @@ class ContactsViewController: UIViewController {
 
     //MARK: - IBOUTLET
    @IBOutlet weak var tableView : UITableView!
+    
+
    //MARK: - IBACTION
    @IBAction func logOut(_ sender: UIButton){
     viewmodel.firebaseManager.logOut()
@@ -19,6 +21,7 @@ class ContactsViewController: UIViewController {
     @IBAction func group(_ sender: UIButton){
       alertForGroup()
     }
+    
    //MARK: - VARIABLES
     let viewmodel = ContactsViewModel()
     let disposablebag = DisposeBag()
@@ -27,35 +30,32 @@ class ContactsViewController: UIViewController {
     var dateManager : DateManager!
     var prefrences: ContactsPrefrences!
     var navigator : ContactsNavigator!
+    private var animateTable : BehaviorRelay<Bool> = BehaviorRelay(value: true)
+//    private var animation : ((ContactsViewController)->())?
    //MARK: - OVERRIDEN
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
         setUI()
         bindUiToViewModel()
         getContacts()
     }
+    
    //MARK: - UI SETUP
    func setUI(){
-       
+    
    }
     //MARK: - BINDABLES
     func bindUiToViewModel(){
-        viewmodel.contacts.bind(to: tableView.rx.items) { (tableV, row, item) -> UITableViewCell in
-            if let cell = self.dataSource.cellForRowAt(self, for: item, at: IndexPath(row: row, section: 0)){
-                return cell
-            }
-            let cell = tableV.dequeueReusableCell(withIdentifier: "cell", for: IndexPath(row: row, section: 0) ) as! ContactTableViewCell
-            if self.dateManager == nil{
-                fatalError("intitalize datebformattor")
-            }
-            cell.prefrences = self.prefrences
-            cell.dateManager = self.dateManager
-            cell.configureCell(channel: item)
-            return cell
-        }.disposed(by: disposablebag)
+        tableView.rx.setDataSource(self).disposed(by: disposablebag)
         tableView.rx.setDelegate(self).disposed(by: disposablebag)
-        
+        viewmodel.contacts.subscribe { (_) in
+            self.tableView.reloadData()
+        }.disposed(by: disposablebag)
+        animateTable.subscribe { (_) in
+            self.tableView.reloadData()
+        }.disposed(by: disposablebag)
     }
        //MARK: - NETWORK CALL
     func getContacts(){
@@ -91,9 +91,23 @@ class ContactsViewController: UIViewController {
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
+    
+    //ANIMATION
+    func showAnimation(animation : ((ContactsViewController)->())? = nil){
+        if animation != nil{
+//            self.animation = animation
+            animation!(self)
+            animateTable.accept(false)
+            return
+        }
+        animateTable.accept(true)
+    }
+    func hideAnimation(){
+        animateTable.accept(false)
+    }
 }
 
-
+//MARK: - UITableViewDelegate
 extension ContactsViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = viewmodel.contacts.value[indexPath.row]
@@ -102,9 +116,49 @@ extension ContactsViewController : UITableViewDelegate{
             return
         }
         if delegate == nil{
-            navigator.navigateToChat(self, receiverId: channel.id)
+            navigator.navigateToChat(self, receiver: channel)
         }else{
             delegate?.didSelectContact(self, contact: channel)
         }
+    }
+}
+//MARK: - UITableViewDataSource
+extension ContactsViewController : UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        section == 0 ? 1 : (animateTable.value ? 5 : viewmodel.contacts.value.count)
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = indexPath.row
+        let section = indexPath.section
+        if section == 0{ // cell for add group and broad cast list
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionsCell", for: indexPath)
+            return cell
+        }else{
+            // default cell
+           
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: IndexPath(row: row, section: 0) ) as! ContactTableViewCell
+            if self.dateManager == nil{
+                fatalError("intitalize dateformattor")
+            }
+            if animateTable.value{
+                cell.showLoaderSkelton()
+                return cell
+            }
+            let item = viewmodel.contacts.value[row]
+            // custom cell by user
+            if let cell = self.dataSource.cellForRowAt(self, for: item, at: row){
+                return cell
+            }
+            cell.hideLoaderSkelton()
+            cell.prefrences = self.prefrences
+            cell.dateManager = self.dateManager
+            cell.configureCell(channel: item)
+            return cell
+            
+        }
+        
     }
 }

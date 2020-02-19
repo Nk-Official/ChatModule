@@ -56,6 +56,10 @@ class LogInViewController: UIViewController {
 
 
 extension LogInViewController: ContactsDataSource{
+    func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at row: Int) -> UITableViewCell? {
+        return nil
+    }
+    
     
     func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
         firebaseMngr.getAllUsers { (users) in
@@ -63,9 +67,6 @@ extension LogInViewController: ContactsDataSource{
         }
     }
     
-    func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at indexPath: IndexPath) -> UITableViewCell? {
-        return nil
-    }
     
     func startRefreshing(_ viewController: ContactsViewController, completion: ([Channel]) -> ()) {
         

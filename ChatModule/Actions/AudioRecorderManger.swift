@@ -95,7 +95,7 @@ extension AudioRecorderManager:AVAudioRecorderDelegate,AVAudioPlayerDelegate{
     }
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         finishRecording()
-        deleteAudio()
+//        deleteAudio()
         delegate?.didRecordedAudio(manager: self, audioUrl: nil, error: error)
     }
 }

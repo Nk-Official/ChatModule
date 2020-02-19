@@ -8,7 +8,17 @@
 
 import Foundation
 
-class DocumentDirectoryManager{
+open class DocumentDirectoryManager{
+    
+    func getData(from url: URL)->Data?{
+        do{
+            let data = try Data(contentsOf: url)
+            return data
+        }catch{
+            print("error while fetching fata from url",error.localizedDescription)
+            return nil
+        }
+    }
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -28,5 +38,15 @@ class DocumentDirectoryManager{
         catch(let err){
             print("error while deleting file at url",path,err.localizedDescription)
         }
+    }
+    static func deleteFileAtUrl(localFile url: URL){
+        let path = url.path
+       do{
+           try FileManager.default.removeItem(atPath: path)
+           print("file at url",path,"\ndeleted successfully")
+       }
+       catch(let err){
+           print("error while deleting file at url",path,err.localizedDescription)
+       }
     }
 }

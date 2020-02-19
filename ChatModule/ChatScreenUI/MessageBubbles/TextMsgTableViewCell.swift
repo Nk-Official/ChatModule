@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class TextMsgTableViewCell : MessageTableViewCell{
+    
     @IBOutlet weak   var msgLbl : UILabel!
 
     override func configureUI(){

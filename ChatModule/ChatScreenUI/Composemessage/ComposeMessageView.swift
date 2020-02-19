@@ -6,11 +6,13 @@
 //  Copyright © 2019 Namrata Khanduri. All rights reserved.
 //
 
-import UIKit
+
+import ContactsUI
 
 protocol ComposeMssageDelegate {
     func textMessageSent(_ composeMessageView: ComposeMessageView, message : String)
     func audioMessageSent(_ composeMessageView: ComposeMessageView, audioUrl : URL)
+    func imageMessageSent(_ composeMessageView: ComposeMessageView, images : [UIImage])
 //    func messageSent(_ composeMessageView: ComposeMessageView, message : Message)
 }
 
@@ -22,7 +24,7 @@ class ComposeMessageView: UIView{
     @IBOutlet weak private var sendMsgBtn : UIButton!
 
     
-    private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "m4a")
+    private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
 
     
     
@@ -39,6 +41,7 @@ class ComposeMessageView: UIView{
     }
     @IBAction private func  attachMnetBtn(_ sender : UIButton){
         let actionSheetMng = AttachmentActionSheet()
+        actionSheetMng.delegate = self
         actionSheetMng.presentActionSheet()
     }
     @IBAction private func  microPhnBtn(_ sender : UIButton){
@@ -91,10 +94,11 @@ class ComposeMessageView: UIView{
     }
     
 }
+//MARK: - AudioRecorderManagerDelegate
 extension  ComposeMessageView : AudioRecorderManagerDelegate{
     func didRecordedAudio(manager: AudioRecorderManager, audioUrl: URL?, error: Error?) {
-        print("url",audioUrl)
-        manager.deleteAudio()
+        print("url",audioUrl as Any)
+//        manager.deleteAudio()
         if let url = audioUrl{
             delegate?.audioMessageSent(self, audioUrl: url)
         }
@@ -103,5 +107,23 @@ extension  ComposeMessageView : AudioRecorderManagerDelegate{
     func setSendTextMessageBtn(enable : Bool){
         sendMsgBtn.isHidden = !enable
         microphnBtn.isHidden = enable
+    }
+}
+//MARK: - AttachmentActionSheetDelegate
+extension ComposeMessageView: AttachmentActionSheetDelegate{
+    func didPickImage(sheet: AttachmentActionSheet, image: UIImage) {
+        delegate?.imageMessageSent(self, images: [image])
+    }
+    
+    func didPickVideo(sheet: AttachmentActionSheet, videoUrl: URL) {
+        
+    }
+    
+    func didPickDocument(sheet: AttachmentActionSheet, urls: [URL]) {
+        
+    }
+    
+    func didPickContacts(sheet: AttachmentActionSheet, contacts: [CNContact]) {
+        
     }
 }

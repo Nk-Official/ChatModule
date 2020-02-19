@@ -10,13 +10,19 @@ import Foundation
 
 import AVKit
 
+protocol AudioPlayerManagerDelegate {
+    func didFinishPlayingAudio(_ audioPlayerManager: AudioPlayerManager, url: URL)
+}
+
+
 class AudioPlayerManager : NSObject{
     
+    ///he AVAudioPlayer class does not provide support for streaming audio based on HTTP URL's. The URL used with initWithContentsOfURL: must be a File URL (file://). That is, a local path.
     //play recorded audio
-    var audioPlayer : AVAudioPlayer!
+    var audioPlayer : AVPlayer?
     private var urlToPlay : URL
-    // document directory
-//    private let docdirectryMng = DocumentDirectoryManager()
+    var delegate : AudioPlayerManagerDelegate?
+    
     
     init(url : URL){
         self.urlToPlay = url
@@ -27,31 +33,24 @@ class AudioPlayerManager : NSObject{
     }
     
     private func preparePlayer() {
-        var error: NSError?
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: urlToPlay)
-        } catch let error1 as NSError {
-            error = error1
-            audioPlayer = nil
-        }
-        if let err = error {
-            print("AVAudioPlayer error: \(err.localizedDescription)")
-        }
-        else {
-            audioPlayer.delegate = self
-            audioPlayer.prepareToPlay()
-            audioPlayer.volume = 10.0
-        }
+        let playerItem = AVPlayerItem(url: urlToPlay)
+        audioPlayer = AVPlayer(playerItem: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        audioPlayer!.volume = 10.0
     }
     
     func playAudio(){
         preparePlayer()
-        audioPlayer.play()
+        audioPlayer?.play()
     }
     func stopAudio(){
-        audioPlayer.stop()
+        audioPlayer?.pause()
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        delegate?.didFinishPlayingAudio(self, url: urlToPlay)
     }
 }
-extension AudioPlayerManager :  AVAudioPlayerDelegate{
-    
-}
+
+
+

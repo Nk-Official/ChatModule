@@ -11,8 +11,7 @@ import RxCocoa
 class ContactsViewModel {
     
     
-       
-       //MARK: - VARIABLES
+    //MARK: - VARIABLES
     let firebaseManager : FireBaseManager
     let contacts : BehaviorRelay<[Channel]> = BehaviorRelay(value: [])
        //MARK: - INIT
