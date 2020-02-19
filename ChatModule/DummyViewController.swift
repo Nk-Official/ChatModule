@@ -16,17 +16,5 @@ class DummyViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    let audiomng = AudioRecorderManager(audioName: "recording", typeExt: "mpeg")
-    @IBAction func record(){
-        audiomng.startRecording()
-    }
-    @IBAction func play(_ sender: UIButton){
-//        audiomng.playAudio()
-    }
-    @IBAction func delete(){
-        audiomng.deleteAudio()
-    }
-    @IBAction func stopRecording(){
-        audiomng.finishRecording()
-    }
+    
 }
