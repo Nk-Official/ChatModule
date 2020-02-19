@@ -101,7 +101,11 @@ class ChatViewController: UIViewController {
         tableView.rx.setDelegate(self).disposed(by: disposablebag)
         tableView.rx.setDataSource(self).disposed(by: disposablebag)
     }
-    func deleteFileAtUrl(aturl : URL){
+    func openImage(image : UIImage, date: String){
+        let vc = ImageMessageViewerViewController.initiatefromStoryboard(.main)
+        vc.image = image
+        vc.date = date
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -116,7 +120,9 @@ extension ChatViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -149,7 +155,13 @@ extension ChatViewController : UITableViewDataSource{
         case .image:
             if incoming{
                 if let cell = dataSource.incomingImageMessageBubble(self, message: message){messageCell = cell}
-                else{ messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingImageCell, for: indexPath) as! MessageTableViewCell}
+                else{ let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingImageCell, for: indexPath) as! ImageMsgTableViewCell
+                    cell.imageTap = {
+                        (_,image) in
+                        self.openImage(image: image)
+                    }
+                    messageCell = cell
+                }
             }else{
                 if let cell = dataSource.outgoingImageMessageBubble(self, message: message){messageCell = cell}
                 else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingImageCell, for: indexPath) as! MessageTableViewCell}

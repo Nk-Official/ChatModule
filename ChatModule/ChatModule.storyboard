@@ -376,14 +376,24 @@
                                                                 </imageView>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2k-I5-Z2W">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="176"/>
+                                                            <connections>
+                                                                <action selector="imagetap:" destination="gKs-Qu-BBk" eventType="touchUpInside" id="pnD-ey-v3E"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="176" id="0FB-e5-tfA"/>
+                                                        <constraint firstItem="k2k-I5-Z2W" firstAttribute="top" secondItem="ZCE-2e-bhE" secondAttribute="top" id="6Hh-BD-lM5"/>
                                                         <constraint firstAttribute="bottom" secondItem="p7U-6m-Wl6" secondAttribute="bottom" constant="5" id="7Mr-Pr-iIv"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZnW-ei-pks" secondAttribute="trailing" constant="20" id="EM8-DP-pPg"/>
                                                         <constraint firstAttribute="width" constant="200" id="EUk-cB-8Va"/>
+                                                        <constraint firstAttribute="trailing" secondItem="k2k-I5-Z2W" secondAttribute="trailing" id="KHs-aV-lou"/>
                                                         <constraint firstAttribute="trailing" secondItem="p7U-6m-Wl6" secondAttribute="trailing" constant="5" id="QwG-qm-Kfg"/>
+                                                        <constraint firstAttribute="bottom" secondItem="k2k-I5-Z2W" secondAttribute="bottom" id="VyO-t3-Pai"/>
+                                                        <constraint firstItem="k2k-I5-Z2W" firstAttribute="leading" secondItem="ZCE-2e-bhE" secondAttribute="leading" id="aD9-JS-DZv"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZnW-ei-pks" secondAttribute="bottom" constant="10" id="gLg-Sv-gkz"/>
                                                         <constraint firstItem="p7U-6m-Wl6" firstAttribute="leading" secondItem="ZCE-2e-bhE" secondAttribute="leading" constant="5" id="mdA-bu-LjJ"/>
                                                         <constraint firstItem="p7U-6m-Wl6" firstAttribute="top" secondItem="ZCE-2e-bhE" secondAttribute="top" constant="5" id="zoe-hM-qJV"/>
@@ -442,17 +452,27 @@
                                                                 </imageView>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkK-by-ntQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="176"/>
+                                                            <connections>
+                                                                <action selector="imagetap:" destination="ywb-Rt-ubA" eventType="touchUpInside" id="ZIp-yg-fWD"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="u1v-RF-EkF" firstAttribute="top" secondItem="kvF-3e-fM9" secondAttribute="top" constant="5" id="02d-Wy-KiU"/>
+                                                        <constraint firstItem="IkK-by-ntQ" firstAttribute="top" secondItem="kvF-3e-fM9" secondAttribute="top" id="5Mf-TD-95z"/>
                                                         <constraint firstItem="u1v-RF-EkF" firstAttribute="leading" secondItem="kvF-3e-fM9" secondAttribute="leading" constant="5" id="HC6-5h-PM9"/>
                                                         <constraint firstAttribute="width" constant="200" id="Q9N-0b-EjX"/>
+                                                        <constraint firstItem="IkK-by-ntQ" firstAttribute="leading" secondItem="kvF-3e-fM9" secondAttribute="leading" id="eCy-Ra-Rks"/>
                                                         <constraint firstAttribute="trailing" secondItem="u1v-RF-EkF" secondAttribute="trailing" constant="5" id="fkB-LN-aZV"/>
                                                         <constraint firstAttribute="trailing" secondItem="fYU-du-3I3" secondAttribute="trailing" constant="20" id="fnE-3h-N8B"/>
                                                         <constraint firstAttribute="bottom" secondItem="fYU-du-3I3" secondAttribute="bottom" constant="10" id="gqC-DK-IWO"/>
                                                         <constraint firstAttribute="bottom" secondItem="u1v-RF-EkF" secondAttribute="bottom" constant="5" id="hqa-cs-zq5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="IkK-by-ntQ" secondAttribute="bottom" id="oGC-6i-Pp3"/>
                                                         <constraint firstAttribute="height" constant="176" id="oTu-uv-k5W"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IkK-by-ntQ" secondAttribute="trailing" id="ypJ-hL-ZjG"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -669,18 +689,27 @@
                                                 <state key="normal" title="Star">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="star:" destination="jIP-eI-VXY" eventType="touchUpInside" id="Y5i-F3-tJO"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gv7-zd-UpF">
                                                 <rect key="frame" x="35" y="0.0" width="56" height="70"/>
                                                 <state key="normal" title="Forward">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="forward:" destination="jIP-eI-VXY" eventType="touchUpInside" id="tWk-DM-PSd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbK-Cf-vny">
                                                 <rect key="frame" x="96" y="0.0" width="35" height="70"/>
                                                 <state key="normal" title="extra">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="more:" destination="jIP-eI-VXY" eventType="touchUpInside" id="OmI-c7-057"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -713,6 +742,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4ux-0u-7z6"/>
                     </view>
+                    <connections>
+                        <outlet property="dateLbl" destination="CAr-sK-azV" id="aCH-tl-3fg"/>
+                        <outlet property="imageView" destination="fNC-fO-p4E" id="eKh-r0-iqM"/>
+                        <outlet property="nameLbl" destination="i6a-LS-SP0" id="yaI-Uy-uNi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mPB-Xu-dNI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -6,22 +6,18 @@
 //  Copyright © 2020 Namrata Khanduri. All rights reserved.
 //
 
-import UIKit
 
 class ImageMsgTableViewCell: MessageTableViewCell {
 
     //MARK: - OUTLETS
     @IBOutlet weak var imageMsgView : UIImageView!
+    @IBAction func imagetap(_ sender: UIButton){
+        if imageMsgView.image != nil{
+            imageTap?(self,imageMsgView.image!)
+        }
+    }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-    }
+    var imageTap : ((ImageMsgTableViewCell,UIImage)->())?
 
     override func configureUI() {
         super.configureUI()
