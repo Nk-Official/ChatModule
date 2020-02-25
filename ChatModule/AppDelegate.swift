@@ -13,7 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var loginUser : Channel!
     override init() {
         FirebaseApp.configure()
     }
@@ -64,21 +64,28 @@ extension AppDelegate{
 
 //MARK: - ContactsDataSource
 extension AppDelegate: ContactsDataSource{
+    func currentUser(_ viewController: ContactsViewController, completion: @escaping (Channel) -> ()) {
+        completion(loginUser)
+    }
+    
+    
     func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at row: Int) -> UITableViewCell? {
         return nil
     }
 
     func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
         viewController.showAnimation()
-        FireBaseManager().getAllUsers { (users) in
+        FireBaseManager().getAllUsers { (users,loginUser) in
             viewController.hideAnimation()
+            self.loginUser = loginUser
             list(users)
         }
     }
     
     
     func startRefreshing(_ viewController: ContactsViewController, completion: @escaping ([Channel]) -> ()) {
-        FireBaseManager().getAllUsers { (channels) in
+        FireBaseManager().getAllUsers { (channels,loginUser) in
+            self.loginUser = loginUser
             completion(channels)
         }
     }

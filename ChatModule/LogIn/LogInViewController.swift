@@ -12,7 +12,9 @@ class LogInViewController: UIViewController {
 
     //MARK: - IBOUTLET
     @IBOutlet weak var logInButton : UIButton!
-    let firebaseMngr = FireBaseManager()
+    var firebaseMngr = FireBaseManager()
+    var channels: [Channel] = []
+    var loginUser: Channel!
     //MARK: - IBACTION
        @IBAction func logIn(_ sender: UIButton){
            logInButton.setTitle("Loading...", for: .normal)
@@ -51,19 +53,31 @@ class LogInViewController: UIViewController {
         contactsCoordinator.start()
     }
 
+    //MARK: - NETWORK
+    func getUsers(){
+        firebaseMngr.getAllUsers { (users,currentUser) in
+            self.channels = users
+            self.loginUser = currentUser!
+        }
+    }
 
 }
 
 
 extension LogInViewController: ContactsDataSource{
+    func currentUser(_ viewController: ContactsViewController, completion: @escaping (Channel) -> ()) {
+        completion(loginUser)
+    }
+    
     func cellForRowAt(_ viewController: ContactsViewController, for user: Channel, at row: Int) -> UITableViewCell? {
         return nil
     }
     
     
     func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
-        firebaseMngr.getAllUsers { (users) in
-            list(users)
+        firebaseMngr.getAllUsers { (users,currentUser) in
+             list(users)
+             self.loginUser = currentUser!
         }
     }
     
@@ -71,4 +85,5 @@ extension LogInViewController: ContactsDataSource{
     func startRefreshing(_ viewController: ContactsViewController, completion: ([Channel]) -> ()) {
         
     }
+    
 }

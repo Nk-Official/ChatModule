@@ -7,48 +7,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "23A8D35D-817E-4172-9C86-A622A4CFAF24"
+            uuid = "4FDAC010-6964-4CA4-BB40-0518502EAC8B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
+            filePath = "ChatModule/Actionsheet Components/LocationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "getAllChat(of:completion:)"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "shareCurrentLocation(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90CCAAC5-D048-4D4B-80ED-9AE7E73FB681"
-            shouldBeEnabled = "Yes"
+            uuid = "B8DCA648-3D5C-4AA4-BECD-5EF41C565F3D"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
+            filePath = "ChatModule/Chat/ViewController/ChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "getAllChat(of:completion:)"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A5DEA9B8-FD1C-46EB-8D36-2B266E3163E2"
+            uuid = "4AF983C4-A154-45CA-8CB3-4029FE22098F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatModule/Chat/ViewController/ChatViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4AF983C4-A154-45CA-8CB3-4029FE22098F - 3b8dd267e7c008e8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChatModule.ChatViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "ChatModule"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/namrata_khanduri/Documents/Xcode%20Project/ChatModule/ChatModule/Chat/ViewController/ChatViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "10344">
+               </Location>
+               <Location
+                  uuid = "4AF983C4-A154-45CA-8CB3-4029FE22098F - 3b8dd267e7c008e8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChatModule.ChatViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "ChatModule"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/namrata_khanduri/Documents/Xcode%20Project/ChatModule/ChatModule/Chat/ViewController/ChatViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "10356">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD53E36D-F21F-4E83-A933-773FF4A99F40"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/FireBase Manager/FireBaseManager.swift"
+            filePath = "ChatModule/Actionsheet Components/LocationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "getAllChat(of:completion:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "setUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
