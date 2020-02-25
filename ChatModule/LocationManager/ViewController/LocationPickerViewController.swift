@@ -19,10 +19,7 @@ class LocationPickerViewController: MapViewController {
     @IBOutlet weak var scrollView : UIScrollView!
 
    //MARK: - IBACTION
-   @IBAction func cancel(_ sender: UIButton){
-    navigationController?.navigationBar.isHidden = true
-    navigationController?.popViewController(animated: true)
-   }
+  
     @IBAction func refresh(_ sender: UIButton){
         
     }
@@ -62,7 +59,7 @@ class LocationPickerViewController: MapViewController {
    }
     func setNavigationBar(){
         
-        let leftBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel(_:)))
+        let leftBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismiss))
         navigationItem.leftBarButtonItem =  leftBarButton
         
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
@@ -70,7 +67,13 @@ class LocationPickerViewController: MapViewController {
         
         navigationItem.searchController?.searchBar.delegate = self
     }
-    
+    @objc func dismiss(_ sender: UIButton){
+       pop()
+      }
+    func pop(){
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.popViewController(animated: true)
+    }
    //MARK: - NETWORK CALL
 
     

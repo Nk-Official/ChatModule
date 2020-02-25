@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import CoreLocation
+import Contacts
 
 class ChatViewController: UIViewController {
 
@@ -126,12 +127,20 @@ extension ChatViewController : UITableViewDelegate{
         let messageType = message.getMessageType()
         switch messageType {
         case .location:
-            if message.receiverId == userid{
-                navigator.moveToLocationViewerScreen(self, locations: [message.location!], sender: receiver)
+            if message.location!.live == 1{
+                if message.receiverId == userid{
+                    navigator.moveToLocationViewerScreen(self, locations: [message.location!], sender: receiver)
+                }else{
+                    navigator.moveToLocationViewerScreen(self, locations: [message.location!], sender: logInUser)
+                }
             }else{
-                navigator.moveToLocationViewerScreen(self, locations: [message.location!], sender: logInUser)
+                let url = "comgooglemaps://?center=\(message.location!.latitude),\(message.location!.longitude)&zoom=14&views=traffic"
+                if UIApplication.shared.canOpenURL(URL(string: url)!){
+                    UIApplication.shared.open(URL(string: url)!)
+                }else{
+                    debugPrint("cannot open url")
+                }
             }
-            
             break
         default:
             break
@@ -185,6 +194,10 @@ extension ChatViewController : UITableViewDataSource{
                 if let cell = dataSource.incomingLocationMessageBubble(self, message: message){messageCell = cell}
                 else{  let cell  = Bundle.main.loadNibNamed(viewModel.incomingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
                 messageCell = cell}
+            case .contact:
+                if let cell = dataSource.incomingContactMessageBubble(self, message: message){messageCell = cell}
+                else{  messageCell = Bundle.main.loadNibNamed(viewModel.incomingContactCell, owner: self, options: nil)?.first as! MessageTableViewCell
+                }
             }
         }else{
             switch messageType {
@@ -212,6 +225,10 @@ extension ChatViewController : UITableViewDataSource{
                 if let cell = dataSource.outgoingLocationMessageBubble(self, message: message){messageCell = cell}
                 else{  let cell  = Bundle.main.loadNibNamed(viewModel.outgoingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
                     messageCell = cell
+                }
+            case .contact:
+                if let cell = dataSource.outgoingContactMessageBubble(self, message: message){messageCell = cell}
+                else{  messageCell = Bundle.main.loadNibNamed(viewModel.outgoingContactCell, owner: self, options: nil)?.first as! MessageTableViewCell
                 }
            }
         }
@@ -268,13 +285,18 @@ extension ChatViewController : ComposeMssageDelegate{
         delegate.didSendPhotoMessage(self, message: message, to: receiverId, images: images)
     }
 
+    func contactMessageSent(_ composeMessageView: ComposeMessageView, contacts: [CNContact]) {
+        let sendtime = dateManager.getCurrentDateTime()
+        let receiverId = receiver.id
+        let message = Message(senderId: userid, receiverId: receiverId,  contacts: nil, sendDateTime: sendtime)
+        delegate.didSendContactMessage(self, message: message, to: receiverId, contacts: contacts)
+       
+    }
 //    func textMessageSent(view: ComposeMessageView, message: String) {
 //        let msg = Message(message: message, senderId: userid, sendTime: "12:00 am", deliveryTime: "", readTime: "")
 //        viewModel.messages.accept(viewModel.messages.value + [msg])
 //    }
 }
-
-
 
 extension ChatViewController: LocationPickerDelegate{
     func didPickLocation(_ viewController: LocationPickerViewController, coordinates: CLLocationCoordinate2D, isLive: Bool) {
@@ -284,6 +306,6 @@ extension ChatViewController: LocationPickerDelegate{
         let location = Location(latitude: coordinates.latitude, longitude: coordinates.longitude, live: live,  updateTime: sendtime)
         let message = Message(senderId: userid, receiverId: receiverId,  location: location, sendDateTime: sendtime)
         delegate.didSendLocationMessage(self, message: message, to: receiverId)
-        navigationController?.popViewController(animated: true)
+        viewController.pop()
     }
 }

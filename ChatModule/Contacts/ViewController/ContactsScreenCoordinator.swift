@@ -42,9 +42,8 @@ open class ContactsScreenCoordinator {
         let searchController = UISearchController(searchResultsController: nil)
         self.navigationController.navigationBar.prefersLargeTitles = true
         contactsViewController.navigationItem.searchController = searchController
-        
+        contactsViewController.navigationItem.hidesSearchBarWhenScrolling = false
         navigationController.pushViewController(contactsViewController, animated: true)
-
     }
     func setUpNavigatinControllerForList(){
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black,

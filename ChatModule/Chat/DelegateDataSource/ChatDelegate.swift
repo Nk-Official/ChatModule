@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Contacts
 //MARK: - ChatDelegate
 protocol ChatDelegate{
     
@@ -18,5 +19,6 @@ protocol ChatDelegate{
     func didSendAudioMessage(_ viewController: ChatViewController, message : Message, to receiver : String,localfile url : URL)
     func didSendPhotoMessage(_ viewController: ChatViewController, message : Message, to receiver : String, images : [UIImage])
     func didSendLocationMessage(_ viewController: ChatViewController, message : Message, to receiver : String)
+    func didSendContactMessage(_ viewController: ChatViewController, message : Message, to receiver : String, contacts: [CNContact])
 
 }

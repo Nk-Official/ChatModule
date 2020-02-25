@@ -89,12 +89,12 @@ extension AttachmentActionSheet :UIDocumentPickerDelegate{
 
 //https://iosdevcenters.blogspot.com/2016/07/show-contact-list-in-swift.html
 extension AttachmentActionSheet: CNContactPickerDelegate{
-    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        for i in contact.phoneNumbers{
-            print("contact",contact.givenName,i.value)
-        }
-        delegate?.didPickContacts(sheet: self, contacts: [contact])
-    }
+//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+//        for i in contact.phoneNumbers{
+//            print("contact",contact.givenName,i.value)
+//        }
+//        delegate?.didPickContacts(sheet: self, contacts: [contact])
+//    }
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
         contacts.forEach { contact in
             for number in contact.phoneNumbers {

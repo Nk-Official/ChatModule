@@ -18,6 +18,7 @@ protocol ChatDataSource {
     func incomingImageMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func incomingFileMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func incomingLocationMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
+    func incomingContactMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
 
     func outgoingTextMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func outgoingAudioMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
@@ -25,6 +26,7 @@ protocol ChatDataSource {
     func outgoingImageMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func outgoingFileMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func outgoingLocationMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
+    func outgoingContactMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
 
 }
 
@@ -74,5 +76,11 @@ extension ChatDataSource{
     func outgoingLocationMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble? {
         return nil
     }
-
+    func incomingContactMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble? {
+        return nil
+    }
+    func outgoingContactMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
+    {
+        return nil
+    }
 }

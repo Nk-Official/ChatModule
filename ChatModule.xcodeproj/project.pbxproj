@@ -48,6 +48,11 @@
 		1B1DE9DB23F666280078C132 /* DummyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B1DE9D923F666280078C132 /* DummyTableViewCell.xib */; };
 		1B1DE9DF23F686A70078C132 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1DE9DE23F686A70078C132 /* FirebaseStorageManager.swift */; };
 		1B2590142404F2BA002F880C /* LocationViewerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2590132404F2BA002F880C /* LocationViewerCoordinator.swift */; };
+		1B25901B2404FC0F002F880C /* IncomingLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2590192404FC0F002F880C /* IncomingLocationTableViewCell.swift */; };
+		1B25901C2404FC0F002F880C /* IncomingLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B25901A2404FC0F002F880C /* IncomingLocationTableViewCell.xib */; };
+		1B25901F24051E86002F880C /* OutGoingContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B25901D24051E86002F880C /* OutGoingContactTableViewCell.swift */; };
+		1B25902024051E86002F880C /* OutGoingContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B25901E24051E86002F880C /* OutGoingContactTableViewCell.xib */; };
+		1B2590222405248A002F880C /* ContactMsgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2590212405248A002F880C /* ContactMsgTableViewCell.swift */; };
 		1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BD52723F55CE3005A3C35 /* ChatDataSource.swift */; };
 		1B3BD52A23F55CF4005A3C35 /* ChatDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BD52923F55CF4005A3C35 /* ChatDelegate.swift */; };
 		1B3BD53123F56313005A3C35 /* InformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3BD53023F56313005A3C35 /* InformationView.xib */; };
@@ -125,6 +130,11 @@
 		1B1DE9D923F666280078C132 /* DummyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyTableViewCell.xib; sourceTree = "<group>"; };
 		1B1DE9DE23F686A70078C132 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		1B2590132404F2BA002F880C /* LocationViewerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewerCoordinator.swift; sourceTree = "<group>"; };
+		1B2590192404FC0F002F880C /* IncomingLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingLocationTableViewCell.swift; sourceTree = "<group>"; };
+		1B25901A2404FC0F002F880C /* IncomingLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingLocationTableViewCell.xib; sourceTree = "<group>"; };
+		1B25901D24051E86002F880C /* OutGoingContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutGoingContactTableViewCell.swift; sourceTree = "<group>"; };
+		1B25901E24051E86002F880C /* OutGoingContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutGoingContactTableViewCell.xib; sourceTree = "<group>"; };
+		1B2590212405248A002F880C /* ContactMsgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMsgTableViewCell.swift; sourceTree = "<group>"; };
 		1B3BD52723F55CE3005A3C35 /* ChatDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDataSource.swift; sourceTree = "<group>"; };
 		1B3BD52923F55CF4005A3C35 /* ChatDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDelegate.swift; sourceTree = "<group>"; };
 		1B3BD53023F56313005A3C35 /* InformationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InformationView.xib; sourceTree = "<group>"; };
@@ -183,6 +193,7 @@
 				1BEFC5292384108F00DC6964 /* AudioBubbleTableViewCell.swift */,
 				1BF7AC9723FBB1AB00954E8E /* ImageMsgTableViewCell.swift */,
 				1B06050324039C6D0045E442 /* LocationMsgTavleViewCell.swift */,
+				1B2590212405248A002F880C /* ContactMsgTableViewCell.swift */,
 			);
 			path = "Super Classes";
 			sourceTree = "<group>";
@@ -197,6 +208,10 @@
 				1BF7AC9B23FBBBAD00954E8E /* OutgoingImageMsgTableViewCell.swift */,
 				1B06050B2403C6D50045E442 /* OutgoingLocationTableViewCell.swift */,
 				1B06050C2403C6D50045E442 /* OutgoingLocationTableViewCell.xib */,
+				1B2590192404FC0F002F880C /* IncomingLocationTableViewCell.swift */,
+				1B25901A2404FC0F002F880C /* IncomingLocationTableViewCell.xib */,
+				1B25901D24051E86002F880C /* OutGoingContactTableViewCell.swift */,
+				1B25901E24051E86002F880C /* OutGoingContactTableViewCell.xib */,
 			);
 			name = SubClasses;
 			path = "New Group";
@@ -628,6 +643,8 @@
 				1B3BD53123F56313005A3C35 /* InformationView.xib in Resources */,
 				1B10EE3323825756005A94E2 /* Assets.xcassets in Resources */,
 				1BE2C51123FD068A0045F251 /* Example.storyboard in Resources */,
+				1B25902024051E86002F880C /* OutGoingContactTableViewCell.xib in Resources */,
+				1B25901C2404FC0F002F880C /* IncomingLocationTableViewCell.xib in Resources */,
 				1B1DE9DB23F666280078C132 /* DummyTableViewCell.xib in Resources */,
 				1B10EE5823826F00005A94E2 /* ChatModule.storyboard in Resources */,
 			);
@@ -684,9 +701,11 @@
 			files = (
 				1B1B09CF23F2AC3B009238B7 /* CommonFunctions.swift in Sources */,
 				1B57658123F2D406001EBC01 /* ContactsViewModel.swift in Sources */,
+				1B25901F24051E86002F880C /* OutGoingContactTableViewCell.swift in Sources */,
 				1B1DE9D723F665540078C132 /* Dummy2ViewController.swift in Sources */,
 				1BF7AC9C23FBBBAD00954E8E /* OutgoingImageMsgTableViewCell.swift in Sources */,
 				1B0D64F623F52FB900D16134 /* DayWiseMessage.swift in Sources */,
+				1B2590222405248A002F880C /* ContactMsgTableViewCell.swift in Sources */,
 				1BE2C50F23FD03800045F251 /* ImageMessageViewerViewController.swift in Sources */,
 				1B876AD323F3CB15001A722D /* LogInViewController.swift in Sources */,
 				1B06050424039C6D0045E442 /* LocationMsgTavleViewCell.swift in Sources */,
@@ -736,6 +755,7 @@
 				1B1B09CA23F28740009238B7 /* FireBaseManager.swift in Sources */,
 				1BE2C51323FD39FC0045F251 /* ChatPrefrences.swift in Sources */,
 				1B3BD52A23F55CF4005A3C35 /* ChatDelegate.swift in Sources */,
+				1B25901B2404FC0F002F880C /* IncomingLocationTableViewCell.swift in Sources */,
 				1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */,
 				1B10EE5E23828279005A94E2 /* ComposeMessageView.swift in Sources */,
 				1B2590142404F2BA002F880C /* LocationViewerCoordinator.swift in Sources */,

@@ -41,7 +41,7 @@ struct FireBaseManager {
         
         guard let currentUser = Auth.auth().currentUser else{
             
-            Auth.auth().signIn(withEmail: "komal45@gmail.com", password: "1234567890") { (result, error) in
+            Auth.auth().signIn(withEmail: "rohan.1998@gmail.com", password: "1234567890") { (result, error) in
                 if error != nil{
                     debugPrint("error while login",error!.localizedDescription)
                     completion(.failure(error!))

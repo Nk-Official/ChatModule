@@ -6,7 +6,7 @@
 //  Copyright © 2020 Namrata Khanduri. All rights reserved.
 //
 
-import Foundation
+import Contacts
 class ChatHandler {
     
     var firebaseManager = FireBaseManager()
@@ -67,6 +67,27 @@ extension ChatHandler : ChatDelegate{
         allMessages = firebaseManager.addMessage(message: message, ofdate: dateManager.getCurrentDate(), to: self.allMessages)
         viewController.refresh(message: allMessages)
    }
+    func didSendContactMessage(_ viewController: ChatViewController, message: Message, to receiver: String, contacts: [CNContact]) {
+        
+        do{
+            let data = try CNContactVCardSerialization.data(with: contacts)
+            fireBaseStorage.uploadContactData(data: data) { (result) in
+                switch result{
+                case .success(let url):
+                    var msg = message
+                    msg.contacts = url.absoluteString
+                    self.firebaseManager.sendMessage(toUser: receiver, message: msg)
+                    self.allMessages = self.firebaseManager.addMessage(message: msg, ofdate: self.dateManager.getCurrentDate(), to: self.allMessages)
+                    viewController.refresh(message: self.allMessages)
+                case .failure(let error):
+                    print("error while sending contact",error.localizedDescription)
+                }
+            }
+        }
+        catch{
+            debugPrint("error while converting contact to data",error.localizedDescription)
+        }
+    }
 }
 
 //MARK: - ChatDataSource

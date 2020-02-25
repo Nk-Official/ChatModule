@@ -9,27 +9,29 @@
 import Foundation
 struct Message: Codable{
     
-    
+    //MARK: - PROPERTIES
     var senderId : String
     var receiverId: String
     
-    var message : String? = nil
-    var audioMsg : String? = nil
-    var videoMsg: String? = nil
-    var imageMsg: String? = nil
+    var message : String? = nil// URL
+    var audioMsg : String? = nil// URL
+    var videoMsg: String? = nil// URL
+    var imageMsg: String? = nil// URL
     var location: Location? = nil
-
+    var contacts: String? = nil// URL
+    
     var sendDateTime : String
     var deliveryDateTime : String? = nil
     var readDateTime : String? = nil
     
-
+    //MARK: - HELPER
     enum MsgStatus{
         case sent,deliver,read,notSent
     }
     enum MessageType{
-        case text, image,video, audio, file, location
+        case text, image,video, audio, file, location, contact
     }
+    //MARK: - FUNCTIONS
     func getState( )->MsgStatus{
         if readDateTime?.count ?? 0 > 0 {
             return .read
@@ -55,11 +57,14 @@ struct Message: Codable{
         if location != nil{
             return .location
         }
+        if contacts != nil{
+            return .contact
+        }
         return .text
     }
     
 }
-
+//MARK: - Location
 struct Location : Codable{
     let latitude: Double
     let longitude: Double

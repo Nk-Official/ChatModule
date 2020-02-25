@@ -66,6 +66,8 @@ class ContactTableViewCell: UITableViewCell {
             lastMsgLbl.text = "File"
         case .location:
             lastMsgLbl.text = "Location"
+        case .contact:
+            lastMsgLbl.text = "Contact"
         }
         guard let dateDiff = dateManager.daysFromTodaysDate(from: recentMessage.sendDateTime)else{
             return

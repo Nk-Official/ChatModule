@@ -13,7 +13,7 @@ protocol ComposeMssageDelegate {
     func textMessageSent(_ composeMessageView: ComposeMessageView, message : String)
     func audioMessageSent(_ composeMessageView: ComposeMessageView, audioUrl : URL)
     func imageMessageSent(_ composeMessageView: ComposeMessageView, images : [UIImage])
-//    func messageSent(_ composeMessageView: ComposeMessageView, message : Message)
+    func contactMessageSent(_ composeMessageView: ComposeMessageView, contacts : [CNContact])
 }
 
 class ComposeMessageView: UIView{
@@ -126,6 +126,6 @@ extension ComposeMessageView: AttachmentActionSheetDelegate{
     }
     
     func didPickContacts(sheet: AttachmentActionSheet, contacts: [CNContact]) {
-        
+        delegate?.contactMessageSent(self, contacts: contacts)
     }
 }
