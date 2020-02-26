@@ -14,6 +14,8 @@ class ContactMsgTableViewCell: MessageTableViewCell{
     @IBOutlet weak var nameLbl : UILabel!
     @IBOutlet weak var profileImgView : UIImageView!
     
+    var contacts: [CNContact]?
+    
     //MARK: - UI SETUP
     override func configureUI() {
         super.configureUI()
@@ -23,6 +25,8 @@ class ContactMsgTableViewCell: MessageTableViewCell{
             profileImgView.image = UIImage(named: "placeholderUserImg")
             return
         }
+        timeLbl.text = dateManager.getTime(from: message.sendDateTime)
+        msgStateImgV.image = getMessageStateImg()
         guard let contactsUrl = message.contacts else {
             return
         }
@@ -30,15 +34,17 @@ class ContactMsgTableViewCell: MessageTableViewCell{
             if data != nil{
                 do{
                     let contacts = try CNContactVCardSerialization.contacts(with: data!)
+                    self.contacts = contacts
                     print("contacts get ",contacts)
-                    self.configureCell(with: contacts.last!)
+                    DispatchQueue.main.async {
+                        self.configureCell(with: contacts.last!)
+                    }
                 }
                 catch{
                     print("error while decoding",error.localizedDescription)
                 }
             }
-        }
-        
+        }        
     }
     
     

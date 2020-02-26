@@ -9,6 +9,7 @@
 import CoreLocation
 
 typealias MessageBubble = MessageTableViewCell
+typealias ContactMessageBubble = ContactMsgTableViewCell
 
 protocol ChatScreenNavigator {
     func moveToLocationViewerScreen(_ viewController: ChatViewController, locations : [Location], sender: Channel)
@@ -26,6 +27,7 @@ class ChatScreenCoordinator {
     var dateManager : DateManager!
     var backCoordinator: BackNavigateDelegate
     var loginUser: Channel
+    
     //MARK: - INITIALIZATION
     init(navigationController : UINavigationController,
          receiver : Channel,

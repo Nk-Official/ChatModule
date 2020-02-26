@@ -67,6 +67,7 @@
 		1B876ADA23F3D10B001A722D /* ContactsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876AD923F3D10B001A722D /* ContactsScreenCoordinator.swift */; };
 		1B876ADC23F3E095001A722D /* ChatScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876ADB23F3E095001A722D /* ChatScreenCoordinator.swift */; };
 		1B876ADE23F3FEA2001A722D /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876ADD23F3FEA2001A722D /* Group.swift */; };
+		1B8F8C2D24064D2C00557C6E /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F8C2C24064D2C00557C6E /* ContactManager.swift */; };
 		1BE2C50A23FCFD6B0045F251 /* IncomingMessageBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C50923FCFD6B0045F251 /* IncomingMessageBubbleTableViewCell.swift */; };
 		1BE2C50C23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C50B23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift */; };
 		1BE2C50F23FD03800045F251 /* ImageMessageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE2C50E23FD03800045F251 /* ImageMessageViewerViewController.swift */; };
@@ -149,6 +150,7 @@
 		1B876AD923F3D10B001A722D /* ContactsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B876ADB23F3E095001A722D /* ChatScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B876ADD23F3FEA2001A722D /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		1B8F8C2C24064D2C00557C6E /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		1BE2C50923FCFD6B0045F251 /* IncomingMessageBubbleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageBubbleTableViewCell.swift; sourceTree = "<group>"; };
 		1BE2C50B23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutGoingMessageBubbleTableViewCell.swift; sourceTree = "<group>"; };
 		1BE2C50E23FD03800045F251 /* ImageMessageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessageViewerViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		1B10EE2A2382574C005A94E2 /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				1B8F8C2B24064D0800557C6E /* ContactManager */,
 				1B0605052403A0AD0045E442 /* LocationManager */,
 				1BEFC5172383B46900DC6964 /* Actionsheet Components */,
 				1B1A39FE23FAA24D0050F329 /* BackCoordinator */,
@@ -457,6 +460,14 @@
 				1B876AD723F3CBEF001A722D /* StoryBoards.swift */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		1B8F8C2B24064D0800557C6E /* ContactManager */ = {
+			isa = PBXGroup;
+			children = (
+				1B8F8C2C24064D2C00557C6E /* ContactManager.swift */,
+			);
+			path = ContactManager;
 			sourceTree = "<group>";
 		};
 		1BE2C50D23FD02FB0045F251 /* Viewer */ = {
@@ -759,6 +770,7 @@
 				1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */,
 				1B10EE5E23828279005A94E2 /* ComposeMessageView.swift in Sources */,
 				1B2590142404F2BA002F880C /* LocationViewerCoordinator.swift in Sources */,
+				1B8F8C2D24064D2C00557C6E /* ContactManager.swift in Sources */,
 				1B1B09D223F2AE5F009238B7 /* DateManager.swift in Sources */,
 				1B0605072403A0BC0045E442 /* LocationManager.swift in Sources */,
 				1B10EE5A2382706D005A94E2 /* ChatViewModel.swift in Sources */,

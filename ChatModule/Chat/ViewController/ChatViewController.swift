@@ -141,7 +141,22 @@ extension ChatViewController : UITableViewDelegate{
                     debugPrint("cannot open url")
                 }
             }
-            break
+        case .contact:
+            if message.senderId != userid{
+                guard let cell = tableView.cellForRow(at: indexPath) as? ContactMsgTableViewCell else {
+                    return
+                }
+                let manager = ContactManager()
+                guard let contacts = cell.contacts else{
+                    return
+                }
+                do{
+                    try manager.saveContactToContacts(contacts: contacts)
+                    self.showAlert(title: "Success", message: "Contact added successfully", okAction: nil)
+                }catch{
+                    self.showAlert(title: "Error", message: error.localizedDescription, okAction: nil)
+                }
+            }
         default:
             break
         }

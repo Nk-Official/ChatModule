@@ -53,7 +53,12 @@ extension ChatHandler : ChatDelegate{
     func didSelect(_ viewController: ChatViewController, message bubble: MessageBubble, message: Message) {
         
     }
-    
+    func didSelectContactMessageBubble(_ viewController: ChatViewController, message bubble: ContactMessageBubble, message : Message){
+        guard let contacts = bubble.contacts else{
+            return
+        }
+        contacts
+    }
     func didLongPress(_ viewController: ChatViewController, message bubble: MessageBubble, message: Message) {
         
     }
