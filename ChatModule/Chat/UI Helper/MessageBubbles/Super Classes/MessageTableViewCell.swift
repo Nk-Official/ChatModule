@@ -64,5 +64,18 @@ class MessageTableViewCell : UITableViewCell{
         }
     }
     
+    
+    //MARK: - NETWORK
+    func fetchDataFromURL(url string: String,completion: @escaping (Data?)->()){
+        guard let url = URL(string: string) else{
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil{
+                print("error while fetching data",error!.localizedDescription)
+            }
+            completion(data)
+        }.resume()
+    }
 }
 

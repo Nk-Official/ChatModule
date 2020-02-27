@@ -138,7 +138,7 @@ extension ChatViewController : UITableViewDelegate{
                 if UIApplication.shared.canOpenURL(URL(string: url)!){
                     UIApplication.shared.open(URL(string: url)!)
                 }else{
-                    debugPrint("cannot open url")
+                    showAlert(title: "Error", message: "Not getting any application for open location", okAction: nil)
                 }
             }
         case .contact:
@@ -204,7 +204,7 @@ extension ChatViewController : UITableViewDataSource{
                 else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingAudioCell, for: indexPath) as! MessageTableViewCell}
             case .file:
                 if let cell = dataSource.incomingFileMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingFileCell, for: indexPath) as! MessageTableViewCell}
+                else{  messageCell = Bundle.main.loadNibNamed(viewModel.incomingFileCell, owner: self, options: nil)?.first as! MessageTableViewCell}
             case .location:
                 if let cell = dataSource.incomingLocationMessageBubble(self, message: message){messageCell = cell}
                 else{  let cell  = Bundle.main.loadNibNamed(viewModel.incomingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
@@ -235,7 +235,7 @@ extension ChatViewController : UITableViewDataSource{
                 else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingAudioCell, for: indexPath) as! MessageTableViewCell}
             case .file:
                 if let cell = dataSource.outgoingFileMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingFileCell, for: indexPath) as! MessageTableViewCell}
+                else{  messageCell = Bundle.main.loadNibNamed(viewModel.outgoingFileCell, owner: self, options: nil)?.first as! MessageTableViewCell}
             case .location:
                 if let cell = dataSource.outgoingLocationMessageBubble(self, message: message){messageCell = cell}
                 else{  let cell  = Bundle.main.loadNibNamed(viewModel.outgoingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
@@ -306,6 +306,12 @@ extension ChatViewController : ComposeMssageDelegate{
         let message = Message(senderId: userid, receiverId: receiverId,  contacts: nil, sendDateTime: sendtime)
         delegate.didSendContactMessage(self, message: message, to: receiverId, contacts: contacts)
        
+    }
+    func fileMessageSent(_ composeMessageView: ComposeMessageView, url: URL) {
+        let sendtime = dateManager.getCurrentDateTime()
+        let receiverId = receiver.id
+        let message = Message(senderId: userid, receiverId: receiverId,  file: url.absoluteString, sendDateTime: sendtime)
+        delegate?.didSendFileMessage(self, message: message, to: receiverId, fileAt: url)
     }
 //    func textMessageSent(view: ComposeMessageView, message: String) {
 //        let msg = Message(message: message, senderId: userid, sendTime: "12:00 am", deliveryTime: "", readTime: "")

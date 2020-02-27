@@ -21,6 +21,7 @@ protocol ChatDelegate{
     func didSendPhotoMessage(_ viewController: ChatViewController, message : Message, to receiver : String, images : [UIImage])
     func didSendLocationMessage(_ viewController: ChatViewController, message : Message, to receiver : String)
     func didSendContactMessage(_ viewController: ChatViewController, message : Message, to receiver : String, contacts: [CNContact])
+    func didSendFileMessage(_ viewController: ChatViewController, message : Message, to receiver : String, fileAt url: URL)
 
 }
 

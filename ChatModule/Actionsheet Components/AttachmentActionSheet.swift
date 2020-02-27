@@ -14,14 +14,14 @@ import ContactsUI
 protocol AttachmentActionSheetDelegate {
     func didPickImage(sheet : AttachmentActionSheet, image : UIImage)
     func didPickVideo(sheet : AttachmentActionSheet, videoUrl : URL)
-    func didPickDocument(sheet : AttachmentActionSheet, urls : [URL])
+    func didPickDocument(sheet : AttachmentActionSheet, url : URL)
     func didPickContacts(sheet : AttachmentActionSheet, contacts : [CNContact])
 }
 
 class AttachmentActionSheet : NSObject{
     
     let pickerController = UIImagePickerController()
-    let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF),String(kUTTypeContact)], in: .import)
+    let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF),String(kUTTypeContact),(kUTTypeRTFD as String),(kUTTypeZipArchive as String)], in: .import)
     var delegate : AttachmentActionSheetDelegate?
     var viewController : UIViewController!
     var actionSheet : UIAlertController!
@@ -78,8 +78,11 @@ extension AttachmentActionSheet : UIImagePickerControllerDelegate, UINavigationC
     
 }
 extension AttachmentActionSheet :UIDocumentPickerDelegate{
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        delegate?.didPickDocument(sheet: self, urls: urls)
+//    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//        delegate?.didPickDocument(sheet: self, urls: urls)
+//    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        delegate?.didPickDocument(sheet: self, url: url)
     }
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         viewController.dismiss(animated: true, completion: nil)

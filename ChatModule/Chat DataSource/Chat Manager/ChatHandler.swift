@@ -93,6 +93,21 @@ extension ChatHandler : ChatDelegate{
             debugPrint("error while converting contact to data",error.localizedDescription)
         }
     }
+    func didSendFileMessage(_ viewController: ChatViewController, message: Message, to receiver: String, fileAt url: URL) {
+        fireBaseStorage.uploadFileData(fileat: url) { (result) in
+            switch result{
+            case .success(let url):
+                var msg = message
+                msg.file = url.absoluteString
+                self.firebaseManager.sendMessage(toUser: receiver, message: message)
+                self.allMessages = self.firebaseManager.addMessage(message: msg, ofdate: self.dateManager.getCurrentDate(), to: self.allMessages)
+                viewController.refresh(message: self.allMessages)
+            case .failure(let error):
+                print("error while sending contact",error.localizedDescription)
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
 }
 
 //MARK: - ChatDataSource

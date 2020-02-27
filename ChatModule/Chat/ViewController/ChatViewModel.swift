@@ -28,15 +28,15 @@ class ChatViewModel {
     let incomingAudioCell = "OutgoingAudioMsgBubble"
     let incomingImageCell = "IncomingImageMsgTableViewCell"
     let incomingVideoCell = "OutgoingAudioMsgBubble"
-    let incomingFileCell = "OutgoingAudioMsgBubble"
+    let incomingFileCell = "IncomingDocumentTableViewCell"
     let incomingLocationCell = "IncomingLocationTableViewCell"
-    let incomingContactCell = ""
+    let incomingContactCell = "IncomingContactTableViewCell"
     
     let outgoingTextCell = "outgoingcell"
     let outgoingAudioCell = "OutgoingAudioMsgBubble"
     let outgoingImageCell = "OutgoingImageMsgTableViewCell"
     let outgoingVideoCell = "OutgoingAudioMsgBubble"
-    let outgoingFileCell = "OutgoingAudioMsgBubble"
+    let outgoingFileCell = "OutGoingDocumentTableViewCell"
     let outgoingLocationCell = "OutgoingLocationTableViewCell"
     let outgoingContactCell = "OutGoingContactTableViewCell"
 }

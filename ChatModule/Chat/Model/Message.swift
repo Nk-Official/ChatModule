@@ -19,7 +19,8 @@ struct Message: Codable{
     var imageMsg: String? = nil// URL
     var location: Location? = nil
     var contacts: String? = nil// URL
-    
+    var file: String? = nil// URL
+
     var sendDateTime : String
     var deliveryDateTime : String? = nil
     var readDateTime : String? = nil
@@ -59,6 +60,9 @@ struct Message: Codable{
         }
         if contacts != nil{
             return .contact
+        }
+        if file != nil{
+            return .file
         }
         return .text
     }

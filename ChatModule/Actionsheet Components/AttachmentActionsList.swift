@@ -68,7 +68,7 @@ extension AttachmentActionSheet{
     func presentDocumentPicker(){
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
-        self.viewController.present(pickerController, animated: true, completion: nil)
+        self.viewController.present(documentPicker, animated: true, completion: nil)
     }
     func presentContactList(){
         contactPickerViewController.delegate = self

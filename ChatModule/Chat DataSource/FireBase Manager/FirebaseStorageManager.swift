@@ -14,34 +14,22 @@ struct FirebaseStorageManager {
     let imageRefrence : StorageReference
     let audioRefrence : StorageReference
     let contactsRefrence : StorageReference
+    let filesRefrence : StorageReference
 
     init() {
         imageRefrence = storageRefrence.child("images")
         audioRefrence = storageRefrence.child("audios")
         contactsRefrence = storageRefrence.child("contact")
+        filesRefrence = storageRefrence.child("files")
+
     }
     @discardableResult
     func uploadAudio(localfile url: URL, completion : @escaping (Result<URL,Error>)->()) -> StorageUploadTask{
         let metadata = StorageMetadata()
         metadata.contentType = "audio/mpeg"
         // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = audioRefrence.putFile(from: url, metadata: metadata) { metadata, error in
-              guard let metadata = metadata else {
-                completion(.failure(error ?? FireBasemanagerError.unknownError ))
-                return
-              }
-          // Metadata contains file metadata such as size, content-type.
-//          let size = metadata.size
-            print("file type",metadata.contentType as Any)
-          // You can also access to download URL after upload.
-            self.audioRefrence.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    completion(.failure(error ?? FireBasemanagerError.unknownError))
-                    return
-                }
-                completion(.success(downloadURL))
-             }
-        }
+        
+        let uploadTask = uploadData(storageRefrence: audioRefrence, name: url.lastPathComponent, fileurl: url, metadata: metadata, completion: completion)
         
         return uploadTask
     }
@@ -65,6 +53,17 @@ struct FirebaseStorageManager {
         let name = String(Int.random(in: 0 ... 1000))
         return uploadData(storageRefrence: contactsRefrence, name: name, data: data, metadata: nil, completion: completion)
     }
+    @discardableResult
+    func uploadFileData(fileat url: URL, completion : @escaping (Result<URL,Error>)->())  -> StorageUploadTask?{
+        
+        let fileExtension = url.pathExtension
+        let name = url.lastPathComponent
+        let metadata = StorageMetadata()
+        metadata.contentType = "file/"+fileExtension
+        
+        return uploadData(storageRefrence: filesRefrence, name: name, fileurl: url, metadata: metadata, completion: completion)
+    }
+    
     
     private func uploadData(storageRefrence: StorageReference,name: String,data: Data, metadata: StorageMetadata?,completion: @escaping ((Result<URL,Error>)->()))->StorageUploadTask{
         let refrence = storageRefrence.child(name)
@@ -83,6 +82,28 @@ struct FirebaseStorageManager {
         }
         
         return task
+    }
+    private func uploadData(storageRefrence: StorageReference,name: String,fileurl: URL, metadata: StorageMetadata?,completion: @escaping ((Result<URL,Error>)->()))->StorageUploadTask{
+        let refrence = storageRefrence.child(name)
+    
+        let uploadTask = refrence.putFile(from: fileurl, metadata: metadata) { metadata, error in
+              guard let metadata = metadata else {
+                completion(.failure(error ?? FireBasemanagerError.unknownError ))
+                return
+              }
+          // Metadata contains file metadata such as size, content-type.
+//          let size = metadata.size
+            print("file type",metadata.contentType as Any)
+          // You can also access to download URL after upload.
+            refrence.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    completion(.failure(error ?? FireBasemanagerError.unknownError))
+                    return
+                }
+                completion(.success(downloadURL))
+             }
+        }
+        return uploadTask
     }
 }
 

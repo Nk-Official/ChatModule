@@ -7,7 +7,6 @@
 //
 
 import Contacts
-
 struct ContactManager {
     
     
@@ -29,6 +28,7 @@ struct ContactManager {
         catch{
             throw error
         }
+    
     }
     
 }

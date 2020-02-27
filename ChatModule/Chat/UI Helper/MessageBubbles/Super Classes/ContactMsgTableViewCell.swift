@@ -7,7 +7,7 @@
 //
 
 import Contacts
-
+import SDWebImage
 class ContactMsgTableViewCell: MessageTableViewCell{
     
     //MARK: - OUTLET
@@ -30,10 +30,27 @@ class ContactMsgTableViewCell: MessageTableViewCell{
         guard let contactsUrl = message.contacts else {
             return
         }
+        let key = "contact"+contactsUrl
+        let cache = SDImageCache.shared // this is hack to save contact data to cache
+        
+        if let data = cache.diskImageData(forKey: key){
+            do{
+                let contacts = try CNContactVCardSerialization.contacts(with: data)
+                DispatchQueue.main.async {
+                    self.configureCell(with: contacts.last!)
+                }
+            }
+            catch(let error){
+                fatalError(error.localizedDescription)
+            }
+            return
+        }
+        
         fetchDataFromURL(url: contactsUrl) { (data) in
             if data != nil{
                 do{
                     let contacts = try CNContactVCardSerialization.contacts(with: data!)
+                    cache.storeImageData(toDisk: data!, forKey: key)
                     self.contacts = contacts
                     print("contacts get ",contacts)
                     DispatchQueue.main.async {
@@ -51,15 +68,5 @@ class ContactMsgTableViewCell: MessageTableViewCell{
     func configureCell(with contact: CNContact){
         nameLbl.text = contact.givenName
     }
-    func fetchDataFromURL(url string: String,completion: @escaping (Data?)->()){
-        guard let url = URL(string: string) else{
-            return
-        }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil{
-                print("error while fetching data",error!.localizedDescription)
-            }
-            completion(data)
-        }.resume()
-    }
+    
 }

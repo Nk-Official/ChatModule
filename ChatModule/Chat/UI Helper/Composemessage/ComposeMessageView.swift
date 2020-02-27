@@ -14,6 +14,7 @@ protocol ComposeMssageDelegate {
     func audioMessageSent(_ composeMessageView: ComposeMessageView, audioUrl : URL)
     func imageMessageSent(_ composeMessageView: ComposeMessageView, images : [UIImage])
     func contactMessageSent(_ composeMessageView: ComposeMessageView, contacts : [CNContact])
+    func fileMessageSent(_ composeMessageView: ComposeMessageView, url : URL)
 }
 
 class ComposeMessageView: UIView{
@@ -113,6 +114,8 @@ extension  ComposeMessageView : AudioRecorderManagerDelegate{
 }
 //MARK: - AttachmentActionSheetDelegate
 extension ComposeMessageView: AttachmentActionSheetDelegate{
+    
+    
     func didPickImage(sheet: AttachmentActionSheet, image: UIImage) {
         delegate?.imageMessageSent(self, images: [image])
     }
@@ -121,8 +124,9 @@ extension ComposeMessageView: AttachmentActionSheetDelegate{
         
     }
     
-    func didPickDocument(sheet: AttachmentActionSheet, urls: [URL]) {
-        
+    func didPickDocument(sheet: AttachmentActionSheet, url: URL) {
+        print("\n\n\n\n hkjhkjkjlkjlk\n",url,"\n\n\n",url.pathExtension,"\n\n")
+        delegate?.fileMessageSent(self, url: url)
     }
     
     func didPickContacts(sheet: AttachmentActionSheet, contacts: [CNContact]) {
