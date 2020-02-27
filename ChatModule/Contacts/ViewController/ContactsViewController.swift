@@ -16,7 +16,8 @@ class ContactsViewController: UIViewController {
 
    //MARK: - IBACTION
    @IBAction func logOut(_ sender: UIButton){
-    viewmodel.firebaseManager.logOut()
+     viewmodel.firebaseManager.logOut()
+     navigator.goToLoginScreen(self)
    }
     @IBAction func group(_ sender: UIButton){
       alertForGroup()

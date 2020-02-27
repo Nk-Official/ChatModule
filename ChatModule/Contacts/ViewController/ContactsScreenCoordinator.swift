@@ -55,6 +55,18 @@ open class ContactsScreenCoordinator {
 
 //MARK: - ContactsNavigator
 extension ContactsScreenCoordinator :ContactsNavigator{
+    func goToLoginScreen(_ viewController: ContactsViewController) {
+        // following code dont add in source code
+        let navigationcontroller = UINavigationController()
+        let loginViewController = LogInViewController.initiatefromStoryboard(.example)
+        navigationcontroller.viewControllers = [loginViewController]
+        if let window = UIApplication.shared.delegate?.window {
+            window?.rootViewController = navigationcontroller
+            window?.makeKeyAndVisible()
+            window?.makeKey()
+        }
+    }
+    
     func navigateToChat(_ viewController: ContactsViewController, receiver: Channel) {
         navigationController.navigationBar.isHidden = true
         let chatHandler = ChatHandler()
@@ -78,4 +90,5 @@ extension ContactsScreenCoordinator :BackNavigateDelegate{
 //MARK: - ContactsNavigator
 protocol ContactsNavigator {
     func navigateToChat(_ viewController : ContactsViewController, receiver: Channel)
+    func goToLoginScreen(_ viewController : ContactsViewController)
 }

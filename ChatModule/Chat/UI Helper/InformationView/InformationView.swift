@@ -8,11 +8,12 @@
 
 import UIKit
 class InformationView : UIView{
-    
+    //MARK: - OUTLET
     @IBOutlet weak var contentV : UIView!
     @IBOutlet weak var msglabel : UILabel!
     @IBOutlet weak var leftIconImageView : UIImageView!
-
+    
+    //MARK: - INITIALIZE
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -21,13 +22,13 @@ class InformationView : UIView{
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    func commonInit(){        
+    func commonInit(){
         Bundle.main.loadNibNamed("InformationView", owner: self, options: nil)
         self.addSubview(contentV)
         contentV.frame = self.bounds
         contentV.autoresizingMask = [.flexibleWidth,.flexibleHeight]
     }
+    //MARK: - CONFIGURE
     func configure(message: String, leftIcon : UIImage?){
         msglabel.text = message
         leftIconImageView.isHidden = leftIcon == nil

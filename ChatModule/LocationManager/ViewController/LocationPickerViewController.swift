@@ -99,11 +99,9 @@ extension LocationPickerViewController: CLLocationManagerDelegate {
 extension LocationPickerViewController : UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-//        if offset < 0 {
-            UIView.animate(withDuration: 0.2) {
-                self.mapViewHeightConstraint.constant = self.heigthMapView - offset
-            }
-//        }
+        UIView.animate(withDuration: 0.2) {
+            self.mapViewHeightConstraint.constant = self.heigthMapView - offset
+        }
     }
 }
 

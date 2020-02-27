@@ -32,7 +32,6 @@ class MessageTableViewCell : UITableViewCell{
         super.awakeFromNib()
         setUIAccToTheme()
         configureUI()
-//        layoutMargins = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
     }
     
     

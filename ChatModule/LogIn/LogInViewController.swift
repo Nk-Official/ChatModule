@@ -63,7 +63,6 @@ class LogInViewController: UIViewController {
 
 }
 
-
 extension LogInViewController: ContactsDataSource{
     func currentUser(_ viewController: ContactsViewController, completion: @escaping (Channel) -> ()) {
         completion(loginUser)
@@ -75,10 +74,12 @@ extension LogInViewController: ContactsDataSource{
     
     
     func contactsList(_ viewController: ContactsViewController, contacts list: @escaping (([Channel]) -> ())) {
-        firebaseMngr.getAllUsers { (users,currentUser) in
-             list(users)
-             self.loginUser = currentUser!
-        }
+        viewController.showAnimation()
+       firebaseMngr.getAllUsers { (users,loginUser) in
+           viewController.hideAnimation()
+           self.loginUser = loginUser
+           list(users)
+       }
     }
     
     
