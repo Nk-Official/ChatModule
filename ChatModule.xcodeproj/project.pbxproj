@@ -61,6 +61,7 @@
 		1B57657F23F2D3AB001EBC01 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57657E23F2D3AB001EBC01 /* ContactsViewController.swift */; };
 		1B57658123F2D406001EBC01 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57658023F2D406001EBC01 /* ContactsViewModel.swift */; };
 		1B57658523F2D9E9001EBC01 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57658423F2D9E9001EBC01 /* ContactTableViewCell.swift */; };
+		1B641CEE2407C49400D989C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B641CED2407C49400D989C5 /* README.md */; };
 		1B876ACF23F3C466001A722D /* ExUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876ACE23F3C466001A722D /* ExUIImageView.swift */; };
 		1B876AD323F3CB15001A722D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876AD223F3CB15001A722D /* LogInViewController.swift */; };
 		1B876AD823F3CBEF001A722D /* StoryBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876AD723F3CBEF001A722D /* StoryBoards.swift */; };
@@ -152,6 +153,7 @@
 		1B57657E23F2D3AB001EBC01 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		1B57658023F2D406001EBC01 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		1B57658423F2D9E9001EBC01 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		1B641CED2407C49400D989C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1B876ACE23F3C466001A722D /* ExUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExUIImageView.swift; sourceTree = "<group>"; };
 		1B876AD223F3CB15001A722D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		1B876AD723F3CBEF001A722D /* StoryBoards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryBoards.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 		1B10EE1F2382574C005A94E2 = {
 			isa = PBXGroup;
 			children = (
+				1B641CED2407C49400D989C5 /* README.md */,
 				1B10EE2A2382574C005A94E2 /* ChatModule */,
 				1B10EE292382574C005A94E2 /* Products */,
 				35C42B5B0EBE0B43A1BC011C /* Pods */,
@@ -708,6 +711,7 @@
 				1BE2C51123FD068A0045F251 /* Example.storyboard in Resources */,
 				1B25902024051E86002F880C /* OutGoingContactTableViewCell.xib in Resources */,
 				1B25901C2404FC0F002F880C /* IncomingLocationTableViewCell.xib in Resources */,
+				1B641CEE2407C49400D989C5 /* README.md in Resources */,
 				1B1DE9DB23F666280078C132 /* DummyTableViewCell.xib in Resources */,
 				1B10EE5823826F00005A94E2 /* ChatModule.storyboard in Resources */,
 			);

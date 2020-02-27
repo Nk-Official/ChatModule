@@ -49,7 +49,7 @@ class LogInViewController: UIViewController {
     func openContactScreen(){
         
         let contactsCoordinator = ContactsScreenCoordinator(navigationController: navigationController!, delegate: nil, dataSource: self, datemanager: nil)
-        contactsCoordinator.prefrences.nameColor = .red
+//        contactsCoordinator.prefrences.nameColor = .red
         contactsCoordinator.start()
     }
 
