@@ -7,48 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AEAF61B1-BA6B-49E9-AB13-977E938436EE"
+            uuid = "CE102007-0894-4B0D-B2FA-8EB799BB41AD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatModule/Chat/ViewController/ChatViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "canPerformAction(_:withSender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E6DAAC69-0AC0-4DDC-A308-DEF51016E90B"
-            shouldBeEnabled = "Yes"
+            uuid = "684DDA04-39F9-454B-9DAE-82195D45AC31"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/Chat/ViewController/ChatViewController.swift"
+            filePath = "ChatModule/DummyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "canPerformAction(_:withSender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B8DC7DFA-398B-4453-8BB2-A8DD53429FD3"
+            uuid = "58AB43C1-5D30-464C-B88E-7136C5D30192"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatModule/Chat/ViewController/ChatViewController.swift"
+            filePath = "ChatModule/Utility/MenuController/MenuController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "showMenu(inview:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17E4D013-FAEA-4095-8B89-765C6F873904"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatModule/DummyViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "textFieldShouldReturn(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

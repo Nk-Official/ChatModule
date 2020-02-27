@@ -18,16 +18,19 @@ extension UIView{
             self.layer.cornerRadius = newValue
         }
     }
-}
-
-
-extension UITextView {
-    func calculateMaxLines() -> Int {
-        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
-        let charSize = font?.lineHeight  ?? 0
-        let text = (self.text ?? "") as NSString
-        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        let linesRoundedUp = Int(ceil(textSize.height/charSize))
-        return linesRoundedUp
+    open override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return true
+    }
+    func screenshot() -> UIImage {
+        return UIGraphicsImageRenderer(size: bounds.size).image { _ in
+            drawHierarchy(in: CGRect(origin: .zero, size: bounds.size), afterScreenUpdates: true)
+        }
+    }
+    func copyView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
     }
 }
+

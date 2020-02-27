@@ -62,6 +62,9 @@
 		1B57658123F2D406001EBC01 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57658023F2D406001EBC01 /* ContactsViewModel.swift */; };
 		1B57658523F2D9E9001EBC01 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57658423F2D9E9001EBC01 /* ContactTableViewCell.swift */; };
 		1B641CEE2407C49400D989C5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1B641CED2407C49400D989C5 /* README.md */; };
+		1B641CF02407D1E800D989C5 /* ExChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B641CEF2407D1E800D989C5 /* ExChatViewController.swift */; };
+		1B641CF22407D39D00D989C5 /* ExUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B641CF12407D39D00D989C5 /* ExUITextView.swift */; };
+		1B641CF52407D77900D989C5 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B641CF42407D77900D989C5 /* MenuController.swift */; };
 		1B876ACF23F3C466001A722D /* ExUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876ACE23F3C466001A722D /* ExUIImageView.swift */; };
 		1B876AD323F3CB15001A722D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876AD223F3CB15001A722D /* LogInViewController.swift */; };
 		1B876AD823F3CBEF001A722D /* StoryBoards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B876AD723F3CBEF001A722D /* StoryBoards.swift */; };
@@ -154,6 +157,9 @@
 		1B57658023F2D406001EBC01 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		1B57658423F2D9E9001EBC01 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		1B641CED2407C49400D989C5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1B641CEF2407D1E800D989C5 /* ExChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExChatViewController.swift; sourceTree = "<group>"; };
+		1B641CF12407D39D00D989C5 /* ExUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExUITextView.swift; sourceTree = "<group>"; };
+		1B641CF42407D77900D989C5 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		1B876ACE23F3C466001A722D /* ExUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExUIImageView.swift; sourceTree = "<group>"; };
 		1B876AD223F3CB15001A722D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		1B876AD723F3CBEF001A722D /* StoryBoards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryBoards.swift; sourceTree = "<group>"; };
@@ -381,6 +387,7 @@
 				1B1B09D323F2C4B6009238B7 /* ExEncodable.swift */,
 				1B876ACE23F3C466001A722D /* ExUIImageView.swift */,
 				1B0604FB24038EC00045E442 /* ExViewController.swift */,
+				1B641CF12407D39D00D989C5 /* ExUITextView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -462,6 +469,14 @@
 				1B0605182403F6FB0045E442 /* ViewController */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		1B641CF32407D76400D989C5 /* MenuController */ = {
+			isa = PBXGroup;
+			children = (
+				1B641CF42407D77900D989C5 /* MenuController.swift */,
+			);
+			path = MenuController;
 			sourceTree = "<group>";
 		};
 		1B876AD123F3CAF6001A722D /* LogIn */ = {
@@ -576,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				1B10EE4523826183005A94E2 /* ChatViewController.swift */,
+				1B641CEF2407D1E800D989C5 /* ExChatViewController.swift */,
 				1B10EE592382706D005A94E2 /* ChatViewModel.swift */,
 				1B876ADB23F3E095001A722D /* ChatScreenCoordinator.swift */,
 			);
@@ -594,6 +610,7 @@
 		1BE9B73623FE757B00B8C994 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				1B641CF32407D76400D989C5 /* MenuController */,
 				1B0605082403A2640045E442 /* Error */,
 				1B1B09D023F2AE48009238B7 /* DateManager */,
 				1B10EE662382A723005A94E2 /* CustomView */,
@@ -777,12 +794,14 @@
 				1BE2C50F23FD03800045F251 /* ImageMessageViewerViewController.swift in Sources */,
 				1B8F8C3C24069D5100557C6E /* DocumentMsgTableViewCell.swift in Sources */,
 				1B876AD323F3CB15001A722D /* LogInViewController.swift in Sources */,
+				1B641CF22407D39D00D989C5 /* ExUITextView.swift in Sources */,
 				1B06050424039C6D0045E442 /* LocationMsgTavleViewCell.swift in Sources */,
 				1BE2C50C23FCFD8C0045F251 /* OutGoingMessageBubbleTableViewCell.swift in Sources */,
 				1BE9B73823FE8E2400B8C994 /* LocationPickerViewController.swift in Sources */,
 				1B10EE682382A732005A94E2 /* CustomTextView.swift in Sources */,
 				1B1DE9DF23F686A70078C132 /* FirebaseStorageManager.swift in Sources */,
 				1BEFC52C238415E800DC6964 /* TextMsgTableViewCell.swift in Sources */,
+				1B641CF02407D1E800D989C5 /* ExChatViewController.swift in Sources */,
 				1B1A3A0023FAA3060050F329 /* BackNavigateDelegate.swift in Sources */,
 				1B57657F23F2D3AB001EBC01 /* ContactsViewController.swift in Sources */,
 				1BEFC5262384081B00DC6964 /* AudioPlayerManager.swift in Sources */,
@@ -826,6 +845,7 @@
 				1B1B09CA23F28740009238B7 /* FireBaseManager.swift in Sources */,
 				1BE2C51323FD39FC0045F251 /* ChatPrefrences.swift in Sources */,
 				1B3BD52A23F55CF4005A3C35 /* ChatDelegate.swift in Sources */,
+				1B641CF52407D77900D989C5 /* MenuController.swift in Sources */,
 				1B25901B2404FC0F002F880C /* IncomingLocationTableViewCell.swift in Sources */,
 				1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */,
 				1B10EE5E23828279005A94E2 /* ComposeMessageView.swift in Sources */,

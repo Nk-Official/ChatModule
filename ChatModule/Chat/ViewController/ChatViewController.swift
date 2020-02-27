@@ -28,6 +28,9 @@ class ChatViewController: UIViewController {
      
     }
     
+    @IBAction func back(sender: UIBarButtonItem) {
+        backDelegate?.moveBackScreen(from: self)
+    }
     //MARK: - PROPERTIES
     var viewModel : ChatViewModel!
     let disposablebag = DisposeBag()
@@ -41,6 +44,9 @@ class ChatViewController: UIViewController {
     var backDelegate: BackNavigateDelegate?
     var navigator: ChatScreenNavigator!
     var logInUser: Channel!
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
     //MARK: - INHERITANCE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +55,14 @@ class ChatViewController: UIViewController {
         bindMessagesWithTV()
         setComposeMsgView()
         getAllMessages()
+        longPressGestureToMesages()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollToBottom()
+    }
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return true
     }
     //MARK: - METHODS
     func getAllMessages(){
@@ -62,17 +72,7 @@ class ChatViewController: UIViewController {
             print(messages)
         }
     }
-    func refresh(message : [DayMessages]){
-        viewModel.messages.accept(message)
-        
-    }
-    func scrollToBottom(){
-        DispatchQueue.main.async {
-            if let index = self.viewModel.lastIndex{
-                self.tableView.scrollToRow(at: index, at: .bottom, animated: false)
-            }
-        }
-    }
+    
     func setUI(){
         
         let theme = DBManager().chatTheme
@@ -85,9 +85,25 @@ class ChatViewController: UIViewController {
         composeMsgView.delegate = self
         composeMsgView.locationPickerDelegate = self
     }
-    
-    @IBAction func back(sender: UIBarButtonItem) {
-        backDelegate?.moveBackScreen(from: self)
+    //MARK: - UI ACTION
+    func openImage(image : UIImage,username: String, date: String){
+        let vc = ImageMessageViewerViewController.initiatefromStoryboard(.main)
+        vc.image = image
+        vc.date = date
+        vc.name = username
+        present(vc, animated: true, completion: nil)
+    }
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            if let index = self.viewModel.lastIndex{
+                self.tableView.scrollToRow(at: index, at: .bottom, animated: false)
+            }
+        }
+    }
+    //MARK: - BINDABLE
+    func refresh(message : [DayMessages]){
+        viewModel.messages.accept(message)
+        
     }
     func bindMessagesWithTV(){
         
@@ -101,13 +117,8 @@ class ChatViewController: UIViewController {
         tableView.rx.setDelegate(self).disposed(by: disposablebag)
         tableView.rx.setDataSource(self).disposed(by: disposablebag)
     }
-    func openImage(image : UIImage,username: String, date: String){
-        let vc = ImageMessageViewerViewController.initiatefromStoryboard(.main)
-        vc.image = image
-        vc.date = date
-        vc.name = username
-        present(vc, animated: true, completion: nil)
-    }
+    
+    
 }
 
 //MARK: - UITableViewDelegate
@@ -161,6 +172,7 @@ extension ChatViewController : UITableViewDelegate{
             break
         }
     }
+    
 }
 
 //MARK: - UITableViewDataSource
