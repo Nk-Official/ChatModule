@@ -44,12 +44,14 @@ class ChatViewController: UIViewController {
     var backDelegate: BackNavigateDelegate?
     var navigator: ChatScreenNavigator!
     var logInUser: Channel!
+    var messageInterprator: MessageInterprator?
     override var canBecomeFirstResponder: Bool{
         return true
     }
     //MARK: - INHERITANCE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel = ChatViewModel(userId: userid)
         setUI()
         bindMessagesWithTV()

@@ -88,7 +88,7 @@ class MessageAccessiblityPresentor {
         let items = menuItems ?? getMenuItems()
         
         
-        let popUpViewController = MessageAccessiblityPopUpViewController.initiatefromStoryboard(.main)
+        let popUpViewController = MenuPopOverViewController.initiatefromStoryboard(.main)
         popUpViewController.menuItems = items
         
         popUpViewController.modalPresentationStyle = .popover

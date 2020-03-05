@@ -27,37 +27,24 @@ extension ChatViewController{
                 guard let cell = tableView.cellForRow(at: indexPath) as? MessageTableViewCell else {
                     return
                 }
-                print("cell",cell)
-                let bgView = UIView(frame: view.bounds)
-                bgView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                messageInterprator = MessageInterprator(chat: self, tableView: tableView, messageCell: cell)
+                messageInterprator?.present()
                 
-                let scrnshot = cell.screenshot()
-                let cellCopy = UIImageView(image: scrnshot)
-                cellCopy.frame = tableView.convert(cell.frame, to: self.view)
-                bgView.alpha = 0
-                UIView.animate(withDuration: 0.3) {
-                    bgView.addSubview(cellCopy)
-                    bgView.alpha = 1
-                }
-                gestureToRemoveAccesibiltyView(bgView: bgView)
-                self.view.addSubview(bgView)
             }
         }
     }
+}
 
-    func gestureToRemoveAccesibiltyView(bgView: UIView){
-        
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeSubview(_:)))
-        bgView.addGestureRecognizer(tapgesture)
-        
+
+
+//MARK: - UIPopoverPresentationControllerDelegate
+
+extension ChatViewController: UIPopoverPresentationControllerDelegate{
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
-    @objc func removeSubview(_ tapGestureRecognizer: UITapGestureRecognizer){
-        if let view = tapGestureRecognizer.view{
-            UIView.animate(withDuration: 0.3, animations: {
-                view.alpha = 0
-            }) { (_) in
-                view.removeFromSuperview()
-            }
-        }
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        messageInterprator?.remove(with: true)
     }
+    
 }
