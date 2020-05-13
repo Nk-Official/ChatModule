@@ -11,6 +11,7 @@ struct Message: Codable{
     
     //MARK: - PROPERTIES
     var senderId : String
+    var senderName : String
     var receiverId: String
     
     var message : String? = nil// URL

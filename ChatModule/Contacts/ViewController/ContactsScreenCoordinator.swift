@@ -67,7 +67,7 @@ extension ContactsScreenCoordinator :ContactsNavigator{
         }
     }
     
-    func navigateToChat(_ viewController: ContactsViewController, receiver: Channel) {
+    func navigateToChat(_ viewController: ContactsViewController, receiver: Channel, iGroupChat: Bool) {
         navigationController.navigationBar.isHidden = true
         let chatHandler = ChatHandler()
         dataSource!.currentUser(viewController) { (user) in
@@ -89,6 +89,6 @@ extension ContactsScreenCoordinator :BackNavigateDelegate{
 
 //MARK: - ContactsNavigator
 protocol ContactsNavigator {
-    func navigateToChat(_ viewController : ContactsViewController, receiver: Channel)
+    func navigateToChat(_ viewController : ContactsViewController, receiver: Channel, iGroupChat: Bool)
     func goToLoginScreen(_ viewController : ContactsViewController)
 }

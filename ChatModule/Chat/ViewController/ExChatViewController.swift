@@ -11,8 +11,16 @@ import UIKit
 
 extension ChatViewController{
     
-    
-    //MARK: -  GESTURE
+    func tapToHideKeyboard(){
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(tableTap) )
+        tableView.addGestureRecognizer(tapGesture)
+        
+    }
+    @objc func tableTap(_ longPressGestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    //MARK: - LONG PRESS GESTURE
     func longPressGestureToMesages(){
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
         self.view.addGestureRecognizer(longPressRecognizer)
@@ -23,7 +31,6 @@ extension ChatViewController{
 
             let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                print("indexpath",indexPath)
                 guard let cell = tableView.cellForRow(at: indexPath) as? MessageTableViewCell else {
                     return
                 }

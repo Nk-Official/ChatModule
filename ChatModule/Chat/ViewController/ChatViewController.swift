@@ -45,19 +45,23 @@ class ChatViewController: UIViewController {
     var navigator: ChatScreenNavigator!
     var logInUser: Channel!
     var messageInterprator: MessageInterprator?
+    
     override var canBecomeFirstResponder: Bool{
         return true
     }
+    
     //MARK: - INHERITANCE
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel = ChatViewModel(userId: userid)
+        registerCell()
         setUI()
         bindMessagesWithTV()
         setComposeMsgView()
         getAllMessages()
         longPressGestureToMesages()
+        tapToHideKeyboard()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,6 +90,17 @@ class ChatViewController: UIViewController {
     func setComposeMsgView(){
         composeMsgView.delegate = self
         composeMsgView.locationPickerDelegate = self
+    }
+    func registerCell(){
+        [viewModel.incomingFileCell,
+        viewModel.incomingLocationCell,
+        viewModel.incomingContactCell,
+        viewModel.outgoingFileCell,
+        viewModel.outgoingLocationCell,
+        viewModel.outgoingContactCell].forEach { (identifier) in
+            let nib = UINib(nibName: identifier, bundle: nil)
+            tableView.register(nib, forCellReuseIdentifier: identifier)
+        }
     }
     //MARK: - UI ACTION
     func openImage(image : UIImage,username: String, date: String){
@@ -134,6 +149,7 @@ extension ChatViewController : UITableViewDelegate{
         return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
         let row = indexPath.row
         let section = indexPath.section
         let message = viewModel.messages.value[section].messages[row]
@@ -218,15 +234,16 @@ extension ChatViewController : UITableViewDataSource{
                 else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingAudioCell, for: indexPath) as! MessageTableViewCell}
             case .file:
                 if let cell = dataSource.incomingFileMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = Bundle.main.loadNibNamed(viewModel.incomingFileCell, owner: self, options: nil)?.first as! MessageTableViewCell}
+                    else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingFileCell, for: indexPath) as! MessageTableViewCell}
             case .location:
                 if let cell = dataSource.incomingLocationMessageBubble(self, message: message){messageCell = cell}
-                else{  let cell  = Bundle.main.loadNibNamed(viewModel.incomingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
-                messageCell = cell}
+                    else{  let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingLocationCell, for: indexPath) as! MessageTableViewCell
+                    messageCell = cell
+                }
             case .contact:
                 if let cell = dataSource.incomingContactMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = Bundle.main.loadNibNamed(viewModel.incomingContactCell, owner: self, options: nil)?.first as! MessageTableViewCell
-                }
+                    else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.incomingContactCell, for: indexPath) as! MessageTableViewCell}
+
             }
         }else{
             switch messageType {
@@ -249,21 +266,22 @@ extension ChatViewController : UITableViewDataSource{
                 else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingAudioCell, for: indexPath) as! MessageTableViewCell}
             case .file:
                 if let cell = dataSource.outgoingFileMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = Bundle.main.loadNibNamed(viewModel.outgoingFileCell, owner: self, options: nil)?.first as! MessageTableViewCell}
+                else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingFileCell, for: indexPath)  as! MessageTableViewCell }
             case .location:
                 if let cell = dataSource.outgoingLocationMessageBubble(self, message: message){messageCell = cell}
-                else{  let cell  = Bundle.main.loadNibNamed(viewModel.outgoingLocationCell, owner: self, options: nil)?.first as! LocationMsgTavleViewCell
+                else{  let cell  = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingLocationCell, for: indexPath)  as! MessageTableViewCell
                     messageCell = cell
                 }
             case .contact:
                 if let cell = dataSource.outgoingContactMessageBubble(self, message: message){messageCell = cell}
-                else{  messageCell = Bundle.main.loadNibNamed(viewModel.outgoingContactCell, owner: self, options: nil)?.first as! MessageTableViewCell
+                else{  messageCell = tableView.dequeueReusableCell(withIdentifier: viewModel.outgoingContactCell, for: indexPath)  as! MessageTableViewCell
                 }
            }
         }
         
         messageCell.dateManager = dateManager
         messageCell.message = message
+        messageCell.isGroupChat = receiver.isGroup == 1 ? true : false
         return messageCell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -295,37 +313,37 @@ extension ChatViewController : ComposeMssageDelegate{
     func textMessageSent(_ composeMessageView: ComposeMessageView, message: String) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
-        let message = Message(senderId: userid, receiverId: receiverId, message: message, sendDateTime: sendtime)
+        let message = Message(senderId: userid,senderName: logInUser.name, receiverId: receiverId, message: message, sendDateTime: sendtime)
        
-        delegate.didSendMessage(self, message: message, to: receiverId)
+        delegate.didSendMessage(self, message: message, to: receiver)
     }
     
     func audioMessageSent(_ composeMessageView: ComposeMessageView, audioUrl: URL) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
-        let message = Message(senderId: userid, receiverId: receiverId, audioMsg: "\(audioUrl)" , sendDateTime: sendtime)
-        delegate.didSendAudioMessage(self, message: message, to: receiverId, localfile: audioUrl)
+        let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId, audioMsg: "\(audioUrl)" , sendDateTime: sendtime)
+        delegate.didSendAudioMessage(self, message: message, to: receiver, localfile: audioUrl)
     }
     
     func imageMessageSent(_ composeMessageView: ComposeMessageView, images: [UIImage]) {
        let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
-        let message = Message(senderId: userid, receiverId: receiverId, imageMsg: "", sendDateTime: sendtime)
-        delegate.didSendPhotoMessage(self, message: message, to: receiverId, images: images)
+        let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId, imageMsg: "", sendDateTime: sendtime)
+        delegate.didSendPhotoMessage(self, message: message, to: receiver, images: images)
     }
 
     func contactMessageSent(_ composeMessageView: ComposeMessageView, contacts: [CNContact]) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
-        let message = Message(senderId: userid, receiverId: receiverId,  contacts: nil, sendDateTime: sendtime)
-        delegate.didSendContactMessage(self, message: message, to: receiverId, contacts: contacts)
+        let message = Message(senderId: userid ,senderName: logInUser.name , receiverId: receiverId,  contacts: nil, sendDateTime: sendtime)
+        delegate.didSendContactMessage(self, message: message, to: receiver, contacts: contacts)
        
     }
     func fileMessageSent(_ composeMessageView: ComposeMessageView, url: URL) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
-        let message = Message(senderId: userid, receiverId: receiverId,  file: url.absoluteString, sendDateTime: sendtime)
-        delegate?.didSendFileMessage(self, message: message, to: receiverId, fileAt: url)
+        let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId,  file: url.absoluteString, sendDateTime: sendtime)
+        delegate?.didSendFileMessage(self, message: message, to: receiver, fileAt: url)
     }
 //    func textMessageSent(view: ComposeMessageView, message: String) {
 //        let msg = Message(message: message, senderId: userid, sendTime: "12:00 am", deliveryTime: "", readTime: "")
@@ -339,8 +357,8 @@ extension ChatViewController: LocationPickerDelegate{
         let live = isLive ? 1 : 0
         let sendtime = dateManager.getCurrentDateTime()
         let location = Location(latitude: coordinates.latitude, longitude: coordinates.longitude, live: live,  updateTime: sendtime)
-        let message = Message(senderId: userid, receiverId: receiverId,  location: location, sendDateTime: sendtime)
-        delegate.didSendLocationMessage(self, message: message, to: receiverId)
+        let message = Message(senderId: userid,senderName: logInUser.name, receiverId: receiverId,  location: location, sendDateTime: sendtime)
+        delegate.didSendLocationMessage(self, message: message, to: receiver)
         viewController.pop()
     }
 }

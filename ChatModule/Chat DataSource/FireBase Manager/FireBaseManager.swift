@@ -26,6 +26,7 @@ struct FireBaseManager {
     
     //MARK: - firebase child path
     private let chat = "Chat"
+    private let groupChat = "GroupChat"
     private let channel = "Channel"
     
     func logOut(){
@@ -105,6 +106,16 @@ struct FireBaseManager {
         }
     }
     
+    func sendMessageToGroup(toGroup: String, message : Message){
+        do{
+            let message = try message.toDictionary()
+            databaseRefrence.child(groupChat).child(udid).child(toGroup).childByAutoId().updateChildValues(message)
+            databaseRefrence.child(channel).child(toGroup).updateChildValues(["lastMessage":message])
+        }
+        catch(let error){
+            fatalError(error.localizedDescription)
+        }
+    }
     //MARK: - getAllChat
     func getAllChat(of friendId: String, completion : @escaping ([Message])->()){
         var messages = [Message]()

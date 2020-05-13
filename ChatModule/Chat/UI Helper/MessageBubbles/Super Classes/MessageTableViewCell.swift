@@ -20,13 +20,16 @@ class MessageTableViewCell : UITableViewCell{
     var theme : ChatTheme{
         return DBManager().chatTheme
     }
+    var isGroupChat: Bool = false
     var dateManager : DateManager!
+    private var headerView: MessageHeaderView?
     
     //MARK: - IBOUTLET
     @IBOutlet weak   var msgBackgroundView : UIView!
     @IBOutlet weak   var timeLbl : UILabel!
     @IBOutlet weak   var msgStateImgV : UIImageView!
-    
+    @IBOutlet weak   var messageHeaderView : UIStackView?
+
     //MARK: - METHODS
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +39,6 @@ class MessageTableViewCell : UITableViewCell{
     
     
     func configureUI(){
-        
     }
     
     
@@ -44,8 +46,17 @@ class MessageTableViewCell : UITableViewCell{
     func setUIAccToTheme(){
         self.msgBackgroundView.layer.cornerRadius = 5
         self.msgBackgroundView.clipsToBounds = true
+        addHeaderView()
     }
-    
+    func addHeaderView(){
+        
+        let headerview = MessageHeaderView(frame: .zero)
+        if messageHeaderView != nil, headerView == nil,isGroupChat{
+            self.headerView = headerview
+            messageHeaderView!.addArrangedSubview(headerview)
+        }
+        
+    }
     //MARK: - getMessageStateImg
 
     func getMessageStateImg()->UIImage{

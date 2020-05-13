@@ -115,7 +115,7 @@ extension ContactsViewController : UITableViewDelegate{
             return
         }
         if delegate == nil{
-            navigator.navigateToChat(self, receiver: channel)
+            navigator.navigateToChat(self, receiver: channel, iGroupChat: false)
         }else{
             delegate?.didSelectContact(self, contact: channel)
         }
