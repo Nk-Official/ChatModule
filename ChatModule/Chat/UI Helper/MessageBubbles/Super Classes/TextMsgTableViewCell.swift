@@ -14,6 +14,7 @@ class TextMsgTableViewCell : MessageTableViewCell{
     @IBOutlet weak   var msgLbl : UILabel!
 
     override func configureUI(){
+        super.configureUI()
         if message == nil{
             msgLbl.text = nil
             timeLbl.text = nil

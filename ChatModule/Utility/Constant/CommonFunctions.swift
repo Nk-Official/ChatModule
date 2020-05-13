@@ -17,6 +17,8 @@ struct CommonFunctions {
         return currentUser.uid
     }
     static func dictionaryDecode<T:Codable>(dictionary : Dictionary<AnyHashable, Any>)->T?{
+        
+        print(dictionary)
         do {
             let json = try JSONSerialization.data(withJSONObject: dictionary)
             let decoder = JSONDecoder()

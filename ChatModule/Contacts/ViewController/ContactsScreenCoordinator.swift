@@ -67,11 +67,11 @@ extension ContactsScreenCoordinator :ContactsNavigator{
         }
     }
     
-    func navigateToChat(_ viewController: ContactsViewController, receiver: Channel, iGroupChat: Bool) {
+    func navigateToChat(_ viewController: ContactsViewController, receiver: Channel) {
         navigationController.navigationBar.isHidden = true
         let chatHandler = ChatHandler()
         dataSource!.currentUser(viewController) { (user) in
-            let coordinator = ChatScreenCoordinator(navigationController: self.navigationController, receiver: receiver, delegate: chatHandler, dataSource: chatHandler, backNavigator: self, loginUser: user)
+            let coordinator = ChatScreenCoordinator(navigationController: self.navigationController, chatChannel: receiver, delegate: chatHandler, dataSource: chatHandler, backNavigator: self, loginUser: user)
             coordinator.dateManager = self.dateManager
             coordinator.start()
         }
@@ -89,6 +89,6 @@ extension ContactsScreenCoordinator :BackNavigateDelegate{
 
 //MARK: - ContactsNavigator
 protocol ContactsNavigator {
-    func navigateToChat(_ viewController : ContactsViewController, receiver: Channel, iGroupChat: Bool)
+    func navigateToChat(_ viewController : ContactsViewController, receiver: Channel)
     func goToLoginScreen(_ viewController : ContactsViewController)
 }

@@ -20,7 +20,7 @@ class ChatScreenCoordinator {
     //MARK: - PROPERTIES
 
     private var navigationController :UINavigationController!
-    private var receiver : Channel
+    private var receiver : Channel!
     private var chatDelegate : ChatDelegate
     private var chatDataSource : ChatDataSource
 
@@ -30,18 +30,20 @@ class ChatScreenCoordinator {
     
     //MARK: - INITIALIZATION
     init(navigationController : UINavigationController,
-         receiver : Channel,
+         chatChannel : Channel,
          delegate : ChatDelegate,
          dataSource: ChatDataSource,
          backNavigator: BackNavigateDelegate,
          loginUser: Channel){
         
         self.navigationController = navigationController
-        self.receiver = receiver
+        
         chatDelegate = delegate
         chatDataSource = dataSource
         self.backCoordinator = backNavigator
         self.loginUser = loginUser
+        self.receiver = chatChannel
+        
    }
     //MARK: - METHOD
     func start(){

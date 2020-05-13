@@ -14,7 +14,7 @@ class MessageTableViewCell : UITableViewCell{
     //MARK: - PROPERTIES
     var message : Message!{
         didSet{
-            configureUI()
+//            configureUI()
         }
     }
     var theme : ChatTheme{
@@ -39,6 +39,7 @@ class MessageTableViewCell : UITableViewCell{
     
     
     func configureUI(){
+        addHeaderView()
     }
     
     
@@ -46,13 +47,12 @@ class MessageTableViewCell : UITableViewCell{
     func setUIAccToTheme(){
         self.msgBackgroundView.layer.cornerRadius = 5
         self.msgBackgroundView.clipsToBounds = true
-        addHeaderView()
     }
     func addHeaderView(){
-        
         let headerview = MessageHeaderView(frame: .zero)
         if messageHeaderView != nil, headerView == nil,isGroupChat{
             self.headerView = headerview
+            headerView?.configureView(senderName: message?.senderName ?? "")
             messageHeaderView!.addArrangedSubview(headerview)
         }
         

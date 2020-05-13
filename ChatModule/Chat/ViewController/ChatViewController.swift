@@ -27,7 +27,12 @@ class ChatViewController: UIViewController {
     @IBAction func call(_ sender: UIButton){
      
     }
-    
+    @IBAction func contactInfo(_ sender: UIButton){
+        if receiver.isGroup == 1{
+            let coordinator = ContactInfoCoordinator(navigationController: navigationController!)
+            coordinator.start()
+        }
+    }
     @IBAction func back(sender: UIBarButtonItem) {
         backDelegate?.moveBackScreen(from: self)
     }
@@ -72,10 +77,8 @@ class ChatViewController: UIViewController {
     }
     //MARK: - METHODS
     func getAllMessages(){
-        let receiverId = receiver.id
-        dataSource.messages(self, receiver: receiverId) { (messages) in
+        dataSource.messages(self, receiver: receiver) { (messages) in
             self.viewModel.messages.accept(messages)
-            print(messages)
         }
     }
     
@@ -208,7 +211,6 @@ extension ChatViewController : UITableViewDataSource{
         let message = viewModel.messages.value[section].messages[row]
         let messageType = message.getMessageType()
         let incoming : Bool = (message.senderId != userid)
-        
         var messageCell : MessageTableViewCell
         
         if incoming{
@@ -280,8 +282,10 @@ extension ChatViewController : UITableViewDataSource{
         }
         
         messageCell.dateManager = dateManager
-        messageCell.message = message
+
         messageCell.isGroupChat = receiver.isGroup == 1 ? true : false
+        messageCell.message = message
+        messageCell.configureUI()
         return messageCell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

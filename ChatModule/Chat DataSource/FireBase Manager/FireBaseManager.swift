@@ -43,7 +43,8 @@ struct FireBaseManager {
         guard let currentUser = Auth.auth().currentUser else{
             //komal45@gmail.com
             //"rohan.1998@gmail.com"
-            Auth.auth().signIn(withEmail: "komal45@gmail.com", password: "1234567890") { (result, error) in
+            //sheely#45@gmail.com
+            Auth.auth().signIn(withEmail: "rohan.1998@gmail.com", password: "1234567890") { (result, error) in
                 if error != nil{
                     debugPrint("error while login",error!.localizedDescription)
                     completion(.failure(error!))
@@ -66,7 +67,7 @@ struct FireBaseManager {
     func addUserToDataBase(){
         
         do{
-            let user = try Channel(name: "Rohan", id: udid, profile: "", lastMessage: nil).toDictionary()
+            let user = try Channel(name: "Shelly", id: udid, profile: "", lastMessage: nil).toDictionary()
             databaseRefrence.child(channel).child(udid).updateChildValues(user)
         }
         catch{
@@ -109,7 +110,7 @@ struct FireBaseManager {
     func sendMessageToGroup(toGroup: String, message : Message){
         do{
             let message = try message.toDictionary()
-            databaseRefrence.child(groupChat).child(udid).child(toGroup).childByAutoId().updateChildValues(message)
+            databaseRefrence.child(groupChat).child(toGroup).childByAutoId().updateChildValues(message)
             databaseRefrence.child(channel).child(toGroup).updateChildValues(["lastMessage":message])
         }
         catch(let error){
@@ -120,6 +121,21 @@ struct FireBaseManager {
     func getAllChat(of friendId: String, completion : @escaping ([Message])->()){
         var messages = [Message]()
         databaseRefrence.child(chat).child(udid).child(friendId).observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.exists(){
+                if let userData = snapshot.value as? [String:Any]{
+                    for (_,value) in userData {
+                        if let message: Message = CommonFunctions.dictionaryDecode(dictionary: value as! Dictionary<AnyHashable, Any>){
+                            messages.append(message)
+                        }
+                    }
+                }
+            }
+            completion(messages)
+        }
+    }
+    func getGroupChatMessages(of groupId: String, completion : @escaping ([Message])->()){
+        var messages = [Message]()
+        databaseRefrence.child(groupChat).child(groupId).observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.exists(){
                 if let userData = snapshot.value as? [String:Any]{
                     for (_,value) in userData {

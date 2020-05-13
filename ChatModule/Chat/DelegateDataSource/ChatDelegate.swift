@@ -10,7 +10,7 @@ import UIKit
 import Contacts
 //MARK: - ChatDelegate
 protocol ChatDelegate{
-    
+    typealias Closure = (()->())
 
     func didSelect(_ viewController: ChatViewController, message bubble: MessageBubble, message : Message)
     func didSelectContactMessageBubble(_ viewController: ChatViewController, message bubble: ContactMessageBubble, message : Message)// when default contact cell is used
@@ -23,6 +23,7 @@ protocol ChatDelegate{
     func didSendContactMessage(_ viewController: ChatViewController, message : Message, to receiver : Channel, contacts: [CNContact])
     func didSendFileMessage(_ viewController: ChatViewController, message : Message, to receiver : Channel, fileAt url: URL)
 
+    func didSelectContactInfo(_ viewController: ChatViewController,receiver : Channel)->Closure?
 }
 
 

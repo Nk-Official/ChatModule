@@ -116,18 +116,28 @@ extension ChatHandler : ChatDelegate{
             }
         }
     }
+    
+    
 }
 
 //MARK: - ChatDataSource
 extension ChatHandler : ChatDataSource{
     
     
-    func messages(_ viewcontroller: ChatViewController, receiver id: String, messages: @escaping ([DayMessages]) -> ()) {
-        firebaseManager.getAllChat(of: id) { (list) in
-            let daysMsgs = self.firebaseManager.splitMessagesaccordingToTime(all: list)
-            messages(daysMsgs)
-            self.allMessages = daysMsgs
-        }
+    func messages(_ viewcontroller: ChatViewController, receiver: Channel, messages: @escaping ([DayMessages]) -> ()) {
+        if receiver.isGroup == 1{
+            firebaseManager.getGroupChatMessages(of: receiver.id) { (list) in
+                let daysMsgs = self.firebaseManager.splitMessagesaccordingToTime(all: list)
+                messages(daysMsgs)
+                self.allMessages = daysMsgs
+            }
+        }else{
+            firebaseManager.getAllChat(of: receiver.id) { (list) in
+                let daysMsgs = self.firebaseManager.splitMessagesaccordingToTime(all: list)
+                messages(daysMsgs)
+                self.allMessages = daysMsgs
+            }
+        } 
     }
     
 }

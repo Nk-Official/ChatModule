@@ -10,7 +10,7 @@ import Foundation
 //MARK: - ChatDataSource
 protocol ChatDataSource {
     
-    func messages(_ viewcontroller: ChatViewController,receiver id : String, messages: @escaping ([DayMessages])->())
+    func messages(_ viewcontroller: ChatViewController,receiver : Channel, messages: @escaping ([DayMessages])->())
     
     func incomingTextMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?
     func incomingAudioMessageBubble(_ viewController: ChatViewController, message: Message)->MessageBubble?

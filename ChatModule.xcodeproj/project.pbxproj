@@ -104,6 +104,11 @@
 		1BFF86EF240783ED00E2DA2D /* IncomingDocumentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BFF86ED240783ED00E2DA2D /* IncomingDocumentTableViewCell.xib */; };
 		1BFF86F22407878E00E2DA2D /* IncomingContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFF86F02407878E00E2DA2D /* IncomingContactTableViewCell.swift */; };
 		1BFF86F32407878E00E2DA2D /* IncomingContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BFF86F12407878E00E2DA2D /* IncomingContactTableViewCell.xib */; };
+		CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */; };
+		CE5138DB246C370700CAD960 /* ContactInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */; };
+		CEFCF699246BCA85004F4502 /* MessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */; };
+		CEFCF69A246BCA85004F4502 /* MessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */; };
+		CEFCF69D246C0406004F4502 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF69C246C0406004F4502 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +214,11 @@
 		3765BD8486DF55B65EC9CCF5 /* Pods_ChatModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3BE3CA8AB7E2EA8B66FBD9 /* Pods-ChatModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatModule.debug.xcconfig"; path = "Target Support Files/Pods-ChatModule/Pods-ChatModule.debug.xcconfig"; sourceTree = "<group>"; };
 		9209E71DBC8CC1BB4E1EE6FD /* Pods-ChatModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatModule.release.xcconfig"; path = "Target Support Files/Pods-ChatModule/Pods-ChatModule.release.xcconfig"; sourceTree = "<group>"; };
+		CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
+		CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoCoordinator.swift; sourceTree = "<group>"; };
+		CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageHeaderView.xib; sourceTree = "<group>"; };
+		CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHeaderView.swift; sourceTree = "<group>"; };
+		CEFCF69C246C0406004F4502 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +347,7 @@
 		1B10EE2A2382574C005A94E2 /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				CE5138D7246C324D00CAD960 /* ContactInfo */,
 				1B8F8C2B24064D0800557C6E /* ContactManager */,
 				1B0605052403A0AD0045E442 /* LocationManager */,
 				1BEFC5172383B46900DC6964 /* Actionsheet Components */,
@@ -585,6 +596,7 @@
 		1BE9B73223FE6B7A00B8C994 /* UI Helper */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCF696246BCA85004F4502 /* Message Header View */,
 				1B3BD52B23F56194005A3C35 /* InformationView */,
 				1B10EE5F2382828D005A94E2 /* Composemessage */,
 				1B10EE5623826ABF005A94E2 /* MessageBubbles */,
@@ -624,6 +636,7 @@
 		1BE9B73623FE757B00B8C994 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCF69B246C03F6004F4502 /* Color */,
 				1BF797042408F66E005C2217 /* MenuOptionPopUp */,
 				1B641CF32407D76400D989C5 /* MenuController */,
 				1B0605082403A2640045E442 /* Error */,
@@ -683,6 +696,32 @@
 				3765BD8486DF55B65EC9CCF5 /* Pods_ChatModule.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE5138D7246C324D00CAD960 /* ContactInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */,
+				CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */,
+			);
+			path = ContactInfo;
+			sourceTree = "<group>";
+		};
+		CEFCF696246BCA85004F4502 /* Message Header View */ = {
+			isa = PBXGroup;
+			children = (
+				CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */,
+				CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */,
+			);
+			path = "Message Header View";
+			sourceTree = "<group>";
+		};
+		CEFCF69B246C03F6004F4502 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				CEFCF69C246C0406004F4502 /* Color.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -765,6 +804,7 @@
 				1B641CEE2407C49400D989C5 /* README.md in Resources */,
 				1B1DE9DB23F666280078C132 /* DummyTableViewCell.xib in Resources */,
 				1B10EE5823826F00005A94E2 /* ChatModule.storyboard in Resources */,
+				CEFCF699246BCA85004F4502 /* MessageHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,13 +911,16 @@
 				1B0605122403D8240045E442 /* MapViewController.swift in Sources */,
 				1BF797032408F0DE005C2217 /* PopUpMenuItem.swift in Sources */,
 				1BF797062408FAA6005C2217 /* MessageInterprator.swift in Sources */,
+				CEFCF69A246BCA85004F4502 /* MessageHeaderView.swift in Sources */,
 				1B876ADC23F3E095001A722D /* ChatScreenCoordinator.swift in Sources */,
 				1BFF86EE240783ED00E2DA2D /* IncomingDocumentTableViewCell.swift in Sources */,
 				1B57657D23F2CC22001EBC01 /* Channel.swift in Sources */,
 				1BEFC51B2383B66500DC6964 /* AttachmentActionsList.swift in Sources */,
 				1BF796FF2408E44B005C2217 /* PopUpMenuItemTableViewCell.swift in Sources */,
 				1B9218CD240CC34C00653670 /* MessageBluePrint.swift in Sources */,
+				CEFCF69D246C0406004F4502 /* Color.swift in Sources */,
 				1B876ADA23F3D10B001A722D /* ContactsScreenCoordinator.swift in Sources */,
+				CE5138DB246C370700CAD960 /* ContactInfoCoordinator.swift in Sources */,
 				1B0D64F423F5115800D16134 /* ContactsPrefrences.swift in Sources */,
 				1BEFC52A2384108F00DC6964 /* AudioBubbleTableViewCell.swift in Sources */,
 				1B1B09CA23F28740009238B7 /* FireBaseManager.swift in Sources */,
@@ -895,6 +938,7 @@
 				1B10EE5A2382706D005A94E2 /* ChatViewModel.swift in Sources */,
 				1BF797012408E61B005C2217 /* MessageAccessiblityPresentor.swift in Sources */,
 				1B0605162403F6D20045E442 /* ContactsDataSource.swift in Sources */,
+				CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */,
 				1B10EE2C2382574C005A94E2 /* AppDelegate.swift in Sources */,
 				1B1DE9DA23F666280078C132 /* DummyTableViewCell.swift in Sources */,
 			);

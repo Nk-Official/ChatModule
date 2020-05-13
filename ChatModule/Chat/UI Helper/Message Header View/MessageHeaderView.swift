@@ -15,6 +15,7 @@ class MessageHeaderView: UIView {
     @IBOutlet weak private var nameLbl : UILabel!
     @IBOutlet weak private var msgTypeImgView : UIImageView!
     @IBOutlet weak private var msgTypeLbl : UILabel!
+    @IBOutlet weak private var msgTypeStackView : UIStackView!
 
     //MARK: - INIT
     override init(frame: CGRect) {
@@ -36,6 +37,11 @@ class MessageHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.contentV.frame = self.bounds
+    }
+    
+    func configureView(senderName: String ){
+        nameLbl.text = senderName
+        msgTypeStackView.isHidden = true
     }
 
 }

@@ -13,6 +13,7 @@
                 <outlet property="contentV" destination="iN0-l3-epB" id="Th8-3L-jDp"/>
                 <outlet property="msgTypeImgView" destination="wag-5Z-5fR" id="zl4-ud-bAd"/>
                 <outlet property="msgTypeLbl" destination="g4c-Nf-9Ra" id="aL0-6g-wVI"/>
+                <outlet property="msgTypeStackView" destination="276-Zt-eh3" id="ZlJ-aw-qp3"/>
                 <outlet property="nameLbl" destination="NVG-z7-0zh" id="LS3-Ua-9TU"/>
             </connections>
         </placeholder>

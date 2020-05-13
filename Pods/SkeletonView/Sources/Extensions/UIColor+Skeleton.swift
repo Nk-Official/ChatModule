@@ -3,7 +3,7 @@
 import UIKit
 
 // codebeat:disable[TOO_MANY_IVARS]
-extension UIColor {
+public extension UIColor {
     convenience init(_ hex: UInt) {
         self.init(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,

@@ -110,12 +110,12 @@ class ContactsViewController: UIViewController {
 extension ContactsViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = viewmodel.contacts.value[indexPath.row]
-        if channel.isGroup == 1{
-            //open group chat viewcontroller
-            return
-        }
+//        if channel.isGroup == 1{
+//            //open group chat viewcontroller
+//            return
+//        }
         if delegate == nil{
-            navigator.navigateToChat(self, receiver: channel, iGroupChat: false)
+            navigator.navigateToChat(self, receiver: channel)
         }else{
             delegate?.didSelectContact(self, contact: channel)
         }
