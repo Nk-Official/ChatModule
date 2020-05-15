@@ -104,8 +104,12 @@
 		1BFF86EF240783ED00E2DA2D /* IncomingDocumentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BFF86ED240783ED00E2DA2D /* IncomingDocumentTableViewCell.xib */; };
 		1BFF86F22407878E00E2DA2D /* IncomingContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFF86F02407878E00E2DA2D /* IncomingContactTableViewCell.swift */; };
 		1BFF86F32407878E00E2DA2D /* IncomingContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BFF86F12407878E00E2DA2D /* IncomingContactTableViewCell.xib */; };
+		CE4FA6B2246D05BE001599BA /* ContactInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */; };
 		CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */; };
 		CE5138DB246C370700CAD960 /* ContactInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */; };
+		CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */; };
+		CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB28246D793300EC901F /* ContactInfoTableData.swift */; };
+		CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */; };
 		CEFCF699246BCA85004F4502 /* MessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */; };
 		CEFCF69A246BCA85004F4502 /* MessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */; };
 		CEFCF69D246C0406004F4502 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF69C246C0406004F4502 /* Color.swift */; };
@@ -214,8 +218,12 @@
 		3765BD8486DF55B65EC9CCF5 /* Pods_ChatModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3BE3CA8AB7E2EA8B66FBD9 /* Pods-ChatModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatModule.debug.xcconfig"; path = "Target Support Files/Pods-ChatModule/Pods-ChatModule.debug.xcconfig"; sourceTree = "<group>"; };
 		9209E71DBC8CC1BB4E1EE6FD /* Pods-ChatModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatModule.release.xcconfig"; path = "Target Support Files/Pods-ChatModule/Pods-ChatModule.release.xcconfig"; sourceTree = "<group>"; };
+		CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableViewController.swift; sourceTree = "<group>"; };
 		CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
 		CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoCoordinator.swift; sourceTree = "<group>"; };
+		CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
+		CE64DB28246D793300EC901F /* ContactInfoTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableData.swift; sourceTree = "<group>"; };
+		CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewModel.swift; sourceTree = "<group>"; };
 		CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageHeaderView.xib; sourceTree = "<group>"; };
 		CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHeaderView.swift; sourceTree = "<group>"; };
 		CEFCF69C246C0406004F4502 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -701,10 +709,22 @@
 		CE5138D7246C324D00CAD960 /* ContactInfo */ = {
 			isa = PBXGroup;
 			children = (
+				CE64DB25246D59FC00EC901F /* TableViewCell */,
 				CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */,
+				CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */,
+				CE64DB28246D793300EC901F /* ContactInfoTableData.swift */,
 				CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */,
+				CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */,
 			);
 			path = ContactInfo;
+			sourceTree = "<group>";
+		};
+		CE64DB25246D59FC00EC901F /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		CEFCF696246BCA85004F4502 /* Message Header View */ = {
@@ -858,6 +878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1B09CF23F2AC3B009238B7 /* CommonFunctions.swift in Sources */,
+				CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */,
 				1B57658123F2D406001EBC01 /* ContactsViewModel.swift in Sources */,
 				1B25901F24051E86002F880C /* OutGoingContactTableViewCell.swift in Sources */,
 				1B1DE9D723F665540078C132 /* Dummy2ViewController.swift in Sources */,
@@ -867,6 +888,7 @@
 				1B2590222405248A002F880C /* ContactMsgTableViewCell.swift in Sources */,
 				1BE2C50F23FD03800045F251 /* ImageMessageViewerViewController.swift in Sources */,
 				1B8F8C3C24069D5100557C6E /* DocumentMsgTableViewCell.swift in Sources */,
+				CE4FA6B2246D05BE001599BA /* ContactInfoTableViewController.swift in Sources */,
 				1B876AD323F3CB15001A722D /* LogInViewController.swift in Sources */,
 				1B641CF22407D39D00D989C5 /* ExUITextView.swift in Sources */,
 				1B06050424039C6D0045E442 /* LocationMsgTavleViewCell.swift in Sources */,
@@ -875,9 +897,11 @@
 				1B10EE682382A732005A94E2 /* CustomTextView.swift in Sources */,
 				1B1DE9DF23F686A70078C132 /* FirebaseStorageManager.swift in Sources */,
 				1BEFC52C238415E800DC6964 /* TextMsgTableViewCell.swift in Sources */,
+				CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */,
 				1B641CF02407D1E800D989C5 /* ExChatViewController.swift in Sources */,
 				1B1A3A0023FAA3060050F329 /* BackNavigateDelegate.swift in Sources */,
 				1B57657F23F2D3AB001EBC01 /* ContactsViewController.swift in Sources */,
+				CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */,
 				1BEFC5262384081B00DC6964 /* AudioPlayerManager.swift in Sources */,
 				1B06050D2403C6D50045E442 /* OutgoingLocationTableViewCell.swift in Sources */,
 				1B57658523F2D9E9001EBC01 /* ContactTableViewCell.swift in Sources */,
@@ -1080,8 +1104,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatModule/ChatModule.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4Q92Z86L4P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatModule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1090,6 +1115,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = softProdigy.ChatModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1101,8 +1127,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatModule/ChatModule.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4Q92Z86L4P;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatModule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1111,6 +1138,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = softProdigy.ChatModule;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

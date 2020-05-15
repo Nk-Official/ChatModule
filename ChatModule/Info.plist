@@ -2,28 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSContactsUsageDescription</key>
-	<string>need permission to read and save contacts</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>App uses GPS</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App need location</string>
-	<key>NSLocationUsageDescription</key>
-	<string>App need location</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App using location</string>
-	<key>UIFileSharingEnabled</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Chat Require to access microphone for video recording</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Chat require to access your camera</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Chat reqires to access photo library</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -40,7 +18,32 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Chat reqires to access photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Chat require to access your camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>need permission to read and save contacts</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App uses GPS</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App using location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>App need location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App need location</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Chat Require to access microphone for video recording</string>
+	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -63,10 +66,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>googlechromes</string>
-		<string>comgooglemaps</string>
-	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>

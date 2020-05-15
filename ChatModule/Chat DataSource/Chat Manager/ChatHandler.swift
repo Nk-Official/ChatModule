@@ -117,7 +117,9 @@ extension ChatHandler : ChatDelegate{
         }
     }
     
-    
+    func didSelectContactInfo(_ viewController: ChatViewController, receiver: Channel) -> Closure? {
+        return nil
+    }
 }
 
 //MARK: - ChatDataSource
