@@ -16,7 +16,7 @@ class ChatViewController: UIViewController {
     //MARK: - IBOUTLET
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var bgImgView : UIImageView!
-    @IBOutlet weak var composeMsgView :ComposeMessageView!
+    @IBOutlet weak var composeMsgView :ComposeMessageToolBar!
     @IBOutlet weak var channelProfileView : UIImageView!
     @IBOutlet weak var channelNameLbl : UILabel!
     
@@ -50,6 +50,7 @@ class ChatViewController: UIViewController {
     var navigator: ChatScreenNavigator!
     var logInUser: Channel!
     var messageInterprator: MessageInterprator?
+    var tableViewFullStrechHeight : CGFloat = 0
     
     override var canBecomeFirstResponder: Bool{
         return true
@@ -80,6 +81,11 @@ class ChatViewController: UIViewController {
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return true
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        if tableViewFullStrechHeight != 0{tableViewFullStrechHeight = tableView.frame.height}
+    }
+    
     //MARK: - METHODS
     func getAllMessages(){
         dataSource.messages(self, receiver: receiver) { (messages) in
@@ -96,7 +102,8 @@ class ChatViewController: UIViewController {
         channelNameLbl.text = receiver.name
     }
     func setComposeMsgView(){
-        composeMsgView.delegate = self
+        composeMsgView.composeMsgdelegate = self
+        composeMsgView.uiDelegate = self
         composeMsgView.locationPickerDelegate = self
     }
     func registerCell(){
@@ -144,6 +151,10 @@ class ChatViewController: UIViewController {
     }
     
     
+}
+//MARK: - SELECTORS
+extension ChatViewController{
+
 }
 
 //MARK: - UITableViewDelegate
@@ -315,11 +326,26 @@ extension ChatViewController : UITableViewDataSource{
     }
 }
 
+//MARK: - ComposeMssageUIDelegate
+extension ChatViewController: ComposeMssageUIDelegate{
+    func heightChange(_ composeMessageView: ComposeMessageToolBar, from: CGFloat, to: CGFloat) {
+        if to > from{
+//            let difference = to - from
+            let tablevContentOffset = tableView.contentOffset.y
+//            let scrollToOffset = tablevContentOffset + difference
+//            tableView.setContentOffset(CGPoint(x: 0, y: scrollToOffset) , animated: true)
+            let tableViewHeight = tableView.frame.height
+            let y = tablevContentOffset + tableViewFullStrechHeight - tableViewHeight
+            tableView.setContentOffset(CGPoint(x: 0, y: y) , animated: true)
+
+        }
+    }
+}
 
 //MARK: - ComposeMssageDelegate
 extension ChatViewController : ComposeMssageDelegate{
     
-    func textMessageSent(_ composeMessageView: ComposeMessageView, message: String) {
+    func textMessageSent(_ composeMessageView: ComposeMessageToolBar, message: String) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
         let message = Message(senderId: userid,senderName: logInUser.name, receiverId: receiverId, message: message, sendDateTime: sendtime)
@@ -327,28 +353,28 @@ extension ChatViewController : ComposeMssageDelegate{
         delegate.didSendMessage(self, message: message, to: receiver)
     }
     
-    func audioMessageSent(_ composeMessageView: ComposeMessageView, audioUrl: URL) {
+    func audioMessageSent(_ composeMessageView: ComposeMessageToolBar, audioUrl: URL) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
         let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId, audioMsg: "\(audioUrl)" , sendDateTime: sendtime)
         delegate.didSendAudioMessage(self, message: message, to: receiver, localfile: audioUrl)
     }
     
-    func imageMessageSent(_ composeMessageView: ComposeMessageView, images: [UIImage]) {
+    func imageMessageSent(_ composeMessageView: ComposeMessageToolBar, images: [UIImage]) {
        let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
         let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId, imageMsg: "", sendDateTime: sendtime)
         delegate.didSendPhotoMessage(self, message: message, to: receiver, images: images)
     }
 
-    func contactMessageSent(_ composeMessageView: ComposeMessageView, contacts: [CNContact]) {
+    func contactMessageSent(_ composeMessageView: ComposeMessageToolBar, contacts: [CNContact]) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
         let message = Message(senderId: userid ,senderName: logInUser.name , receiverId: receiverId,  contacts: nil, sendDateTime: sendtime)
         delegate.didSendContactMessage(self, message: message, to: receiver, contacts: contacts)
        
     }
-    func fileMessageSent(_ composeMessageView: ComposeMessageView, url: URL) {
+    func fileMessageSent(_ composeMessageView: ComposeMessageToolBar, url: URL) {
         let sendtime = dateManager.getCurrentDateTime()
         let receiverId = receiver.id
         let message = Message(senderId: userid,senderName: logInUser.name , receiverId: receiverId,  file: url.absoluteString, sendDateTime: sendtime)
@@ -371,6 +397,3 @@ extension ChatViewController: LocationPickerDelegate{
         viewController.pop()
     }
 }
-
-
-

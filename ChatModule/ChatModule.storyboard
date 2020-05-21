@@ -122,7 +122,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Sd-DZ-sRQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="748"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="outgoingcell" rowHeight="129" id="d3k-l5-CQ2" customClass="OutGoingMessageBubbleTableViewCell" customModule="ChatModule" customModuleProvider="target">
@@ -556,28 +556,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQi-DH-FWL" customClass="ComposeMessageView" customModule="ChatModule" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="792" width="414" height="70"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="555" constant="70" id="6bA-Wc-rXg"/>
-                                </constraints>
-                            </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kh-QL-tre" customClass="ComposeMessageToolBar" customModule="ChatModule" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="t94-AV-xl6"/>
                                 </constraints>
-                                <items>
-                                    <barButtonItem systemItem="add" id="2SF-dU-anz"/>
-                                    <barButtonItem style="plain" id="Inh-JF-XXp">
-                                        <view key="customView" contentMode="scaleToFill" id="t7f-HH-YxD">
-                                            <rect key="frame" x="40" y="9" width="374" height="36"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
-                                    </barButtonItem>
-                                </items>
+                                <items/>
                                 <connections>
                                     <outlet property="heightConstraint" destination="t94-AV-xl6" id="HNS-ZL-MZT"/>
                                 </connections>
@@ -587,10 +571,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ieU-Xn-ZA8" secondAttribute="bottom" id="010-DO-wpd"/>
                             <constraint firstItem="ieU-Xn-ZA8" firstAttribute="top" secondItem="1Sd-DZ-sRQ" secondAttribute="top" id="5Gu-5D-cls"/>
-                            <constraint firstItem="TQi-DH-FWL" firstAttribute="leading" secondItem="foh-zA-4JL" secondAttribute="leading" id="83d-n1-gzN"/>
+                            <constraint firstItem="7kh-QL-tre" firstAttribute="top" secondItem="1Sd-DZ-sRQ" secondAttribute="bottom" symbolic="YES" id="CN8-8j-c3f"/>
                             <constraint firstItem="ieU-Xn-ZA8" firstAttribute="trailing" secondItem="foh-zA-4JL" secondAttribute="trailing" id="CRp-2u-jA6"/>
-                            <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="TQi-DH-FWL" secondAttribute="trailing" id="Hsa-ak-xao"/>
-                            <constraint firstItem="foh-zA-4JL" firstAttribute="bottom" secondItem="TQi-DH-FWL" secondAttribute="bottom" id="IeR-DJ-UeS"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="bottom" secondItem="7kh-QL-tre" secondAttribute="bottom" id="PGq-Sn-euq"/>
                             <constraint firstItem="ieU-Xn-ZA8" firstAttribute="leading" secondItem="foh-zA-4JL" secondAttribute="leading" id="Qu4-Cy-RKu"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="1Sd-DZ-sRQ" secondAttribute="trailing" id="TxG-Dr-1yu"/>
@@ -601,7 +583,6 @@
                             <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="VmV-Hp-5yU" secondAttribute="trailing" id="lUH-HS-hxb"/>
                             <constraint firstItem="7kh-QL-tre" firstAttribute="leading" secondItem="m5H-PE-gEa" secondAttribute="leading" symbolic="YES" id="oWt-0T-Zhd"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="7kh-QL-tre" secondAttribute="trailing" id="rzK-4O-ftA"/>
-                            <constraint firstItem="TQi-DH-FWL" firstAttribute="top" secondItem="1Sd-DZ-sRQ" secondAttribute="bottom" id="vxz-wb-283"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="foh-zA-4JL"/>
                     </view>
@@ -609,7 +590,7 @@
                         <outlet property="bgImgView" destination="ieU-Xn-ZA8" id="LAH-gC-yTb"/>
                         <outlet property="channelNameLbl" destination="OfC-wU-XiA" id="HAZ-0E-eLX"/>
                         <outlet property="channelProfileView" destination="HZJ-6G-1PL" id="xxO-OT-dNg"/>
-                        <outlet property="composeMsgView" destination="TQi-DH-FWL" id="G1C-7y-YNL"/>
+                        <outlet property="composeMsgView" destination="7kh-QL-tre" id="GPT-Or-VHv"/>
                         <outlet property="tableView" destination="1Sd-DZ-sRQ" id="uRX-C2-Djq"/>
                     </connections>
                 </viewController>

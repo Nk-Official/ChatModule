@@ -7,57 +7,25 @@
 //
 
 import UIKit
+import ContactsUI
+
 class ComposeMessageToolBar : UIToolbar{
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    var messageTextView: CustomTextView?
-    var threasholdOfTextViewHeight: CGFloat = 0
     
+    
+    var messageTextView: UITextView?
+    var threasholdOfTextViewHeight: CGFloat = 0
+    var composeMsgdelegate: ComposeMssageDelegate?
+    var locationPickerDelegate: LocationPickerDelegate?
+    var uiDelegate: ComposeMssageUIDelegate?
+    let actionSheetMng = AttachmentActionSheet()
+    private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
+
+    //MARK: - INHERITANCE
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         addButtons()
-    }
-    func addButtons(){
-        let addbutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBtn))
-        messageTextView = getTextView()
-        let textview = UIBarButtonItem(customView: messageTextView!)
-        let cambtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addBtn))
-        let audiobtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addBtn))
-
-        items = [addbutton,textview,cambtn,audiobtn]
-        
-    }
-    
-    func getTextView()->CustomTextView{
-        let width = UIScreen.main.bounds.width-3*(45)
-        let textView = CustomTextView(frame: CGRect.zero )
-        textView.frame.size.width = width
-        textView.layer.cornerRadius = 20
-        textView.layer.borderColor = UIColor.seperatorColor.cgColor
-        textView.layer.borderWidth = 1
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.autocorrectionType = .no
-        textView.editingChanged = {
-           (text,_) in
-           // trigger your animation here
-           self.resizeHeightOfMsgTxvtV(text: text)
-       }
-        textView.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
-        textView.isScrollEnabled = true
-        return textView
-    }
-    func resizeHeightOfMsgTxvtV(text : String?){
-        if messageTextView == nil{return}
-        let numberOfLines = getNumberOfLine()
-        if numberOfLines < 5{
-            messageTextView?.frame = CGRect(x: 0, y: 0, width: messageTextView!.frame.width, height: messageTextView!.contentSize.height)
-        }
-        
-    }
-    @objc func addBtn(){
-        
-        
-        
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if messageTextView == nil{return}
@@ -65,7 +33,10 @@ class ComposeMessageToolBar : UIToolbar{
         {
             let numberOfLines = getNumberOfLine()
             if numberOfLines <= 5{
-                self.heightConstraint.constant = self.messageTextView!.frame.height + 9
+                let oldheight = self.heightConstraint.constant
+                let newheight = self.messageTextView!.frame.height + 9
+                self.heightConstraint.constant = newheight
+                uiDelegate?.heightChange(self, from: oldheight, to: newheight)
             }
             
             if numberOfLines == 5{
@@ -76,10 +47,114 @@ class ComposeMessageToolBar : UIToolbar{
         
     }
     
+    //MARK: - METHODS
+    func addButtons(){
+        let addbutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFileBtn))
+        messageTextView = getTextView()
+        let textview = UIBarButtonItem(customView: messageTextView!)
+        let cambtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addCameraBtn))
+        let audiobtn = UIBarButtonItem(image: UIImage(named: "microphoneBlue") , style: .plain, target: self, action: #selector(mocrophoneBtn))
+        
+        items = [addbutton,textview,cambtn,audiobtn]
+        audioRecodermngr.delegate = self
+
+    }
+    
+    func getTextView()->UITextView{
+        let width = UIScreen.main.bounds.width-3*(45)
+        let textView = UITextView(frame: CGRect.zero )
+        textView.frame.size.width = width
+        textView.layer.cornerRadius = 20
+        textView.layer.borderColor = UIColor.seperatorColor.cgColor
+        textView.layer.borderWidth = 1
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.autocorrectionType = .no
+        textView.delegate = self
+        textView.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
+        return textView
+    }
+    func resizeHeightOfMsgTxvtV(text : String?){
+        if messageTextView == nil{return}
+        let numberOfLines = getNumberOfLine()
+        if numberOfLines < 5{
+            messageTextView?.frame = CGRect(x: 0, y: 0, width: messageTextView!.frame.width, height: messageTextView!.contentSize.height)
+        }
+        
+    }
+    
     func getNumberOfLine()->Int{
         if messageTextView == nil{return 0}
-//        let newSize = self.messageTextView!.sizeThatFits(CGSize(width: self.messageTextView!.frame.width, height: CGFloat.greatestFiniteMagnitude))
         let numberOfLine = self.messageTextView!.calculateMaxLines()
         return numberOfLine
+    }
+    
+    //MARK: - SELECTOR
+    @objc func addFileBtn(){
+        
+        actionSheetMng.delegate = self
+        actionSheetMng.locationPickerDelegate = locationPickerDelegate
+        actionSheetMng.presentActionSheet()
+        
+    }
+    
+    @objc func addCameraBtn(){
+        actionSheetMng.presentLibrary()
+    }
+    
+    @objc func mocrophoneBtn(){
+        if !audioRecodermngr.recordingInProcess{
+            audioRecodermngr.startRecording()
+        }
+        else{
+            audioRecodermngr.finishRecording()
+        }
+    }
+}
+
+
+//MARK: - UITextViewDelegate
+extension ComposeMessageToolBar: UITextViewDelegate{
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else{return}
+        self.resizeHeightOfMsgTxvtV(text: text)
+    }
+    
+}
+
+//MARK: - AttachmentActionSheetDelegate
+extension ComposeMessageToolBar: AttachmentActionSheetDelegate{
+    
+    
+    func didPickImage(sheet: AttachmentActionSheet, image: UIImage) {
+        composeMsgdelegate?.imageMessageSent(self, images: [image])
+    }
+    
+    func didPickVideo(sheet: AttachmentActionSheet, videoUrl: URL) {
+        
+    }
+    
+    func didPickDocument(sheet: AttachmentActionSheet, url: URL) {
+        print("\n\n\n\n hkjhkjkjlkjlk\n",url,"\n\n\n",url.pathExtension,"\n\n")
+        composeMsgdelegate?.fileMessageSent(self, url: url)
+    }
+    
+    func didPickContacts(sheet: AttachmentActionSheet, contacts: [CNContact]) {
+        composeMsgdelegate?.contactMessageSent(self, contacts: contacts)
+    }
+}
+
+//MARK: - AudioRecorderManagerDelegate
+extension  ComposeMessageToolBar : AudioRecorderManagerDelegate{
+    func didRecordedAudio(manager: AudioRecorderManager, audioUrl: URL?, error: Error?) {
+        print("url",audioUrl as Any)
+//        manager.deleteAudio()
+        if let url = audioUrl{
+            composeMsgdelegate?.audioMessageSent(self, audioUrl: url)
+        }
+    }
+    
+    func setSendTextMessageBtn(enable : Bool){
+//        sendMsgBtn.isHidden = !enable
+//        microphnBtn.isHidden = enable
     }
 }

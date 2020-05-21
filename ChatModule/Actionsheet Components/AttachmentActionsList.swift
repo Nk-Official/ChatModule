@@ -55,15 +55,19 @@ extension AttachmentActionSheet{
         pickerController.sourceType = .camera
         //if the resizing & cropping interface should be presented after selecting & taking a picture
         pickerController.allowsEditing = true
-        pickerController.mediaTypes = ["public.image", "public.movie"]
-        viewController.present(pickerController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            pickerController.mediaTypes = ["public.image", "public.movie"]
+            viewController.present(pickerController, animated: true, completion: nil)
+        }
     }
     func presentLibrary(){
         pickerController.sourceType = .photoLibrary
         //if the resizing & cropping interface should be presented after selecting & taking a picture
         pickerController.allowsEditing = true
-        pickerController.mediaTypes = ["public.image", "public.movie"]
-        viewController.present(pickerController, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            pickerController.mediaTypes = ["public.image", "public.movie"]
+            viewController.present(pickerController, animated: true, completion: nil)
+        }
     }
     func presentDocumentPicker(){
         documentPicker.delegate = self

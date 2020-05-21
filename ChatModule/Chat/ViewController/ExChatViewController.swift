@@ -115,14 +115,11 @@ extension ChatViewController {
     }
     
     @objc func contactInfoTap(){
+        
         if receiver.isGroup == 1{
            let coordinator = ContactInfoCoordinator(navigationController: navigationController!)
            coordinator.start()
        }
     }
 
-}
-
-//MARK: - CUSTOM NAVIGATION BAR BUTTON
-extension ChatViewController {
 }
