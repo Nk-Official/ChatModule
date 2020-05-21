@@ -30,7 +30,8 @@ class ComposeMessageToolBar : UIToolbar{
     
     func getTextView()->CustomTextView{
         let width = UIScreen.main.bounds.width-3*(45)
-        let textView = CustomTextView(frame: CGRect(x: 0, y: 0, width: width, height: 40) )
+        let textView = CustomTextView(frame: CGRect.zero )
+        textView.frame.size.width = width
         textView.layer.cornerRadius = 20
         textView.layer.borderColor = UIColor.seperatorColor.cgColor
         textView.layer.borderWidth = 1

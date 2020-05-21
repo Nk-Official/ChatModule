@@ -564,15 +564,22 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kh-QL-tre" customClass="ComposeMessageToolBar" customModule="ChatModule" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="847" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="t94-AV-xl6"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem systemItem="add" id="ITM-GD-P4i"/>
+                                    <barButtonItem systemItem="add" id="2SF-dU-anz"/>
+                                    <barButtonItem style="plain" id="Inh-JF-XXp">
+                                        <view key="customView" contentMode="scaleToFill" id="t7f-HH-YxD">
+                                            <rect key="frame" x="40" y="9" width="374" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                    </barButtonItem>
                                 </items>
                                 <connections>
-                                    <outlet property="heightConstraint" destination="t94-AV-xl6" id="Xra-G0-SCr"/>
+                                    <outlet property="heightConstraint" destination="t94-AV-xl6" id="HNS-ZL-MZT"/>
                                 </connections>
                             </toolbar>
                         </subviews>
@@ -584,7 +591,7 @@
                             <constraint firstItem="ieU-Xn-ZA8" firstAttribute="trailing" secondItem="foh-zA-4JL" secondAttribute="trailing" id="CRp-2u-jA6"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="TQi-DH-FWL" secondAttribute="trailing" id="Hsa-ak-xao"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="bottom" secondItem="TQi-DH-FWL" secondAttribute="bottom" id="IeR-DJ-UeS"/>
-                            <constraint firstAttribute="bottom" secondItem="7kh-QL-tre" secondAttribute="bottom" symbolic="YES" id="PGq-Sn-euq"/>
+                            <constraint firstItem="foh-zA-4JL" firstAttribute="bottom" secondItem="7kh-QL-tre" secondAttribute="bottom" id="PGq-Sn-euq"/>
                             <constraint firstItem="ieU-Xn-ZA8" firstAttribute="leading" secondItem="foh-zA-4JL" secondAttribute="leading" id="Qu4-Cy-RKu"/>
                             <constraint firstItem="foh-zA-4JL" firstAttribute="trailing" secondItem="1Sd-DZ-sRQ" secondAttribute="trailing" id="TxG-Dr-1yu"/>
                             <constraint firstItem="VmV-Hp-5yU" firstAttribute="top" secondItem="foh-zA-4JL" secondAttribute="top" id="U7d-w6-hxA"/>
