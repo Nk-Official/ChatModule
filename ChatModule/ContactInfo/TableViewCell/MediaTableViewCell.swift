@@ -34,5 +34,6 @@ class MediaTableViewCell: UITableViewCell {
         subHeadingLbl.text = data.subtitle
         disclosureLbl.text = data.diclusreTitle
         typeImgView.image = data.typeImage
+        typeImgView.isHidden = data.typeImage == nil
     }
 }

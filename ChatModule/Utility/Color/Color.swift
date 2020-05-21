@@ -46,3 +46,7 @@ UIColor(0xC0392B),
     UIColor(0xFFFF00)
 ]
 
+extension UIColor{
+    static var seperatorColor = UIColor(0xD8D6DC)
+
+}

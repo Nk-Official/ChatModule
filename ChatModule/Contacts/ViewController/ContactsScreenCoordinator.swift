@@ -42,7 +42,7 @@ open class ContactsScreenCoordinator {
         let searchController = UISearchController(searchResultsController: nil)
         self.navigationController.navigationBar.prefersLargeTitles = true
         contactsViewController.navigationItem.searchController = searchController
-        contactsViewController.navigationItem.hidesSearchBarWhenScrolling = false
+//        contactsViewController.navigationItem.hidesSearchBarWhenScrolling = false
         navigationController.pushViewController(contactsViewController, animated: true)
     }
     func setUpNavigatinControllerForList(){
@@ -68,7 +68,8 @@ extension ContactsScreenCoordinator :ContactsNavigator{
     }
     
     func navigateToChat(_ viewController: ContactsViewController, receiver: Channel) {
-        navigationController.navigationBar.isHidden = true
+//        navigationController.navigationBar.isHidden = true
+        navigationController.navigationBar.prefersLargeTitles = false
         let chatHandler = ChatHandler()
         dataSource!.currentUser(viewController) { (user) in
             let coordinator = ChatScreenCoordinator(navigationController: self.navigationController, chatChannel: receiver, delegate: chatHandler, dataSource: chatHandler, backNavigator: self, loginUser: user)
@@ -80,7 +81,7 @@ extension ContactsScreenCoordinator :ContactsNavigator{
 
 extension ContactsScreenCoordinator :BackNavigateDelegate{
     func moveBackScreen(from viewcontroller: UIViewController) {
-        navigationController.navigationBar.isHidden = false
+//        navigationController.navigationBar.isHidden = false
         navigationController.popViewController(animated: true)
     }
 }

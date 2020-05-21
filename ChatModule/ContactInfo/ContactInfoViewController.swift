@@ -19,6 +19,9 @@ class ContactInfoViewController: UIViewController {
     //MARK: - PROPERTIES
     var mediaDataSet : [ContactInfoTableData] = []
     var customiseDataSet : [ContactInfoTableData] = []
+    var contactDetailDataSet : [ContactInfoTableData] = []
+    var chatDataSet : [ContactInfoTableData] = []
+    var contactManupulateDataSet : [ContactInfoTableData] = []
     let viewModel = ContactInfoViewModel()
     
     //MARK: - OVERRIDE
@@ -26,22 +29,34 @@ class ContactInfoViewController: UIViewController {
         super.viewDidLoad()
         mediaDataSet = viewModel.getMediaData()
         customiseDataSet = viewModel.contactCustomiseData()
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        contactDetailDataSet = viewModel.contactDetailData()
+        chatDataSet = viewModel.chatOptionData()
+        contactManupulateDataSet = viewModel.contactManupulateData()
+        self.tableView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        tableView.layer.removeAllAnimations()
+        tableViewHeight.constant = tableView.contentSize.height
+        UIView.animate(withDuration: 0.5) {
+            self.updateViewConstraints()
+        }
+
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        tableViewHeight.constant = tableView.contentSize.height
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scrollView.setContentOffset(CGPoint(x: 0, y: 104) , animated: false)
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 }
 //MARK: -
 extension ContactInfoViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 5
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
@@ -49,15 +64,37 @@ extension ContactInfoViewController: UITableViewDelegate, UITableViewDataSource{
         }else if section == 1{
             return  customiseDataSet.count
         }
+        else if section == 2{
+            return  contactDetailDataSet.count
+        }
+        else if section == 3{
+            return  chatDataSet.count
+        }
+        else if section == 4{
+            return contactManupulateDataSet.count
+        }
         return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mediacell", for: indexPath) as! MediaTableViewCell
+        cell.headingLbl.textColor = UIColor.black
+        cell.accessoryType = .disclosureIndicator
         if indexPath.section == 0{
             cell.configure(data: mediaDataSet[indexPath.row])
         }else if indexPath.section == 1{
             cell.configure(data: customiseDataSet[indexPath.row])
+        }
+        else if indexPath.section == 2{
+            cell.configure(data: contactDetailDataSet[indexPath.row])
+        }else if indexPath.section == 3{
+            cell.configure(data: chatDataSet[indexPath.row])
+            cell.accessoryType = .none
+        }
+        else if indexPath.section == 4{
+            cell.configure(data: contactManupulateDataSet[indexPath.row])
+            cell.headingLbl.textColor = UIColor.red
+            cell.accessoryType = .none
         }
         return cell
     }
@@ -66,8 +103,36 @@ extension ContactInfoViewController: UITableViewDelegate, UITableViewDataSource{
         footer.backgroundColor = .clear
         return footer
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
+        return 25
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (cell.responds(to: #selector(getter: UIView.tintColor))) {
+            let upframe = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 1)
+            let downframe = CGRect(x: 0, y: cell.bounds.height-1, width: tableView.frame.width, height: 1)
+            let upview = UIView(frame: upframe)
+            let downview = UIView(frame: downframe)
+            upview.backgroundColor = UIColor.seperatorColor
+            downview.backgroundColor = UIColor.seperatorColor
+            upview.tag = 100
+            downview.tag = 101
+            for i in cell.subviews where (i.tag == 100 || i.tag == 101){
+                i.removeFromSuperview()
+            }
+            let numberOfrows = tableView.numberOfRows(inSection: indexPath.section)
+            if indexPath.row == 0{
+                cell.addSubview(upview)
+            }
+            if indexPath.row == numberOfrows-1{
+                cell.addSubview(downview)
+            }
+        }
     }
 }
 
@@ -76,11 +141,13 @@ extension ContactInfoViewController: UITableViewDelegate, UITableViewDataSource{
 extension ContactInfoViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
-        print(contentOffsetY)
         if contentOffsetY > 0{
             imageView.transform = CGAffineTransform(translationX: 0, y: -contentOffsetY/2.5)
         }else{
             imageView.transform = CGAffineTransform(translationX: 0, y: -contentOffsetY)
+        }
+        if contentOffsetY < -70{
+            
         }
     }
 }

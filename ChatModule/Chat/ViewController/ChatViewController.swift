@@ -67,7 +67,12 @@ class ChatViewController: UIViewController {
         getAllMessages()
         longPressGestureToMesages()
         tapToHideKeyboard()
+        
+        customizeNavigationBar()
     }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollToBottom()
@@ -366,3 +371,6 @@ extension ChatViewController: LocationPickerDelegate{
         viewController.pop()
     }
 }
+
+
+

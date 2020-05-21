@@ -18,6 +18,8 @@ class ContactInfoCoordinator{
     func start(){
         
         let infoViewController = ContactInfoViewController.initiatefromStoryboard(.main)
+        navigationController.navigationBar.isHidden = false
+        navigationController.navigationBar.prefersLargeTitles = false
         navigationController.pushViewController(infoViewController, animated: true)
     }
 }

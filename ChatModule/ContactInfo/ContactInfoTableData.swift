@@ -12,7 +12,7 @@ struct ContactInfoTableData{
     let title:String
     let subtitle: String?
     let diclusreTitle: String?
-    let typeImage: UIImage
+    let typeImage: UIImage?
     
     
     

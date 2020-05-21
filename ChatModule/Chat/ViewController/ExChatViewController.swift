@@ -55,3 +55,74 @@ extension ChatViewController: UIPopoverPresentationControllerDelegate{
     }
     
 }
+
+//MARK: - CUSTOM NAVIGATION BAR BUTTON
+extension ChatViewController {
+
+    func customizeNavigationBar(){
+        settitleView()
+        setBackButton()
+        let videoBtn = UIBarButtonItem(image: UIImage(named: "videoCam2"), style: .plain, target: self, action: #selector(videoBtnPress))
+        let callBtn = UIBarButtonItem(image: UIImage(named: "callIcon2"), style: .plain, target: self, action: #selector(callBtnPress))
+
+        navigationItem.rightBarButtonItems = [callBtn,videoBtn]
+        
+    }
+    func setBackButton(){
+        let leftBarBtn = UIBarButtonItem(image: UIImage(named: "back3"), style: .plain, target: self, action: #selector(popToBack))
+        navigationItem.leftBarButtonItem = leftBarBtn
+    }
+    @objc func popToBack(){
+        navigationController?.popViewController(animated: true)
+    }
+    @objc func callBtnPress(){
+        debugPrint("callBtnPress")
+    }
+    @objc func videoBtnPress(){
+       debugPrint("videoBtnPress")
+    }
+    func settitleView(){
+        let imageView = UIImageView()
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 36),
+            imageView.widthAnchor.constraint(equalToConstant: 36)
+        ])
+        imageView.setImage(from: receiver.profile)
+        imageView.layer.cornerRadius = 18
+        
+        let titleLabel = UILabel()
+        titleLabel.text = receiver.name
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        
+        let subtitle = UILabel()
+        subtitle.text = "last seen today at 10:19 Am   "
+        subtitle.textColor = UIColor(0x818387)
+        subtitle.font = UIFont.boldSystemFont(ofSize: 14)
+
+
+        let vStack = UIStackView(arrangedSubviews: [titleLabel,subtitle])
+        vStack.axis = .vertical
+        vStack.alignment = .leading
+        
+        let hStack = UIStackView(arrangedSubviews: [imageView, vStack])
+        hStack.spacing = 10
+        hStack.alignment = .leading
+
+        navigationItem.titleView = hStack
+        hStack.isUserInteractionEnabled = true
+        let tg = UITapGestureRecognizer(target: self, action: #selector(contactInfoTap))
+        hStack.addGestureRecognizer(tg)
+    }
+    
+    @objc func contactInfoTap(){
+        if receiver.isGroup == 1{
+           let coordinator = ContactInfoCoordinator(navigationController: navigationController!)
+           coordinator.start()
+       }
+    }
+
+}
+
+//MARK: - CUSTOM NAVIGATION BAR BUTTON
+extension ChatViewController {
+}

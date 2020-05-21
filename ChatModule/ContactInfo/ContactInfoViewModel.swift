@@ -27,4 +27,23 @@ class ContactInfoViewModel {
 
         return [mute,customTone,saveToCameraRoll,encryption]
     }
+    
+    func contactDetailData()->[ContactInfoTableData]{
+        let detail = ContactInfoTableData(title: "Contact Details", subtitle: nil, diclusreTitle: nil, typeImage: UIImage(named: "mediaContactInfo")! )
+        return [detail]
+    }
+    
+    func chatOptionData()->[ContactInfoTableData]{
+        let shareContact = ContactInfoTableData(title: "Share Contact", subtitle: nil, diclusreTitle: nil, typeImage: nil )
+        let exportChat = ContactInfoTableData(title: "Export Chat", subtitle: nil, diclusreTitle: nil, typeImage: nil )
+        let clearChat = ContactInfoTableData(title: "Clear Chat", subtitle: nil, diclusreTitle: nil, typeImage: nil )
+
+        return [shareContact,exportChat,clearChat]
+    }
+    
+    func contactManupulateData()->[ContactInfoTableData]{
+        let blockContact = ContactInfoTableData(title: "Block Contact", subtitle: nil, diclusreTitle: nil, typeImage: nil )
+        let reportChat = ContactInfoTableData(title: "Report Chat", subtitle: nil, diclusreTitle: nil, typeImage: nil )
+        return [blockContact,reportChat]
+    }
 }
