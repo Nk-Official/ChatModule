@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="75e-Fx-fwO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyR-ET-PRR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -661,26 +661,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x58-Ab-Rrq">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="4zu-cO-Xdu"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="x58-Ab-Rrq" firstAttribute="trailing" secondItem="1P0-TB-oAN" secondAttribute="trailing" id="DsL-K4-ymA"/>
                             <constraint firstItem="b8w-AF-f2o" firstAttribute="centerY" secondItem="aGj-bH-vki" secondAttribute="centerY" id="MwF-K6-Ix8"/>
                             <constraint firstItem="b8w-AF-f2o" firstAttribute="leading" secondItem="1P0-TB-oAN" secondAttribute="leading" constant="16" id="Sds-4R-uep"/>
+                            <constraint firstItem="x58-Ab-Rrq" firstAttribute="leading" secondItem="1P0-TB-oAN" secondAttribute="leading" id="W0F-qJ-4fw"/>
                             <constraint firstItem="1P0-TB-oAN" firstAttribute="trailing" secondItem="b8w-AF-f2o" secondAttribute="trailing" constant="16" id="hrJ-z6-IDw"/>
                             <constraint firstItem="b8w-AF-f2o" firstAttribute="centerX" secondItem="aGj-bH-vki" secondAttribute="centerX" id="rgi-Uh-lx4"/>
+                            <constraint firstItem="1P0-TB-oAN" firstAttribute="bottom" secondItem="x58-Ab-Rrq" secondAttribute="bottom" id="uUd-KM-th5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1P0-TB-oAN"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="LPp-TS-NIP">
-                            <connections>
-                                <segue destination="cVm-Oe-bVy" kind="popoverPresentation" popoverAnchorBarButtonItem="LPp-TS-NIP" id="SHp-Pc-uo3">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOK-Lp-leA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -691,11 +692,11 @@
             <objects>
                 <viewController storyboardIdentifier="Dummy2ViewController" id="cVm-Oe-bVy" customClass="Dummy2ViewController" customModule="ChatModule" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aIk-2O-phX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xua-vI-VFt">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="cVm-Oe-bVy" id="8qa-Ub-QWr"/>
@@ -1716,13 +1717,13 @@
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jwz-Vw-TvN">
                                                                                     <rect key="frame" x="52" y="5.5" width="252.5" height="43.5"/>
                                                                                     <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Namrata Khanduri" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kol-vA-sLo">
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Namrata Khanduri" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kol-vA-sLo">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="252.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="None" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8V-8T-CVY">
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8V-8T-CVY">
                                                                                             <rect key="frame" x="0.0" y="25.5" width="252.5" height="18"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                             <color key="textColor" red="0.66666666669999997" green="0.66666668650000005" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

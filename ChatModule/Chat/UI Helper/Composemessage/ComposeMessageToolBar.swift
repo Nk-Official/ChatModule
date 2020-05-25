@@ -20,6 +20,8 @@ class ComposeMessageToolBar : UIToolbar{
     var locationPickerDelegate: LocationPickerDelegate?
     var uiDelegate: ComposeMssageUIDelegate?
     let actionSheetMng = AttachmentActionSheet()
+    var stackview = UIStackView()
+    
     private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
 
     //MARK: - INHERITANCE
@@ -50,14 +52,52 @@ class ComposeMessageToolBar : UIToolbar{
     //MARK: - METHODS
     func addButtons(){
         let addbutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFileBtn))
-        messageTextView = getTextView()
-        let textview = UIBarButtonItem(customView: messageTextView!)
-        let cambtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addCameraBtn))
-        let audiobtn = UIBarButtonItem(image: UIImage(named: "microphoneBlue") , style: .plain, target: self, action: #selector(mocrophoneBtn))
+//        messageTextView = getTextView()
+//        let textview = UIBarButtonItem(customView: messageTextView!)
+//        let cambtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addCameraBtn))
+//        let audiobtn = UIBarButtonItem(image: UIImage(named: "microphoneBlue") , style: .plain, target: self, action: #selector(mocrophoneBtn))
         
-        items = [addbutton,textview,cambtn,audiobtn]
+        let stckv = stackView()
+        items = [UIBarButtonItem(customView: stckv) ]
         audioRecodermngr.delegate = self
 
+    }
+    func stackView()->UIStackView{
+                
+        let camButton = UIButton()
+        camButton.frame.size.width  = 40
+        camButton.setImage(UIImage(named: "cameraIcon") , for: .normal)
+        camButton.tintColor = .blue
+        
+        let audioBtn = UIButton()
+        audioBtn.frame.size.width  = 40
+        audioBtn.setImage(UIImage(named: "microphoneBlue") , for: .normal)
+        audioBtn.tintColor = .blue
+        
+        let textView = UITextView()
+        textView.text = "shjgfjgdsjg"
+        textView.backgroundColor = .red
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.autocorrectionType = .no
+        textView.layer.cornerRadius = 20
+        textView.layer.borderColor = UIColor.seperatorColor.cgColor
+        textView.layer.borderWidth = 1
+        textView.delegate = self
+        textView.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
+        messageTextView = textView
+        
+        let stackView = UIStackView(frame: frame)
+        stackView.axis = .horizontal
+//        stackView.alignment = .bottom
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.addArrangedSubview(textView)
+        stackView.addArrangedSubview(camButton)
+        stackView.addArrangedSubview(audioBtn)
+        textView.sizeToFit()
+        self.stackview = stackView
+        
+        return stackView
     }
     
     func getTextView()->UITextView{
@@ -77,7 +117,8 @@ class ComposeMessageToolBar : UIToolbar{
         if messageTextView == nil{return}
         let numberOfLines = getNumberOfLine()
         if numberOfLines < 5{
-            messageTextView?.frame = CGRect(x: 0, y: 0, width: messageTextView!.frame.width, height: messageTextView!.contentSize.height)
+//            messageTextView?.frame = CGRect(x: 0, y: 0, width: messageTextView!.frame.width, height: messageTextView!.contentSize.height)
+            messageTextView?.frame.size.height = messageTextView!.contentSize.height
         }
         
     }
@@ -117,6 +158,7 @@ extension ComposeMessageToolBar: UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         guard let text = textView.text else{return}
         self.resizeHeightOfMsgTxvtV(text: text)
+        stackview.arrangedSubviews[1].isHidden = true
     }
     
 }
