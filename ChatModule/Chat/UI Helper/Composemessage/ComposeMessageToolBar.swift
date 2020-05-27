@@ -1,148 +1,122 @@
 //
-//  ComposeMessageToolBar.swift
+//  ComposeMessageToolBarView.swift
 //  ChatModule
 //
-//  Created by user on 18/05/20.
+//  Created by user on 26/05/20.
 //  Copyright © 2020 Namrata Khanduri. All rights reserved.
 //
 
 import UIKit
 import ContactsUI
 
-class ComposeMessageToolBar : UIToolbar{
+class ComposeMessageToolBar: UIToolbar{
     
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomToolbarHeight: NSLayoutConstraint!
+
+    var stackView: UIStackView?
+    var textViewHeightConstraint : NSLayoutConstraint?
+    var textView: UITextView?
+    var addBtn: UIButton?
+    var cameraBtn: UIButton?
+    var microphoneBtn: UIButton?
+    var sendMessageBtn: UIButton?
     
     
-    var messageTextView: UITextView?
-    var threasholdOfTextViewHeight: CGFloat = 0
     var composeMsgdelegate: ComposeMssageDelegate?
     var locationPickerDelegate: LocationPickerDelegate?
     var uiDelegate: ComposeMssageUIDelegate?
     let actionSheetMng = AttachmentActionSheet()
-    var stackview = UIStackView()
-    
     private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
 
-    //MARK: - INHERITANCE
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        addButtons()
-    }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if messageTextView == nil{return}
-        if keyPath == "frame"
-        {
-            let numberOfLines = getNumberOfLine()
-            if numberOfLines <= 5{
-                let oldheight = self.heightConstraint.constant
-                let newheight = self.messageTextView!.frame.height + 9
-                self.heightConstraint.constant = newheight
-                uiDelegate?.heightChange(self, from: oldheight, to: newheight)
-            }
-            
-            if numberOfLines == 5{
-                threasholdOfTextViewHeight = self.messageTextView!.frame.height
-            }
-            
+        if stackView == nil{
+            setUpToolBar()
         }
-        
     }
     
-    //MARK: - METHODS
-    func addButtons(){
-        let addbutton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFileBtn))
-//        messageTextView = getTextView()
-//        let textview = UIBarButtonItem(customView: messageTextView!)
-//        let cambtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(addCameraBtn))
-//        let audiobtn = UIBarButtonItem(image: UIImage(named: "microphoneBlue") , style: .plain, target: self, action: #selector(mocrophoneBtn))
+    func setUpToolBar(){
         
-        let stckv = stackView()
-        items = [UIBarButtonItem(customView: stckv) ]
-        audioRecodermngr.delegate = self
-
+        addBtn = addButton()
+        cameraBtn = cameraButton()
+        microphoneBtn = microPhoneButton()
+        textView = getTextView()
+        sendMessageBtn = sendMsgButton()
+        sendMessageBtn?.isHidden = true
+        
+        let stckView = UIStackView()
+        stckView.axis = .horizontal
+        stckView.addArrangedSubview(addBtn!)
+        stckView.addArrangedSubview(textView!)
+        stckView.addArrangedSubview(sendMessageBtn!)
+        stckView.addArrangedSubview(cameraBtn!)
+        stckView.addArrangedSubview(microphoneBtn!)
+        stckView.spacing = 10
+        stckView.alignment = .bottom
+        self.stackView = stckView
+        stackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
+        stackView?.isLayoutMarginsRelativeArrangement = true
+        items = [UIBarButtonItem(customView: stckView) ]
     }
-    func stackView()->UIStackView{
-                
-        let camButton = UIButton()
-        camButton.frame.size.width  = 40
-        camButton.setImage(UIImage(named: "cameraIcon") , for: .normal)
-        camButton.tintColor = .blue
-        
-        let audioBtn = UIButton()
-        audioBtn.frame.size.width  = 40
-        audioBtn.setImage(UIImage(named: "microphoneBlue") , for: .normal)
-        audioBtn.tintColor = .blue
+    
+}
+//MARK: - BUTTONS
+extension ComposeMessageToolBar{
+    
+    func addButton()->UIButton{
+        let addButton = createButton(with: "", Image: UIImage(named: "addBlue"), action: #selector(addbtnAction))
+        return addButton
+    }
+    func cameraButton()->UIButton{
+        let addButton = createButton(with: "", Image: UIImage(named: "cameraIcon"), action: #selector(camerabtnAction))
+        return addButton
+    }
+    func microPhoneButton()->UIButton{
+        let addButton = createButton(with: "", Image: UIImage(named: "microphoneBlue"), action: #selector(microphonebtnAction))
+        return addButton
+    }
+    func sendMsgButton()->UIButton{
+        let addButton = createButton(with: "", Image: UIImage(named: "sendMessage"), action: #selector(addbtnAction))
+        addButton.backgroundColor = .blue
+        return addButton
+    }
+    func createButton(with title: String, Image: UIImage?, action: Selector)->UIButton{
+        let button = UIButton()
+        button.frame.size.width = 40
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        button.setTitle(title, for: .normal)
+        button.setImage(Image, for: .normal)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        return button
+    }
+    func getTextView()->UITextView{
         
         let textView = UITextView()
-        textView.text = "shjgfjgdsjg"
-        textView.backgroundColor = .red
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.autocorrectionType = .no
-        textView.layer.cornerRadius = 20
-        textView.layer.borderColor = UIColor.seperatorColor.cgColor
-        textView.layer.borderWidth = 1
         textView.delegate = self
-        textView.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
-        messageTextView = textView
-        
-        let stackView = UIStackView(frame: frame)
-        stackView.axis = .horizontal
-//        stackView.alignment = .bottom
-        stackView.distribution = .fill
-        stackView.spacing = 10
-        stackView.addArrangedSubview(textView)
-        stackView.addArrangedSubview(camButton)
-        stackView.addArrangedSubview(audioBtn)
-        textView.sizeToFit()
-        self.stackview = stackView
-        
-        return stackView
-    }
-    
-    func getTextView()->UITextView{
-        let width = UIScreen.main.bounds.width-3*(45)
-        let textView = UITextView(frame: CGRect.zero )
-        textView.frame.size.width = width
+        textViewHeightConstraint = NSLayoutConstraint(item: textView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 39)
+        textView.addConstraint(textViewHeightConstraint!)
         textView.layer.cornerRadius = 20
         textView.layer.borderColor = UIColor.seperatorColor.cgColor
         textView.layer.borderWidth = 1
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.autocorrectionType = .no
-        textView.delegate = self
-        textView.addObserver(self, forKeyPath: "frame", options: .new, context: nil)
         return textView
     }
-    func resizeHeightOfMsgTxvtV(text : String?){
-        if messageTextView == nil{return}
-        let numberOfLines = getNumberOfLine()
-        if numberOfLines < 5{
-//            messageTextView?.frame = CGRect(x: 0, y: 0, width: messageTextView!.frame.width, height: messageTextView!.contentSize.height)
-            messageTextView?.frame.size.height = messageTextView!.contentSize.height
-        }
-        
-    }
     
-    func getNumberOfLine()->Int{
-        if messageTextView == nil{return 0}
-        let numberOfLine = self.messageTextView!.calculateMaxLines()
-        return numberOfLine
-    }
+}
+
+//MARK: - SELECTOR
+extension ComposeMessageToolBar {
     
-    //MARK: - SELECTOR
-    @objc func addFileBtn(){
-        
+    @objc func addbtnAction(_ sender: UIButton){
         actionSheetMng.delegate = self
         actionSheetMng.locationPickerDelegate = locationPickerDelegate
         actionSheetMng.presentActionSheet()
-        
     }
-    
-    @objc func addCameraBtn(){
-        actionSheetMng.presentLibrary()
+    @objc func camerabtnAction(_ sender: UIButton){
+        actionSheetMng.presentCamera()
     }
-    
-    @objc func mocrophoneBtn(){
+    @objc func microphonebtnAction(_ sender: UIButton){
         if !audioRecodermngr.recordingInProcess{
             audioRecodermngr.startRecording()
         }
@@ -150,19 +124,44 @@ class ComposeMessageToolBar : UIToolbar{
             audioRecodermngr.finishRecording()
         }
     }
+    @objc func sendMsgbtnAction(_ sender: UIButton){
+        let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if message.count > 0{
+            composeMsgdelegate?.textMessageSent(self, message: message)
+            textView?.text = ""
+        }
+    }
 }
 
-
 //MARK: - UITextViewDelegate
-extension ComposeMessageToolBar: UITextViewDelegate{
+extension ComposeMessageToolBar : UITextViewDelegate{
+    
+    
     func textViewDidChange(_ textView: UITextView) {
-        guard let text = textView.text else{return}
-        self.resizeHeightOfMsgTxvtV(text: text)
-        stackview.arrangedSubviews[1].isHidden = true
+        let numberOfLines = textView.calculateMaxLines()
+        if numberOfLines == 1{
+            textViewHeightConstraint?.constant = 39
+        }else if numberOfLines <= 5{
+            textViewHeightConstraint?.constant = textView.contentSize.height
+        }
+        
+        bottomToolbarHeight.constant = (textViewHeightConstraint?.constant ?? 0) + 10
+        
+        guard let messageTyped = textView.text, messageTyped.count > 0 else{
+            
+            self.microphoneBtn?.isHidden = false
+            self.cameraBtn?.isHidden = false
+            self.sendMessageBtn?.isHidden = true
+            return
+        }
+        [self.cameraBtn,self.microphoneBtn].forEach { (button) in
+            button?.isHidden = true
+        }
+        self.sendMessageBtn?.isHidden = false
+        
     }
     
 }
-
 //MARK: - AttachmentActionSheetDelegate
 extension ComposeMessageToolBar: AttachmentActionSheetDelegate{
     

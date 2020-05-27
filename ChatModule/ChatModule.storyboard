@@ -563,7 +563,7 @@
                                 </constraints>
                                 <items/>
                                 <connections>
-                                    <outlet property="heightConstraint" destination="t94-AV-xl6" id="HNS-ZL-MZT"/>
+                                    <outlet property="bottomToolbarHeight" destination="t94-AV-xl6" id="gUn-2E-pIF"/>
                                 </connections>
                             </toolbar>
                         </subviews>
@@ -590,7 +590,7 @@
                         <outlet property="bgImgView" destination="ieU-Xn-ZA8" id="LAH-gC-yTb"/>
                         <outlet property="channelNameLbl" destination="OfC-wU-XiA" id="HAZ-0E-eLX"/>
                         <outlet property="channelProfileView" destination="HZJ-6G-1PL" id="xxO-OT-dNg"/>
-                        <outlet property="composeMsgView" destination="7kh-QL-tre" id="GPT-Or-VHv"/>
+                        <outlet property="composeMsgView" destination="7kh-QL-tre" id="UXf-tl-ZjQ"/>
                         <outlet property="tableView" destination="1Sd-DZ-sRQ" id="uRX-C2-Djq"/>
                     </connections>
                 </viewController>
