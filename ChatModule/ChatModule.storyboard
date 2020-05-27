@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyR-ET-PRR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cVm-Oe-bVy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -662,7 +662,7 @@
                                 </subviews>
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x58-Ab-Rrq">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Item" id="4zu-cO-Xdu"/>
                                 </items>
@@ -695,24 +695,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xua-vI-VFt">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="cVm-Oe-bVy" id="8qa-Ub-QWr"/>
-                                    <outlet property="delegate" destination="cVm-Oe-bVy" id="u8y-DW-l0R"/>
-                                </connections>
-                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAG-d2-Q37">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="uCG-IN-Hky"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="65x-xu-b3p" firstAttribute="bottom" secondItem="xua-vI-VFt" secondAttribute="bottom" id="8Sm-u5-hJR"/>
-                            <constraint firstItem="xua-vI-VFt" firstAttribute="leading" secondItem="65x-xu-b3p" secondAttribute="leading" id="MV6-BQ-nZ6"/>
-                            <constraint firstItem="xua-vI-VFt" firstAttribute="top" secondItem="65x-xu-b3p" secondAttribute="top" id="NmK-dM-pwD"/>
-                            <constraint firstItem="65x-xu-b3p" firstAttribute="trailing" secondItem="xua-vI-VFt" secondAttribute="trailing" id="UX8-8V-K8s"/>
+                            <constraint firstItem="65x-xu-b3p" firstAttribute="bottom" secondItem="QAG-d2-Q37" secondAttribute="bottom" id="5Cq-9q-9wy"/>
+                            <constraint firstItem="QAG-d2-Q37" firstAttribute="leading" secondItem="65x-xu-b3p" secondAttribute="leading" id="Hxn-i0-9ef"/>
+                            <constraint firstItem="QAG-d2-Q37" firstAttribute="trailing" secondItem="65x-xu-b3p" secondAttribute="trailing" id="XCI-XU-pRI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="65x-xu-b3p"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomToolbarHeight" destination="uCG-IN-Hky" id="JVC-Xy-C96"/>
+                        <outlet property="messageComposeToolbar" destination="QAG-d2-Q37" id="9VY-S6-sZ0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfb-j8-FhF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

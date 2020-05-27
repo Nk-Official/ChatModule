@@ -1,65 +1,19 @@
 //
-//  Dummy2ViewController.swift
+//  ComposeMessageToolBarView.swift
 //  ChatModule
 //
-//  Created by Namrata Khanduri on 14/02/20.
+//  Created by user on 26/05/20.
 //  Copyright © 2020 Namrata Khanduri. All rights reserved.
 //
 
 import UIKit
-
-class Dummy2ViewController: UIViewController {
-
-    //MARK: -
-    @IBOutlet weak var messageComposeToolbar: UIToolbar!
-    @IBOutlet weak var bottomToolbarHeight: NSLayoutConstraint!
-
-    var stackView: UIStackView?
-    var textViewHeightConstraint : NSLayoutConstraint?
-    var textView: UITextView?
-    var addBtn: UIButton?
-    var cameraBtn: UIButton?
-    var microphoneBtn: UIButton?
-    var sendMessageBtn: UIButton?
-
+class ComposeMessageToolBarView: UIToolbar{
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setUpToolBar()
-        let tp = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
-        view.addGestureRecognizer(tp)
-    }
-    @objc func tapGesture(){
-        view.endEditing(true)
-    }
     
-    func setUpToolBar(){
-        
-        addBtn = addButton()
-        cameraBtn = cameraButton()
-        microphoneBtn = microPhoneButton()
-        textView = getTextView()
-        sendMessageBtn = sendMsgButton()
-        sendMessageBtn?.isHidden = true
-        
-        let stckView = UIStackView()
-        stckView.axis = .horizontal
-        stckView.addArrangedSubview(addBtn!)
-        stckView.addArrangedSubview(textView!)
-        stckView.addArrangedSubview(sendMessageBtn!)
-        stckView.addArrangedSubview(cameraBtn!)
-        stckView.addArrangedSubview(microphoneBtn!)
-        stckView.spacing = 10
-        stckView.alignment = .bottom
-        self.stackView = stckView
-        stackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
-        stackView?.isLayoutMarginsRelativeArrangement = true
-        messageComposeToolbar.items = [UIBarButtonItem(customView: stckView) ]
-    }
+    
+    
 }
-
-extension Dummy2ViewController{
+extension ComposeMessageToolBarView{
     
     func addButton()->UIButton{
         let addButton = UIButton()
@@ -107,7 +61,7 @@ extension Dummy2ViewController{
     
 }
 
-extension Dummy2ViewController : UITextViewDelegate{
+extension ComposeMessageToolBarView : UITextViewDelegate{
     
     
     func textViewDidChange(_ textView: UITextView) {

@@ -107,6 +107,7 @@
 		CE4FA6B2246D05BE001599BA /* ContactInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */; };
 		CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */; };
 		CE5138DB246C370700CAD960 /* ContactInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */; };
+		CE5B8215247D44CB009EE3F6 /* ComposeMessageToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B8214247D44CB009EE3F6 /* ComposeMessageToolBarView.swift */; };
 		CE610C5E2472799900E07D37 /* ComposeMessageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE610C5D2472799900E07D37 /* ComposeMessageToolBar.swift */; };
 		CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */; };
 		CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB28246D793300EC901F /* ContactInfoTableData.swift */; };
@@ -222,6 +223,7 @@
 		CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableViewController.swift; sourceTree = "<group>"; };
 		CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
 		CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoCoordinator.swift; sourceTree = "<group>"; };
+		CE5B8214247D44CB009EE3F6 /* ComposeMessageToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeMessageToolBarView.swift; sourceTree = "<group>"; };
 		CE610C5D2472799900E07D37 /* ComposeMessageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeMessageToolBar.swift; sourceTree = "<group>"; };
 		CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		CE64DB28246D793300EC901F /* ContactInfoTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableData.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				1B10EE5D23828279005A94E2 /* ComposeMessageView.swift */,
 				1B10EE602382829D005A94E2 /* ComposeMessageView.xib */,
 				CE610C5D2472799900E07D37 /* ComposeMessageToolBar.swift */,
+				CE5B8214247D44CB009EE3F6 /* ComposeMessageToolBarView.swift */,
 			);
 			path = Composemessage;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				1B876ADE23F3FEA2001A722D /* Group.swift in Sources */,
 				1BEFC5202383CF9D00DC6964 /* AudioRecorderManger.swift in Sources */,
 				1B876AD823F3CBEF001A722D /* StoryBoards.swift in Sources */,
+				CE5B8215247D44CB009EE3F6 /* ComposeMessageToolBarView.swift in Sources */,
 				1B10EE3F2382578E005A94E2 /* ChatTheme.swift in Sources */,
 				1BF7AC9823FBB1AB00954E8E /* ImageMsgTableViewCell.swift in Sources */,
 				1B3BD53323F5656D005A3C35 /* InformationView.swift in Sources */,
