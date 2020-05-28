@@ -111,6 +111,7 @@
 		CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */; };
 		CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB28246D793300EC901F /* ContactInfoTableData.swift */; };
 		CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */; };
+		CEEF4DD9247E88EF00C2370A /* ExComposeMessageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */; };
 		CEFCF699246BCA85004F4502 /* MessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */; };
 		CEFCF69A246BCA85004F4502 /* MessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */; };
 		CEFCF69D246C0406004F4502 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF69C246C0406004F4502 /* Color.swift */; };
@@ -226,6 +227,7 @@
 		CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		CE64DB28246D793300EC901F /* ContactInfoTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableData.swift; sourceTree = "<group>"; };
 		CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewModel.swift; sourceTree = "<group>"; };
+		CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExComposeMessageToolBar.swift; sourceTree = "<group>"; };
 		CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageHeaderView.xib; sourceTree = "<group>"; };
 		CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHeaderView.swift; sourceTree = "<group>"; };
 		CEFCF69C246C0406004F4502 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				1B10EE5D23828279005A94E2 /* ComposeMessageView.swift */,
 				1B10EE602382829D005A94E2 /* ComposeMessageView.xib */,
 				CE5B8214247D44CB009EE3F6 /* ComposeMessageToolBar.swift */,
+				CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */,
 			);
 			path = Composemessage;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */,
 				1BEFC5262384081B00DC6964 /* AudioPlayerManager.swift in Sources */,
 				1B06050D2403C6D50045E442 /* OutgoingLocationTableViewCell.swift in Sources */,
+				CEEF4DD9247E88EF00C2370A /* ExComposeMessageToolBar.swift in Sources */,
 				1B57658523F2D9E9001EBC01 /* ContactTableViewCell.swift in Sources */,
 				1B876ACF23F3C466001A722D /* ExUIImageView.swift in Sources */,
 				1B0604FC24038EC00045E442 /* ExViewController.swift in Sources */,

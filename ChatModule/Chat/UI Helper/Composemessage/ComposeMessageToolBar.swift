@@ -21,6 +21,8 @@ class ComposeMessageToolBar: UIToolbar{
     var microphoneBtn: UIButton?
     var sendMessageBtn: UIButton?
     
+    var audioMessageStackView: UIStackView?
+
     
     var composeMsgdelegate: ComposeMssageDelegate?
     var locationPickerDelegate: LocationPickerDelegate?
