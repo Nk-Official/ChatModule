@@ -22,7 +22,9 @@ class ComposeMessageToolBar: UIToolbar{
     var sendMessageBtn: UIButton?
     
     var audioMessageStackView: UIStackView?
-
+    var audioMesssageImageView: UIImageView?
+    var sendMsgMessageBtn: UIButton?
+    var timerLbl: UILabel?
     
     var composeMsgdelegate: ComposeMssageDelegate?
     var locationPickerDelegate: LocationPickerDelegate?
@@ -30,14 +32,21 @@ class ComposeMessageToolBar: UIToolbar{
     let actionSheetMng = AttachmentActionSheet()
     private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
 
+    var ifTextMessageAnimateddViewSetUp: Bool{
+        return stackView != nil
+    }
+    var ifAudioMessageAnimateddViewSetUp: Bool{
+        return audioMessageStackView != nil
+    }
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         if stackView == nil{
-            setUpToolBar()
+            makeTextMessageComposerVisible()
         }
     }
     
-    func setUpToolBar(){
+    func setUpComposeTextMessageStackView(){
         
         addBtn = addButton()
         cameraBtn = cameraButton()
@@ -58,9 +67,62 @@ class ComposeMessageToolBar: UIToolbar{
         self.stackView = stckView
         stackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
         stackView?.isLayoutMarginsRelativeArrangement = true
-        items = [UIBarButtonItem(customView: stckView) ]
     }
     
+    func makeTextMessageComposerVisible(){
+        if !ifTextMessageAnimateddViewSetUp{
+            setUpComposeTextMessageStackView()
+        }
+        items = [UIBarButtonItem(customView: stackView!) ]
+    }
+    func makeAudioMessageComposerVisible(){
+        if !ifAudioMessageAnimateddViewSetUp{
+            createAudioMessageStackView()
+        }
+//        items?.append(UIBarButtonItem(customView: audioMessageStackView!) )
+        animateTextComposeToShiftLeft()
+        
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (_) in
+//            self.animateTextComposeToBackThePosition()
+        }
+    }
+    func animateTextComposeToShiftLeft(){
+        UIView.animate(withDuration: 1, animations: {
+            self.cameraBtn?.alpha = 0
+            self.textView?.alpha = 0
+            self.addBtn?.alpha = 0
+            self.microphoneBtn?.alpha = 0
+            self.textView?.transform = CGAffineTransform(translationX: -200, y: 0)
+            self.addBtn?.transform = CGAffineTransform(translationX: -200, y: 0)
+            self.animateToOpenAudioMsgView()
+        }) { (_) in
+        }
+    }
+    func animateTextComposeToBackThePosition(){
+        self.items = [UIBarButtonItem(customView: stackView!) ]
+        self.microphoneBtn?.alpha = 1
+
+        UIView.animate(withDuration: 1, animations: {
+            self.cameraBtn?.alpha = 1
+            self.textView?.alpha = 1
+            self.addBtn?.alpha = 1
+            self.textView?.transform = CGAffineTransform.identity
+            self.addBtn?.transform = CGAffineTransform.identity
+        }) { (_) in
+            
+        }
+    }
+    func animateToOpenAudioMsgView(){
+        self.items?.append(UIBarButtonItem(customView: audioMessageStackView!))
+        self.audioMessageStackView?.transform = CGAffineTransform(translationX: 200, y: 0)
+        self.audioMessageStackView?.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.audioMessageStackView?.transform = .identity
+            self.audioMessageStackView?.alpha = 1
+        }) { (_) in
+            self.items?.remove(at: 0)
+        }
+    }
 }
 //MARK: - BUTTONS
 extension ComposeMessageToolBar{
@@ -119,12 +181,19 @@ extension ComposeMessageToolBar {
         actionSheetMng.presentCamera()
     }
     @objc func microphonebtnAction(_ sender: UIButton){
-        if !audioRecodermngr.recordingInProcess{
-            audioRecodermngr.startRecording()
-        }
-        else{
-            audioRecodermngr.finishRecording()
-        }
+//        if !audioRecodermngr.recordingInProcess{
+//            audioRecodermngr.startRecording()
+//        }
+//        else{
+//            audioRecodermngr.finishRecording()
+//        }
+        
+        makeAudioMessageComposerVisible()
+//        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
+//            DispatchQueue.main.async {
+//                self.makeTextMessageComposerVisible()
+//            }
+//        }
     }
     @objc func sendMsgbtnAction(_ sender: UIButton){
         let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
