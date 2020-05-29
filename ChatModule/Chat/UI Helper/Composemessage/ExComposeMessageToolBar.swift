@@ -7,7 +7,7 @@ extension ComposeMessageToolBar {
     
     func createAudioMessageStackView(){
         audioMesssageImageView = microPhoneImg()
-        sendMsgMessageBtn = slideToCancelLbl()
+        slideToCancelBtn = slideToCancelButton()
         timerLbl = getTimerLbl()
         
         let stckView = UIStackView()
@@ -17,7 +17,7 @@ extension ComposeMessageToolBar {
 //        stckView.alignment = .bottom
         stckView.addArrangedSubview(audioMesssageImageView!)
         stckView.addArrangedSubview(timerLbl!)
-        stckView.addArrangedSubview(sendMsgMessageBtn!)
+        stckView.addArrangedSubview(slideToCancelBtn!)
 
         self.audioMessageStackView = stckView
         audioMessageStackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
@@ -37,7 +37,7 @@ extension ComposeMessageToolBar {
         
     }
     
-    func slideToCancelLbl()->UIButton{
+    func slideToCancelButton()->UIButton{
         
         let button = UIButton()
         button.setTitle("slide to cancel  <", for: .normal)

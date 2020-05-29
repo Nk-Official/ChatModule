@@ -23,7 +23,7 @@ class ComposeMessageToolBar: UIToolbar{
     
     var audioMessageStackView: UIStackView?
     var audioMesssageImageView: UIImageView?
-    var sendMsgMessageBtn: UIButton?
+    var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
     
     var composeMsgdelegate: ComposeMssageDelegate?
@@ -53,12 +53,26 @@ class ComposeMessageToolBar: UIToolbar{
         microphoneBtn = microPhoneButton()
         textView = getTextView()
         sendMessageBtn = sendMsgButton()
+        audioMesssageImageView = microPhoneImg()
+        slideToCancelBtn = slideToCancelButton()
+        timerLbl = getTimerLbl()
+        
         sendMessageBtn?.isHidden = true
+        audioMesssageImageView?.isHidden = true
+        slideToCancelBtn?.isHidden = true
+        timerLbl?.isHidden = true
+
         
         let stckView = UIStackView()
         stckView.axis = .horizontal
         stckView.addArrangedSubview(addBtn!)
         stckView.addArrangedSubview(textView!)
+        
+        stckView.addArrangedSubview(audioMesssageImageView!)
+        stckView.addArrangedSubview(audioMesssageImageView!)
+        stckView.addArrangedSubview(timerLbl!)
+
+        
         stckView.addArrangedSubview(sendMessageBtn!)
         stckView.addArrangedSubview(cameraBtn!)
         stckView.addArrangedSubview(microphoneBtn!)
@@ -76,15 +90,18 @@ class ComposeMessageToolBar: UIToolbar{
         items = [UIBarButtonItem(customView: stackView!) ]
     }
     func makeAudioMessageComposerVisible(){
-        if !ifAudioMessageAnimateddViewSetUp{
-            createAudioMessageStackView()
-        }
-//        items?.append(UIBarButtonItem(customView: audioMessageStackView!) )
-        animateTextComposeToShiftLeft()
         
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (_) in
-//            self.animateTextComposeToBackThePosition()
+        UIView.animate(withDuration: 1, animations: {
+            
+            self.cameraBtn?.alpha = 0
+
+            
+            
+        }) { (_) in
+            
         }
+        
+        
     }
     func animateTextComposeToShiftLeft(){
         UIView.animate(withDuration: 1, animations: {
