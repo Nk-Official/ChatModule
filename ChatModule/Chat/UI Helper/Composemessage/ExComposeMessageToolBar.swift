@@ -31,7 +31,6 @@ extension ComposeMessageToolBar {
         let imageView = UIImageView(image: microPhnBtn)
         imageView.contentMode = .scaleAspectFit
         imageView.frame.size.width = 40
-        imageView.backgroundColor = .amethyst
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
         
@@ -50,7 +49,6 @@ extension ComposeMessageToolBar {
         let label = UILabel()
         label.text = ""
         label.frame.size.width = 60
-        label.backgroundColor = .yellow
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }

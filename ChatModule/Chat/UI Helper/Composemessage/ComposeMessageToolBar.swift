@@ -12,7 +12,9 @@ import ContactsUI
 class ComposeMessageToolBar: UIToolbar{
     
     @IBOutlet weak var bottomToolbarHeight: NSLayoutConstraint!
-
+    @IBOutlet weak var viewController: UIViewController!
+    
+    //MARK: - UIProperty
     var stackView: UIStackView?
     var textViewHeightConstraint : NSLayoutConstraint?
     var textView: UITextView?
@@ -26,18 +28,25 @@ class ComposeMessageToolBar: UIToolbar{
     var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
     
+    //MARK: - CALLBACKS
     var composeMsgdelegate: ComposeMssageDelegate?
     var locationPickerDelegate: LocationPickerDelegate?
     var uiDelegate: ComposeMssageUIDelegate?
     let actionSheetMng = AttachmentActionSheet()
     private let audioRecodermngr = AudioRecorderManager(audioName: "sendVoiceMsg", typeExt: "mpeg")
 
+    //MARK: - STORED PROPERTY
+    lazy var stopWatch: StopWatch = StopWatch()
+    var closeAudioMsg: Bool = false
+    
     var ifTextMessageAnimateddViewSetUp: Bool{
         return stackView != nil
     }
     var ifAudioMessageAnimateddViewSetUp: Bool{
         return audioMessageStackView != nil
     }
+    
+    let animationDuration: Double = 0.5
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -46,6 +55,7 @@ class ComposeMessageToolBar: UIToolbar{
         }
     }
     
+    //MARK: - UI METHODS
     func setUpComposeTextMessageStackView(){
         
         addBtn = addButton()
@@ -62,6 +72,10 @@ class ComposeMessageToolBar: UIToolbar{
         slideToCancelBtn?.isHidden = true
         timerLbl?.isHidden = true
 
+//        [addBtn,cameraBtn,microphoneBtn,audioMesssageImageView,sendMessageBtn,slideToCancelBtn,timerLbl].forEach { (btn) in
+//            btn?.backgroundColor = .red
+//        }
+       
         
         let stckView = UIStackView()
         stckView.axis = .horizontal
@@ -73,7 +87,7 @@ class ComposeMessageToolBar: UIToolbar{
         stckView.addArrangedSubview(timerLbl!)
 
         
-        stckView.addArrangedSubview(sendMessageBtn!)
+        stckView.addArrangedSubview(slideToCancelBtn!)
         stckView.addArrangedSubview(cameraBtn!)
         stckView.addArrangedSubview(microphoneBtn!)
         stckView.spacing = 10
@@ -89,58 +103,73 @@ class ComposeMessageToolBar: UIToolbar{
         }
         items = [UIBarButtonItem(customView: stackView!) ]
     }
-    func makeAudioMessageComposerVisible(){
-        
-        UIView.animate(withDuration: 1, animations: {
-            
-            self.cameraBtn?.alpha = 0
+      
+}
 
-            
-            
-        }) { (_) in
-            
-        }
-        
-        
-    }
-    func animateTextComposeToShiftLeft(){
-        UIView.animate(withDuration: 1, animations: {
+//MARK: - ANIMATION
+extension ComposeMessageToolBar{
+    
+    func openAudioRecorderAnimation(){
+        func animate(){
             self.cameraBtn?.alpha = 0
+            self.microphoneBtn?.alpha = 0
             self.textView?.alpha = 0
             self.addBtn?.alpha = 0
-            self.microphoneBtn?.alpha = 0
-            self.textView?.transform = CGAffineTransform(translationX: -200, y: 0)
-            self.addBtn?.transform = CGAffineTransform(translationX: -200, y: 0)
-            self.animateToOpenAudioMsgView()
+
+            self.audioMesssageImageView?.alpha = 1
+            self.slideToCancelBtn?.alpha = 1
+            self.timerLbl?.alpha = 1
+
+            self.cameraBtn?.isHidden = true
+            self.textView?.isHidden = true
+            self.addBtn?.isHidden = true
+
+            self.audioMesssageImageView?.isHidden = false
+            self.slideToCancelBtn?.isHidden = false
+            self.timerLbl?.isHidden = false
+
+            self.addBtn?.transform = CGAffineTransform(translationX: -100, y: 0)
+            self.textView?.transform = CGAffineTransform(translationX: -100, y: 0)
+        }
+        self.audioMesssageImageView?.alpha = 0
+        self.slideToCancelBtn?.alpha = 0
+        self.timerLbl?.alpha = 0
+        UIView.animate(withDuration: animationDuration, animations: {
+            animate()
         }) { (_) in
+            self.microphoneBtn?.alpha = 1
         }
     }
-    func animateTextComposeToBackThePosition(){
-        self.items = [UIBarButtonItem(customView: stackView!) ]
-        self.microphoneBtn?.alpha = 1
-
-        UIView.animate(withDuration: 1, animations: {
+    func closeAudioRecorderAnimation(){
+        func animate(){
             self.cameraBtn?.alpha = 1
+            self.microphoneBtn?.alpha = 1
             self.textView?.alpha = 1
             self.addBtn?.alpha = 1
-            self.textView?.transform = CGAffineTransform.identity
-            self.addBtn?.transform = CGAffineTransform.identity
-        }) { (_) in
+
+            self.slideToCancelBtn?.alpha = 0
+            self.timerLbl?.alpha = 0
+            self.audioMesssageImageView?.alpha = 0
+
+            self.cameraBtn?.isHidden = false
+            self.textView?.isHidden = false
+            self.addBtn?.isHidden = false
+
+            self.audioMesssageImageView?.isHidden = true
+            self.slideToCancelBtn?.isHidden = true
+            self.timerLbl?.isHidden = true
             
+            self.addBtn?.transform = CGAffineTransform.identity
+            self.textView?.transform = CGAffineTransform.identity
         }
-    }
-    func animateToOpenAudioMsgView(){
-        self.items?.append(UIBarButtonItem(customView: audioMessageStackView!))
-        self.audioMessageStackView?.transform = CGAffineTransform(translationX: 200, y: 0)
-        self.audioMessageStackView?.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
-            self.audioMessageStackView?.transform = .identity
-            self.audioMessageStackView?.alpha = 1
-        }) { (_) in
-            self.items?.remove(at: 0)
+        UIView.animate(withDuration: animationDuration) {
+            animate()
         }
+
     }
+    
 }
+
 //MARK: - BUTTONS
 extension ComposeMessageToolBar{
     
@@ -153,21 +182,30 @@ extension ComposeMessageToolBar{
         return addButton
     }
     func microPhoneButton()->UIButton{
-        let addButton = createButton(with: "", Image: UIImage(named: "microphoneBlue"), action: #selector(microphonebtnAction))
-        return addButton
+        let button = createButton(with: "", Image: UIImage(named: "microphoneBlue"), action: nil)
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(
+                    target: self,
+                    action: #selector(microPhoneTouchesHandle(_:)))
+        longPressGestureRecognizer.minimumPressDuration = 0.1
+        button.addGestureRecognizer(longPressGestureRecognizer)
+        return button
     }
+    
     func sendMsgButton()->UIButton{
-        let addButton = createButton(with: "", Image: UIImage(named: "sendMessage"), action: #selector(addbtnAction))
-        addButton.backgroundColor = .blue
-        return addButton
+        let button = createButton(with: "", Image: UIImage(named: "sendMessage"), action: #selector(addbtnAction))
+        button.backgroundColor = .blue
+        return button
     }
-    func createButton(with title: String, Image: UIImage?, action: Selector)->UIButton{
+    func createButton(with title: String, Image: UIImage?, action: Selector?)->UIButton{
         let button = UIButton()
         button.frame.size.width = 40
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         button.setTitle(title, for: .normal)
         button.setImage(Image, for: .normal)
-        button.addTarget(self, action: action, for: .touchUpInside)
+        if action != nil{
+            button.addTarget(self, action: action!, for: .touchUpInside)
+        }
+        button.setContentHuggingPriority(.required, for: .horizontal)
         return button
     }
     func getTextView()->UITextView{
@@ -197,20 +235,48 @@ extension ComposeMessageToolBar {
     @objc func camerabtnAction(_ sender: UIButton){
         actionSheetMng.presentCamera()
     }
-    @objc func microphonebtnAction(_ sender: UIButton){
-//        if !audioRecodermngr.recordingInProcess{
-//            audioRecodermngr.startRecording()
-//        }
-//        else{
-//            audioRecodermngr.finishRecording()
-//        }
-        
-        makeAudioMessageComposerVisible()
-//        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
-//            DispatchQueue.main.async {
-//                self.makeTextMessageComposerVisible()
-//            }
-//        }
+    @objc func microPhoneTouchesHandle(_ gesture: UILongPressGestureRecognizer){
+        switch gesture.state{
+        case .began: print("began")
+            openAudioRecorderAnimation()
+            stopWatch.resetTimer()
+            stopWatch.startTimer()
+            stopWatch.triggerAction = {
+                (timeValue) in
+                DispatchQueue.main.async {
+                    if self.closeAudioMsg{
+                        self.showHint()
+                        self.stopWatch.stopTimer()
+                        self.closeAudioRecorderAnimation()
+                        self.closeAudioMsg = false
+                    }else{
+                        print(timeValue)
+                        self.timerLbl?.text = timeValue
+                    }
+                }
+            }
+        case .cancelled: print("cancelled")
+        case .ended:
+            print("ended")
+            if stopWatch.hour == 0 && stopWatch.minute == 0 && stopWatch.second == 0{
+                
+                closeAudioMsg = true
+                
+            }else{
+//                print(stopWatch.hour,stopWatch.minute,stopWatch.second)
+            }
+            print("ended")
+        default:print(gesture.state.rawValue)
+        }
+    }
+    
+    @objc func microPhnButtonPress(_ sender: UIButton){
+        print("press down")
+        self.openAudioRecorderAnimation()
+    }
+    @objc func microphonebtnRelease(_ sender: UIButton){
+        print("press release")
+        self.closeAudioRecorderAnimation()
     }
     @objc func sendMsgbtnAction(_ sender: UIButton){
         let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -218,6 +284,23 @@ extension ComposeMessageToolBar {
             composeMsgdelegate?.textMessageSent(self, message: message)
             textView?.text = ""
         }
+    }
+}
+
+//MARK: - PRESENTER
+extension ComposeMessageToolBar {
+    func showHint(){
+        let vc = MessagePopOverViewController.initiatefromStoryboard(.main)
+        vc.modalPresentationStyle = .popover
+        vc.message = "Hold to record, release to send"
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        popover.permittedArrowDirections = .down
+        popover.sourceView = viewController.view
+        popover.sourceRect = microphoneBtn!.frame
+        popover.delegate = viewController as? UIPopoverPresentationControllerDelegate
+        popover.barButtonItem = UIBarButtonItem(customView: microphoneBtn!)
+        popover.backgroundColor = .blue
+        viewController.present(vc, animated: true, completion: nil)
     }
 }
 

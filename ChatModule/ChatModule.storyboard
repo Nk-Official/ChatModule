@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Chat View Controller-->
+        <!--View Controller-->
         <scene sceneID="aE2-yT-d5a">
             <objects>
                 <viewController storyboardIdentifier="ChatViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NyR-ET-PRR" customClass="ChatViewController" customModule="ChatModule" customModuleProvider="target" sceneMemberID="viewController">
@@ -564,6 +564,7 @@
                                 <items/>
                                 <connections>
                                     <outlet property="bottomToolbarHeight" destination="t94-AV-xl6" id="gUn-2E-pIF"/>
+                                    <outlet property="viewController" destination="NyR-ET-PRR" id="YRp-Ri-2AW"/>
                                 </connections>
                             </toolbar>
                         </subviews>
@@ -687,7 +688,7 @@
             </objects>
             <point key="canvasLocation" x="2757.971014492754" y="-230.35714285714283"/>
         </scene>
-        <!--Dummy2 View Controller-->
+        <!--View Controller-->
         <scene sceneID="soS-gE-GD9">
             <objects>
                 <viewController storyboardIdentifier="Dummy2ViewController" id="cVm-Oe-bVy" customClass="Dummy2ViewController" customModule="ChatModule" customModuleProvider="target" sceneMemberID="viewController">
@@ -695,12 +696,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAG-d2-Q37">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAG-d2-Q37" customClass="ComposeMessageToolBar" customModule="ChatModule" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="uCG-IN-Hky"/>
                                 </constraints>
                                 <items/>
+                                <connections>
+                                    <outlet property="bottomToolbarHeight" destination="uCG-IN-Hky" id="8jD-wR-4yk"/>
+                                    <outlet property="viewController" destination="cVm-Oe-bVy" id="aYH-MT-7lT"/>
+                                </connections>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1420,6 +1425,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ci5-Z5-vEb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6344.9275362318849" y="-230.35714285714283"/>
+        </scene>
+        <!--Message Pop Over View Controller-->
+        <scene sceneID="pJW-Bm-zWB">
+            <objects>
+                <viewController storyboardIdentifier="MessagePopOverViewController" id="Bua-cr-4B8" customClass="MessagePopOverViewController" customModule="ChatModule" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tJ8-x9-Wpb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nV-cD-Rsb">
+                                <rect key="frame" x="16" y="44" width="382" height="46"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSs-p9-kay">
+                                        <rect key="frame" x="16" y="5" width="304" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4on-aN-B73">
+                                        <rect key="frame" x="336" y="8" width="30" height="30"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="xba-8Y-dmG"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="close:" destination="Bua-cr-4B8" eventType="touchUpInside" id="qKW-jD-1O1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="CSs-p9-kay" secondAttribute="bottom" constant="5" id="2N8-BE-tW2"/>
+                                    <constraint firstItem="4on-aN-B73" firstAttribute="leading" secondItem="CSs-p9-kay" secondAttribute="trailing" constant="16" id="5fb-jF-5Jl"/>
+                                    <constraint firstItem="CSs-p9-kay" firstAttribute="top" secondItem="0nV-cD-Rsb" secondAttribute="top" constant="5" id="Grf-gt-2Wb"/>
+                                    <constraint firstItem="CSs-p9-kay" firstAttribute="leading" secondItem="0nV-cD-Rsb" secondAttribute="leading" constant="16" id="J2K-ws-9UM"/>
+                                    <constraint firstItem="4on-aN-B73" firstAttribute="centerY" secondItem="0nV-cD-Rsb" secondAttribute="centerY" id="SY1-BR-zlr"/>
+                                    <constraint firstAttribute="trailing" secondItem="4on-aN-B73" secondAttribute="trailing" constant="16" id="ay3-Bv-d3c"/>
+                                    <constraint firstAttribute="height" constant="46" id="vuf-Rh-1Wa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yJR-Pv-wxf" firstAttribute="trailing" secondItem="0nV-cD-Rsb" secondAttribute="trailing" constant="16" id="NHg-hj-nqd"/>
+                            <constraint firstItem="0nV-cD-Rsb" firstAttribute="top" secondItem="yJR-Pv-wxf" secondAttribute="top" id="rNG-0B-Z2C"/>
+                            <constraint firstItem="0nV-cD-Rsb" firstAttribute="leading" secondItem="yJR-Pv-wxf" secondAttribute="leading" constant="16" id="xmd-vU-7CY"/>
+                            <constraint firstItem="yJR-Pv-wxf" firstAttribute="bottom" secondItem="0nV-cD-Rsb" secondAttribute="bottom" constant="10" id="y9H-m0-5M0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yJR-Pv-wxf"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="100"/>
+                    <connections>
+                        <outlet property="closeButton" destination="4on-aN-B73" id="GMb-AU-O4U"/>
+                        <outlet property="msglabel" destination="CSs-p9-kay" id="xqL-RV-rDs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uLd-yR-djV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1118.840579710145" y="-933.48214285714278"/>
         </scene>
         <!--Menu Pop Over View Controller-->
         <scene sceneID="3tD-qr-sbr">

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Dummy2ViewController: UIViewController {
+class Dummy2ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     //MARK: -
     @IBOutlet weak var messageComposeToolbar: UIToolbar!
@@ -26,9 +26,9 @@ class Dummy2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpToolBar()
-        let tp = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
-        view.addGestureRecognizer(tp)
+//        setUpToolBar()
+//        let tp = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
+//        view.addGestureRecognizer(tp)
     }
     @objc func tapGesture(){
         view.endEditing(true)
@@ -135,4 +135,11 @@ extension Dummy2ViewController : UITextViewDelegate{
         
     }
     
+}
+
+
+extension Dummy2ViewController{
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
 }
