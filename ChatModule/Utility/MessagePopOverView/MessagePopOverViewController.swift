@@ -12,14 +12,16 @@ class MessagePopOverViewController: UIViewController {
     //MARK: -
     @IBOutlet weak var msglabel : UILabel!
     @IBOutlet weak var closeButton : UIButton!
+    @IBOutlet weak var stackView: UIStackView!
 
-    
     @IBAction func close(_ sender: UIButton){
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.alpha = 0
-        }) { (_) in
+//        UIView.animate(withDuration: 0.2, animations: {
+//            let popover: UIPopoverPresentationController? = self.popoverPresentationController
+//            popover?.backgroundColor = .clear
+//            self.view.alpha = 0
+//        }) { (_) in
             self.dismiss(animated: true, completion: nil)
-        }
+//        }
     }
     
     var message: String?
@@ -32,8 +34,10 @@ class MessagePopOverViewController: UIViewController {
     }
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        see MenuPopOverViewController
-        tableHeightCConstraint.constant = tableView.contentSize.height
-        preferredContentSize = CGSize(width: 150, height: tableView.contentSize.height)
+        
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        preferredContentSize = CGSize(width: stackView.frame.width+10 , height: stackView.frame.height)
     }
 }

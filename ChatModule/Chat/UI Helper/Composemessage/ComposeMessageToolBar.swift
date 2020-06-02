@@ -13,7 +13,7 @@ class ComposeMessageToolBar: UIToolbar{
     
     @IBOutlet weak var bottomToolbarHeight: NSLayoutConstraint!
     @IBOutlet weak var viewController: UIViewController!
-    
+
     //MARK: - UIProperty
     var stackView: UIStackView?
     var textViewHeightConstraint : NSLayoutConstraint?
@@ -24,10 +24,12 @@ class ComposeMessageToolBar: UIToolbar{
     var sendMessageBtn: UIButton?
     
     var audioMessageStackView: UIStackView?
-    var audioMesssageImageView: UIImageView?
+    var microPhnImageView: UIImageView?
     var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
     
+    var intialMicroPhnBtnLocation: CGPoint = .zero
+
     //MARK: - CALLBACKS
     var composeMsgdelegate: ComposeMssageDelegate?
     var locationPickerDelegate: LocationPickerDelegate?
@@ -63,35 +65,38 @@ class ComposeMessageToolBar: UIToolbar{
         microphoneBtn = microPhoneButton()
         textView = getTextView()
         sendMessageBtn = sendMsgButton()
-        audioMesssageImageView = microPhoneImg()
+        microPhnImageView = microPhoneImg()
         slideToCancelBtn = slideToCancelButton()
         timerLbl = getTimerLbl()
         
         sendMessageBtn?.isHidden = true
-        audioMesssageImageView?.isHidden = true
+        microPhnImageView?.isHidden = true
         slideToCancelBtn?.isHidden = true
         timerLbl?.isHidden = true
 
-//        [addBtn,cameraBtn,microphoneBtn,audioMesssageImageView,sendMessageBtn,slideToCancelBtn,timerLbl].forEach { (btn) in
-//            btn?.backgroundColor = .red
-//        }
+        [addBtn,cameraBtn,microphoneBtn,microPhnImageView,sendMessageBtn,slideToCancelBtn,timerLbl].forEach { (btn) in
+            btn?.backgroundColor = .red
+        }
        
         
         let stckView = UIStackView()
         stckView.axis = .horizontal
-        stckView.addArrangedSubview(addBtn!)
-        stckView.addArrangedSubview(textView!)
         
-        stckView.addArrangedSubview(audioMesssageImageView!)
-        stckView.addArrangedSubview(audioMesssageImageView!)
-        stckView.addArrangedSubview(timerLbl!)
-
         
-        stckView.addArrangedSubview(slideToCancelBtn!)
-        stckView.addArrangedSubview(cameraBtn!)
         stckView.addArrangedSubview(microphoneBtn!)
+        stckView.addArrangedSubview(cameraBtn!)
+        stckView.addArrangedSubview(slideToCancelBtn!)
+
+        stckView.addArrangedSubview(timerLbl!)
+        stckView.addArrangedSubview(microPhnImageView!)
+//        stckView.addArrangedSubview(microPhnImageView!)
+
+        stckView.addArrangedSubview(textView!)
+        stckView.addArrangedSubview(addBtn!)
+        
         stckView.spacing = 10
         stckView.alignment = .bottom
+        stckView.semanticContentAttribute = .forceRightToLeft
         self.stackView = stckView
         stackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
         stackView?.isLayoutMarginsRelativeArrangement = true
@@ -116,7 +121,7 @@ extension ComposeMessageToolBar{
             self.textView?.alpha = 0
             self.addBtn?.alpha = 0
 
-            self.audioMesssageImageView?.alpha = 1
+            self.microPhnImageView?.alpha = 1
             self.slideToCancelBtn?.alpha = 1
             self.timerLbl?.alpha = 1
 
@@ -124,14 +129,14 @@ extension ComposeMessageToolBar{
             self.textView?.isHidden = true
             self.addBtn?.isHidden = true
 
-            self.audioMesssageImageView?.isHidden = false
+            self.microPhnImageView?.isHidden = false
             self.slideToCancelBtn?.isHidden = false
             self.timerLbl?.isHidden = false
 
             self.addBtn?.transform = CGAffineTransform(translationX: -100, y: 0)
             self.textView?.transform = CGAffineTransform(translationX: -100, y: 0)
         }
-        self.audioMesssageImageView?.alpha = 0
+        self.microPhnImageView?.alpha = 0
         self.slideToCancelBtn?.alpha = 0
         self.timerLbl?.alpha = 0
         UIView.animate(withDuration: animationDuration, animations: {
@@ -140,7 +145,7 @@ extension ComposeMessageToolBar{
             self.microphoneBtn?.alpha = 1
         }
     }
-    func closeAudioRecorderAnimation(){
+    func closeAudioRecorderAnimation(completion: Closure? = nil){
         func animate(){
             self.cameraBtn?.alpha = 1
             self.microphoneBtn?.alpha = 1
@@ -149,25 +154,40 @@ extension ComposeMessageToolBar{
 
             self.slideToCancelBtn?.alpha = 0
             self.timerLbl?.alpha = 0
-            self.audioMesssageImageView?.alpha = 0
+            self.microPhnImageView?.alpha = 0
 
             self.cameraBtn?.isHidden = false
             self.textView?.isHidden = false
             self.addBtn?.isHidden = false
 
-            self.audioMesssageImageView?.isHidden = true
+            self.microPhnImageView?.isHidden = true
             self.slideToCancelBtn?.isHidden = true
             self.timerLbl?.isHidden = true
             
             self.addBtn?.transform = CGAffineTransform.identity
             self.textView?.transform = CGAffineTransform.identity
         }
-        UIView.animate(withDuration: animationDuration) {
+        UIView.animate(withDuration: animationDuration, animations: {
             animate()
+        }) { (_) in
+            completion?()
         }
-
     }
     
+    func moveSwipeToClose(with gesture: UIGestureRecognizer){
+        let nextLocation = gesture.location(in: self)
+        let differenceInLocation = intialMicroPhnBtnLocation.x - nextLocation.x
+        if differenceInLocation >= 0{
+            if differenceInLocation>130{
+                closeAudioRecorderAnimation {
+//                    gesture.isEnabled = false
+                }
+                return
+            }
+            slideToCancelBtn?.transform = CGAffineTransform(translationX: -differenceInLocation, y: 0)
+            slideToCancelBtn?.alpha = microPhnImageView!.frame.width/differenceInLocation
+        }
+    }
 }
 
 //MARK: - BUTTONS
@@ -237,47 +257,48 @@ extension ComposeMessageToolBar {
     }
     @objc func microPhoneTouchesHandle(_ gesture: UILongPressGestureRecognizer){
         switch gesture.state{
-        case .began: print("began")
+        case .began:
+            intialMicroPhnBtnLocation = gesture.location(in: self)
+            
             openAudioRecorderAnimation()
             stopWatch.resetTimer()
             stopWatch.startTimer()
+            self.closeAudioMsg = false
             stopWatch.triggerAction = {
                 (timeValue) in
                 DispatchQueue.main.async {
                     if self.closeAudioMsg{
-                        self.showHint()
                         self.stopWatch.stopTimer()
                         self.closeAudioRecorderAnimation()
-                        self.closeAudioMsg = false
                     }else{
-                        print(timeValue)
                         self.timerLbl?.text = timeValue
                     }
                 }
             }
-        case .cancelled: print("cancelled")
+        case .changed: moveSwipeToClose(with: gesture)
+        case .cancelled:break
         case .ended:
-            print("ended")
             if stopWatch.hour == 0 && stopWatch.minute == 0 && stopWatch.second == 0{
-                
-                closeAudioMsg = true
-                
-            }else{
-//                print(stopWatch.hour,stopWatch.minute,stopWatch.second)
+                self.showHint()
             }
-            print("ended")
-        default:print(gesture.state.rawValue)
+//            else{
+//                stopWatch.stopTimer()
+//            }
+            closeAudioMsg = true
+            
+            intialMicroPhnBtnLocation = .zero
+            slideToCancelBtn?.transform = .identity
+        default:break
         }
     }
     
     @objc func microPhnButtonPress(_ sender: UIButton){
-        print("press down")
         self.openAudioRecorderAnimation()
     }
     @objc func microphonebtnRelease(_ sender: UIButton){
-        print("press release")
         self.closeAudioRecorderAnimation()
     }
+    
     @objc func sendMsgbtnAction(_ sender: UIButton){
         let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         if message.count > 0{
@@ -299,7 +320,7 @@ extension ComposeMessageToolBar {
         popover.sourceRect = microphoneBtn!.frame
         popover.delegate = viewController as? UIPopoverPresentationControllerDelegate
         popover.barButtonItem = UIBarButtonItem(customView: microphoneBtn!)
-        popover.backgroundColor = .blue
+        popover.backgroundColor = UIColor(0x1478F6)
         viewController.present(vc, animated: true, completion: nil)
     }
 }

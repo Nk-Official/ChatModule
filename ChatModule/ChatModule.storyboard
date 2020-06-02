@@ -1434,44 +1434,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nV-cD-Rsb">
-                                <rect key="frame" x="16" y="44" width="382" height="46"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HsL-cc-onP">
+                                <rect key="frame" x="153" y="0.0" width="261" height="45"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSs-p9-kay">
-                                        <rect key="frame" x="16" y="5" width="304" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="   Hold to record, release to send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSs-p9-kay">
+                                        <rect key="frame" x="0.0" y="0.0" width="211" height="45"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4on-aN-B73">
-                                        <rect key="frame" x="336" y="8" width="30" height="30"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4on-aN-B73">
+                                        <rect key="frame" x="216" y="0.0" width="45" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="xba-8Y-dmG"/>
+                                            <constraint firstAttribute="width" secondItem="4on-aN-B73" secondAttribute="height" id="1pt-mP-sVI"/>
                                         </constraints>
+                                        <state key="normal" image="cross_white1"/>
                                         <connections>
                                             <action selector="close:" destination="Bua-cr-4B8" eventType="touchUpInside" id="qKW-jD-1O1"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="CSs-p9-kay" secondAttribute="bottom" constant="5" id="2N8-BE-tW2"/>
-                                    <constraint firstItem="4on-aN-B73" firstAttribute="leading" secondItem="CSs-p9-kay" secondAttribute="trailing" constant="16" id="5fb-jF-5Jl"/>
-                                    <constraint firstItem="CSs-p9-kay" firstAttribute="top" secondItem="0nV-cD-Rsb" secondAttribute="top" constant="5" id="Grf-gt-2Wb"/>
-                                    <constraint firstItem="CSs-p9-kay" firstAttribute="leading" secondItem="0nV-cD-Rsb" secondAttribute="leading" constant="16" id="J2K-ws-9UM"/>
-                                    <constraint firstItem="4on-aN-B73" firstAttribute="centerY" secondItem="0nV-cD-Rsb" secondAttribute="centerY" id="SY1-BR-zlr"/>
-                                    <constraint firstAttribute="trailing" secondItem="4on-aN-B73" secondAttribute="trailing" constant="16" id="ay3-Bv-d3c"/>
-                                    <constraint firstAttribute="height" constant="46" id="vuf-Rh-1Wa"/>
+                                    <constraint firstAttribute="height" constant="45" id="Bbg-eX-B9k"/>
                                 </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yJR-Pv-wxf" firstAttribute="trailing" secondItem="0nV-cD-Rsb" secondAttribute="trailing" constant="16" id="NHg-hj-nqd"/>
-                            <constraint firstItem="0nV-cD-Rsb" firstAttribute="top" secondItem="yJR-Pv-wxf" secondAttribute="top" id="rNG-0B-Z2C"/>
-                            <constraint firstItem="0nV-cD-Rsb" firstAttribute="leading" secondItem="yJR-Pv-wxf" secondAttribute="leading" constant="16" id="xmd-vU-7CY"/>
-                            <constraint firstItem="yJR-Pv-wxf" firstAttribute="bottom" secondItem="0nV-cD-Rsb" secondAttribute="bottom" constant="10" id="y9H-m0-5M0"/>
+                            <constraint firstItem="HsL-cc-onP" firstAttribute="top" secondItem="tJ8-x9-Wpb" secondAttribute="top" id="PCz-GW-k7f"/>
+                            <constraint firstItem="HsL-cc-onP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tJ8-x9-Wpb" secondAttribute="leading" id="dS7-R9-yrw"/>
+                            <constraint firstItem="yJR-Pv-wxf" firstAttribute="trailing" secondItem="HsL-cc-onP" secondAttribute="trailing" id="r8Z-Tf-i17"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yJR-Pv-wxf"/>
                     </view>
@@ -1479,6 +1472,7 @@
                     <connections>
                         <outlet property="closeButton" destination="4on-aN-B73" id="GMb-AU-O4U"/>
                         <outlet property="msglabel" destination="CSs-p9-kay" id="xqL-RV-rDs"/>
+                        <outlet property="stackView" destination="HsL-cc-onP" id="xm9-an-fkD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uLd-yR-djV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2017,6 +2011,7 @@
         <image name="back2" width="32" height="32"/>
         <image name="callIcon1" width="64" height="64"/>
         <image name="chatIcon1" width="64" height="64"/>
+        <image name="cross_white1" width="45" height="45"/>
         <image name="filledStar_black" width="16" height="16"/>
         <image name="forwardWhite" width="32" height="32"/>
         <image name="groupIcon" width="32" height="32"/>

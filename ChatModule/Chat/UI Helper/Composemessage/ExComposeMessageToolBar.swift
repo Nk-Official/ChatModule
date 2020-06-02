@@ -6,7 +6,7 @@ extension ComposeMessageToolBar {
     
     
     func createAudioMessageStackView(){
-        audioMesssageImageView = microPhoneImg()
+        microPhnImageView = microPhoneImg()
         slideToCancelBtn = slideToCancelButton()
         timerLbl = getTimerLbl()
         
@@ -15,7 +15,7 @@ extension ComposeMessageToolBar {
        
         stckView.spacing = 10
 //        stckView.alignment = .bottom
-        stckView.addArrangedSubview(audioMesssageImageView!)
+        stckView.addArrangedSubview(microPhnImageView!)
         stckView.addArrangedSubview(timerLbl!)
         stckView.addArrangedSubview(slideToCancelBtn!)
 
@@ -48,8 +48,9 @@ extension ComposeMessageToolBar {
     func getTimerLbl()->UILabel{
         let label = UILabel()
         label.text = ""
-        label.frame.size.width = 60
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.frame.size =  CGSize(width: 100, height: self.frame.height)
+        label.backgroundColor = .white
+//        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }
 }

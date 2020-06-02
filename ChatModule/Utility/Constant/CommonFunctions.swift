@@ -7,6 +7,7 @@
 //
 
 import FirebaseAuth
+typealias Closure = (()->())
 
 struct CommonFunctions {
     

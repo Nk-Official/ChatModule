@@ -52,7 +52,17 @@ extension ChatViewController: UIPopoverPresentationControllerDelegate{
     }
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         messageInterprator?.remove(with: true)
+        setAlphaOfBackgroundViews(alpha: 1)
     }
+   func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+       setAlphaOfBackgroundViews(alpha: 1)
+   }
+   func setAlphaOfBackgroundViews(alpha: CGFloat) {
+       UIView.animate(withDuration: 0.2) {
+           self.view.alpha = alpha;
+           self.navigationController?.navigationBar.alpha = alpha;
+       }
+   }
     
 }
 

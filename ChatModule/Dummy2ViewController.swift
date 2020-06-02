@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Dummy2ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class Dummy2ViewController: UIViewController {
 
     //MARK: -
     @IBOutlet weak var messageComposeToolbar: UIToolbar!
@@ -138,8 +138,20 @@ extension Dummy2ViewController : UITextViewDelegate{
 }
 
 
-extension Dummy2ViewController{
+extension Dummy2ViewController: UIPopoverPresentationControllerDelegate{
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        setAlphaOfBackgroundViews(alpha: 1)
+    }
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        setAlphaOfBackgroundViews(alpha: 1)
+    }
+    func setAlphaOfBackgroundViews(alpha: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.view.alpha = alpha;
+            self.navigationController?.navigationBar.alpha = alpha;
+        }
     }
 }

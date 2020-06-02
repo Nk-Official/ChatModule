@@ -19,10 +19,10 @@ class StopWatch {
     var time: String{
         
         if hour != 0{
-            return [hour,minute,hour].map({String($0)}).joined(separator: ":")
+            return [hour,minute,second].map({String($0)}).joined(separator: ":")
         }
         else{
-            return [minute,hour].map({String($0)}).joined(separator: ":")
+            return [minute,second].map({String($0)}).joined(separator: ":")
         }
         
     }
@@ -40,6 +40,7 @@ class StopWatch {
     }
     func stopTimer(){
         timer?.invalidate()
+        resetTimer()
     }
     
     func triggerSecond(){
@@ -61,5 +62,7 @@ class StopWatch {
         minute = 0
         second = 0
     }
-    
+    func pauseTimer(){
+        timer?.invalidate()
+    }
 }
