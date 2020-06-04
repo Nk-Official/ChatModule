@@ -24,10 +24,12 @@ class ComposeMessageToolBar: UIToolbar{
     var sendMessageBtn: UIButton?
     
     var audioMessageStackView: UIStackView?
+    var microPhnContainer: UIView?
     var microPhnImageView: UIImageView?
     var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
-    
+    let timerLblWidth: CGFloat = 70
+
     var intialMicroPhnBtnLocation: CGPoint = .zero
 
     //MARK: - CALLBACKS
@@ -65,18 +67,18 @@ class ComposeMessageToolBar: UIToolbar{
         microphoneBtn = microPhoneButton()
         textView = getTextView()
         sendMessageBtn = sendMsgButton()
-        microPhnImageView = microPhoneImg()
+        (microPhnContainer,microPhnImageView) = microPhoneImg()
         slideToCancelBtn = slideToCancelButton()
         timerLbl = getTimerLbl()
         
         sendMessageBtn?.isHidden = true
-        microPhnImageView?.isHidden = true
+//        microPhnImageView?.isHidden = true
         slideToCancelBtn?.isHidden = true
         timerLbl?.isHidden = true
-
-        [addBtn,cameraBtn,microphoneBtn,microPhnImageView,sendMessageBtn,slideToCancelBtn,timerLbl].forEach { (btn) in
-            btn?.backgroundColor = .red
-        }
+        microPhnContainer?.isHidden = true
+//        [addBtn,cameraBtn,microphoneBtn,microPhnImageView,sendMessageBtn,slideToCancelBtn,timerLbl].forEach { (btn) in
+//            btn?.backgroundColor = .red
+//        }
        
         
         let stckView = UIStackView()
@@ -88,7 +90,7 @@ class ComposeMessageToolBar: UIToolbar{
         stckView.addArrangedSubview(slideToCancelBtn!)
 
         stckView.addArrangedSubview(timerLbl!)
-        stckView.addArrangedSubview(microPhnImageView!)
+        stckView.addArrangedSubview(microPhnContainer!)
 //        stckView.addArrangedSubview(microPhnImageView!)
 
         stckView.addArrangedSubview(textView!)
@@ -121,7 +123,7 @@ extension ComposeMessageToolBar{
             self.textView?.alpha = 0
             self.addBtn?.alpha = 0
 
-            self.microPhnImageView?.alpha = 1
+            self.microPhnContainer?.alpha = 1
             self.slideToCancelBtn?.alpha = 1
             self.timerLbl?.alpha = 1
 
@@ -129,14 +131,15 @@ extension ComposeMessageToolBar{
             self.textView?.isHidden = true
             self.addBtn?.isHidden = true
 
-            self.microPhnImageView?.isHidden = false
+            self.microPhnContainer?.isHidden = false
             self.slideToCancelBtn?.isHidden = false
             self.timerLbl?.isHidden = false
 
             self.addBtn?.transform = CGAffineTransform(translationX: -100, y: 0)
             self.textView?.transform = CGAffineTransform(translationX: -100, y: 0)
         }
-        self.microPhnImageView?.alpha = 0
+        stackView?.alignment = .center
+        self.microPhnContainer?.alpha = 0
         self.slideToCancelBtn?.alpha = 0
         self.timerLbl?.alpha = 0
         UIView.animate(withDuration: animationDuration, animations: {
@@ -154,19 +157,20 @@ extension ComposeMessageToolBar{
 
             self.slideToCancelBtn?.alpha = 0
             self.timerLbl?.alpha = 0
-            self.microPhnImageView?.alpha = 0
+            self.microPhnContainer?.alpha = 0
 
             self.cameraBtn?.isHidden = false
             self.textView?.isHidden = false
             self.addBtn?.isHidden = false
 
-            self.microPhnImageView?.isHidden = true
+            self.microPhnContainer?.isHidden = true
             self.slideToCancelBtn?.isHidden = true
             self.timerLbl?.isHidden = true
             
             self.addBtn?.transform = CGAffineTransform.identity
             self.textView?.transform = CGAffineTransform.identity
         }
+        stackView?.alignment = .bottom
         UIView.animate(withDuration: animationDuration, animations: {
             animate()
         }) { (_) in
@@ -174,18 +178,68 @@ extension ComposeMessageToolBar{
         }
     }
     
+    func closeTheAudioMsg(){
+        if self.stopWatch.isStopWatchAtZero(){
+             self.closeAudioRecorderAnimation()
+        }else{
+            print("jsgdjgsd",stopWatch.second)
+           self.throwMicrophnInSky()
+        }
+        self.stopWatch.stopTimer()
+        self.timerLbl?.text = ""
+    }
+    
     func moveSwipeToClose(with gesture: UIGestureRecognizer){
         let nextLocation = gesture.location(in: self)
         let differenceInLocation = intialMicroPhnBtnLocation.x - nextLocation.x
         if differenceInLocation >= 0{
             if differenceInLocation>130{
-                closeAudioRecorderAnimation {
-//                    gesture.isEnabled = false
-                }
+                closeTheAudioMsg()
+                gesture.state = .cancelled
+                slideToCancelBtn?.transform = .identity
                 return
             }
             slideToCancelBtn?.transform = CGAffineTransform(translationX: -differenceInLocation, y: 0)
-            slideToCancelBtn?.alpha = microPhnImageView!.frame.width/differenceInLocation
+            slideToCancelBtn?.alpha = 1-(differenceInLocation/(timerLblWidth+10))
+        }
+    }
+    func blinkMicropPhoneImage(){
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.microPhnImageView?.image =  UIImage(named: "microphoneFilledRed")
+            self.microPhnImageView?.alpha = 0
+        }) { (_) in
+            UIView.animate(withDuration: 0.5) {
+                self.microPhnImageView?.alpha = 1
+            }
+            
+        }
+        
+    }
+    func throwMicrophnInSky(){
+        
+        let dustbin = UIImageView(frame: microPhnContainer!.bounds)
+        dustbin.image = UIImage(named: "trashBin")
+//        dustbin.isHidden = true
+        microPhnContainer?.addSubview(dustbin)
+        let duration  = animationDuration
+        UIView.animate(withDuration: duration, animations: {
+            self.microPhnImageView?.transform = CGAffineTransform(translationX: 0, y: -180)
+        }) { (_) in
+            UIView.animate(withDuration: duration, animations: {
+                dustbin.isHidden = false
+                self.microPhnImageView?.transform = CGAffineTransform(rotationAngle: .pi)
+            }) { (_) in
+                UIView.animate(withDuration: duration, animations: {
+                    self.microPhnContainer!.transform = CGAffineTransform(translationX: 0, y: 180)
+                }) { (_) in
+                    self.closeAudioRecorderAnimation {
+                        self.microPhnContainer!.transform = .identity
+                        self.microPhnImageView?.transform = .identity
+                        dustbin.removeFromSuperview()
+                    }
+                }
+            }
         }
     }
 }
@@ -268,9 +322,9 @@ extension ComposeMessageToolBar {
                 (timeValue) in
                 DispatchQueue.main.async {
                     if self.closeAudioMsg{
-                        self.stopWatch.stopTimer()
-                        self.closeAudioRecorderAnimation()
+                        self.closeTheAudioMsg()
                     }else{
+                        self.blinkMicropPhoneImage()
                         self.timerLbl?.text = timeValue
                     }
                 }
@@ -278,26 +332,16 @@ extension ComposeMessageToolBar {
         case .changed: moveSwipeToClose(with: gesture)
         case .cancelled:break
         case .ended:
-            if stopWatch.hour == 0 && stopWatch.minute == 0 && stopWatch.second == 0{
+            if stopWatch.isStopWatchAtZero(){
                 self.showHint()
             }
-//            else{
-//                stopWatch.stopTimer()
-//            }
             closeAudioMsg = true
-            
             intialMicroPhnBtnLocation = .zero
             slideToCancelBtn?.transform = .identity
         default:break
         }
     }
     
-    @objc func microPhnButtonPress(_ sender: UIButton){
-        self.openAudioRecorderAnimation()
-    }
-    @objc func microphonebtnRelease(_ sender: UIButton){
-        self.closeAudioRecorderAnimation()
-    }
     
     @objc func sendMsgbtnAction(_ sender: UIButton){
         let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""

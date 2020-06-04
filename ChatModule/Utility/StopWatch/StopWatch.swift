@@ -12,20 +12,14 @@ class StopWatch {
     //MARK: - PROPERTIES
     var timer: Timer?
     
-    var second = 0
-    var minute = 0
-    var hour = 0
-    
+    var second: Double = -1
+//    var minute = 0
+//    var hour = 0
+//
     var time: String{
-        
-        if hour != 0{
-            return [hour,minute,second].map({String($0)}).joined(separator: ":")
-        }
-        else{
-            return [minute,second].map({String($0)}).joined(separator: ":")
-        }
-        
+        time(time: second)
     }
+    
     
     var triggerAction: ((String)->())?
     
@@ -33,34 +27,32 @@ class StopWatch {
     func startTimer(){
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (_) in
-            self?.triggerSecond()
+            self?.second += 1
             self?.triggerAction?(self!.time)
         })
         
     }
+    func time(time: TimeInterval)->String{
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        if hours > 0{
+            return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        }
+        return String(format:"%01i:%02i", minutes, seconds)
+    }
+    func isStopWatchAtZero()->Bool{
+        return second == 0
+    }
     func stopTimer(){
         timer?.invalidate()
+        timer = nil
         resetTimer()
     }
     
-    func triggerSecond(){
-        if second == 60{
-            if minute == 60{
-                hour += 1
-                minute = 0
-                second = 0
-            }else{
-                minute += 1
-                second = 0
-            }
-        }else{
-            second += 1
-        }
-    }
+    
     func resetTimer(){
-        hour = 0
-        minute = 0
-        second = 0
+        second = -1
     }
     func pauseTimer(){
         timer?.invalidate()

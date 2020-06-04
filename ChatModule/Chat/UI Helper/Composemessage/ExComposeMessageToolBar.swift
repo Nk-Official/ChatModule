@@ -4,35 +4,22 @@ import UIKit
 extension ComposeMessageToolBar {
     
     
-    
-    func createAudioMessageStackView(){
-        microPhnImageView = microPhoneImg()
-        slideToCancelBtn = slideToCancelButton()
-        timerLbl = getTimerLbl()
+    func microPhoneImg()->(UIView,UIImageView){
+        let containerView = UIView()
+        let widthContraint = NSLayoutConstraint(item: containerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+        containerView.addConstraint(widthContraint)
+        containerView.setContentHuggingPriority(.required, for: .horizontal)
+        containerView.backgroundColor = .red
         
-        let stckView = UIStackView()
-        stckView.axis = .horizontal
-       
-        stckView.spacing = 10
-//        stckView.alignment = .bottom
-        stckView.addArrangedSubview(microPhnImageView!)
-        stckView.addArrangedSubview(timerLbl!)
-        stckView.addArrangedSubview(slideToCancelBtn!)
-
-        self.audioMessageStackView = stckView
-        audioMessageStackView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 2.5, right: 0)
-        audioMessageStackView?.isLayoutMarginsRelativeArrangement = true
-    }
-    
-    
-    func microPhoneImg()->UIImageView{
-        
-        let microPhnBtn = UIImage(named: "microphoneBlue")
+        let microPhnBtn = UIImage(named: "microphoneFilledGray")
         let imageView = UIImageView(image: microPhnBtn)
         imageView.contentMode = .scaleAspectFit
         imageView.frame.size.width = 40
         imageView.setContentHuggingPriority(.required, for: .horizontal)
-        return imageView
+//        imageView.backgroundColor = .white
+        
+        containerView.addSubview(imageView)
+        return (containerView,imageView)
         
     }
     
@@ -48,8 +35,11 @@ extension ComposeMessageToolBar {
     func getTimerLbl()->UILabel{
         let label = UILabel()
         label.text = ""
-        label.frame.size =  CGSize(width: 100, height: self.frame.height)
+        let widthContraint = NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: timerLblWidth)
+        label.addConstraint(widthContraint)
+        label.textAlignment = .center
         label.backgroundColor = .white
+        label.font = UIFont.systemFont(ofSize: 25)
 //        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }

@@ -41,6 +41,9 @@ class AttachmentActionSheet : NSObject{
     
     
     func presentActionSheet(){
+        if viewController == nil{
+            fatalError("Outlet is missing in stryboard or in code")
+        }
         viewController.present(actionSheet, animated: true, completion: nil)
     }
     func createActionSheet(){
