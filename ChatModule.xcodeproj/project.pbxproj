@@ -108,6 +108,8 @@
 		CE02DDBB2480E26A00CA0E48 /* HintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE02DDBA2480E26A00CA0E48 /* HintView.xib */; };
 		CE02DDBF2480F9CA00CA0E48 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02DDBE2480F9CA00CA0E48 /* StopWatch.swift */; };
 		CE02DDC32481319500CA0E48 /* MessagePopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02DDC22481319500CA0E48 /* MessagePopOverViewController.swift */; };
+		CE338F532488E807008CFC1F /* LockAudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE338F522488E807008CFC1F /* LockAudioMessageView.swift */; };
+		CE338F552488E970008CFC1F /* LockAudioMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE338F542488E970008CFC1F /* LockAudioMessageView.xib */; };
 		CE4FA6B2246D05BE001599BA /* ContactInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */; };
 		CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */; };
 		CE5138DB246C370700CAD960 /* ContactInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */; };
@@ -228,6 +230,8 @@
 		CE02DDBA2480E26A00CA0E48 /* HintView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HintView.xib; sourceTree = "<group>"; };
 		CE02DDBE2480F9CA00CA0E48 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		CE02DDC22481319500CA0E48 /* MessagePopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePopOverViewController.swift; sourceTree = "<group>"; };
+		CE338F522488E807008CFC1F /* LockAudioMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockAudioMessageView.swift; sourceTree = "<group>"; };
+		CE338F542488E970008CFC1F /* LockAudioMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockAudioMessageView.xib; sourceTree = "<group>"; };
 		CE4FA6B1246D05BE001599BA /* ContactInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableViewController.swift; sourceTree = "<group>"; };
 		CE5138D8246C325700CAD960 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
 		CE5138DA246C370700CAD960 /* ContactInfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoCoordinator.swift; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 		1BE9B73223FE6B7A00B8C994 /* UI Helper */ = {
 			isa = PBXGroup;
 			children = (
+				CE338F512488E790008CFC1F /* LockView */,
 				CEFCF696246BCA85004F4502 /* Message Header View */,
 				1B3BD52B23F56194005A3C35 /* InformationView */,
 				1B10EE5F2382828D005A94E2 /* Composemessage */,
@@ -740,6 +745,15 @@
 			path = MessagePopOverView;
 			sourceTree = "<group>";
 		};
+		CE338F512488E790008CFC1F /* LockView */ = {
+			isa = PBXGroup;
+			children = (
+				CE338F522488E807008CFC1F /* LockAudioMessageView.swift */,
+				CE338F542488E970008CFC1F /* LockAudioMessageView.xib */,
+			);
+			path = LockView;
+			sourceTree = "<group>";
+		};
 		CE5138D7246C324D00CAD960 /* ContactInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +857,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE338F552488E970008CFC1F /* LockAudioMessageView.xib in Resources */,
 				1BFF86F32407878E00E2DA2D /* IncomingContactTableViewCell.xib in Resources */,
 				1B8F8C3A240699BC00557C6E /* OutGoingDocumentTableViewCell.xib in Resources */,
 				1B10EE3623825756005A94E2 /* LaunchScreen.storyboard in Resources */,
@@ -1002,6 +1017,7 @@
 				CE02DDC32481319500CA0E48 /* MessagePopOverViewController.swift in Sources */,
 				1BF797012408E61B005C2217 /* MessageAccessiblityPresentor.swift in Sources */,
 				1B0605162403F6D20045E442 /* ContactsDataSource.swift in Sources */,
+				CE338F532488E807008CFC1F /* LockAudioMessageView.swift in Sources */,
 				CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */,
 				1B10EE2C2382574C005A94E2 /* AppDelegate.swift in Sources */,
 				1B1DE9DA23F666280078C132 /* DummyTableViewCell.swift in Sources */,

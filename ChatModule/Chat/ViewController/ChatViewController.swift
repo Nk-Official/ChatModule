@@ -105,6 +105,14 @@ class ChatViewController: UIViewController {
         composeMsgView.composeMsgdelegate = self
         composeMsgView.uiDelegate = self
         composeMsgView.locationPickerDelegate = self
+        composeMsgView.heightChange = {
+            (change) in
+        
+            let contentOffset = self.tableView.contentOffset.y+change
+            self.tableView.setContentOffset(CGPoint(x: 0, y: contentOffset) , animated: false)
+
+            
+        }
     }
     func registerCell(){
         [viewModel.incomingFileCell,

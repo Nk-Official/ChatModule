@@ -20,9 +20,12 @@ class StopWatch {
         time(time: second)
     }
     
-    
+    var intialValue: Double = -1
     var triggerAction: ((String)->())?
     
+    init(intialValue: Double = -1){
+        self.intialValue = intialValue
+    }
     //MARK: - METHODS
     func startTimer(){
         
@@ -47,7 +50,6 @@ class StopWatch {
     func stopTimer(){
         timer?.invalidate()
         timer = nil
-        resetTimer()
     }
     
     

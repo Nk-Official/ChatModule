@@ -7,9 +7,12 @@ extension ComposeMessageToolBar {
     func microPhoneImg()->(UIView,UIImageView){
         let containerView = UIView()
         let widthContraint = NSLayoutConstraint(item: containerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+        let heightContraint = NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.height)
+
         containerView.addConstraint(widthContraint)
+        containerView.addConstraint(heightContraint)
+
         containerView.setContentHuggingPriority(.required, for: .horizontal)
-        containerView.backgroundColor = .red
         
         let microPhnBtn = UIImage(named: "microphoneFilledGray")
         let imageView = UIImageView(image: microPhnBtn)
@@ -26,8 +29,12 @@ extension ComposeMessageToolBar {
     func slideToCancelButton()->UIButton{
         
         let button = UIButton()
-        button.setTitle("slide to cancel  <", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.setTitle("slide to cancel  ", for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 23)
+        button.setImage(UIImage(named: "back4Gray") , for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
         
     }
@@ -40,6 +47,7 @@ extension ComposeMessageToolBar {
         label.textAlignment = .center
         label.backgroundColor = .white
         label.font = UIFont.systemFont(ofSize: 25)
+        label.adjustsFontSizeToFitWidth = true
 //        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }

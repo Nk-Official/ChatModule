@@ -28,7 +28,7 @@ class ComposeMessageToolBar: UIToolbar{
     var microPhnImageView: UIImageView?
     var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
-    let timerLblWidth: CGFloat = 70
+    let timerLblWidth: CGFloat = 50
 
     var intialMicroPhnBtnLocation: CGPoint = .zero
 
@@ -51,6 +51,13 @@ class ComposeMessageToolBar: UIToolbar{
     }
     
     let animationDuration: Double = 0.5
+    let height: CGFloat = 49
+    var updatedHeight: CGFloat = 49
+    
+    //MARK: - Closure callback
+    
+    var heightChange: ((CGFloat)->())? // callback is change in height
+    
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -84,7 +91,7 @@ class ComposeMessageToolBar: UIToolbar{
         let stckView = UIStackView()
         stckView.axis = .horizontal
         
-        
+        stckView.addArrangedSubview(sendMessageBtn!)
         stckView.addArrangedSubview(microphoneBtn!)
         stckView.addArrangedSubview(cameraBtn!)
         stckView.addArrangedSubview(slideToCancelBtn!)
@@ -179,13 +186,13 @@ extension ComposeMessageToolBar{
     }
     
     func closeTheAudioMsg(){
+        self.stopWatch.stopTimer()
         if self.stopWatch.isStopWatchAtZero(){
              self.closeAudioRecorderAnimation()
         }else{
-            print("jsgdjgsd",stopWatch.second)
            self.throwMicrophnInSky()
         }
-        self.stopWatch.stopTimer()
+        stopWatch.resetTimer()
         self.timerLbl?.text = ""
     }
     
@@ -220,9 +227,13 @@ extension ComposeMessageToolBar{
         
         let dustbin = UIImageView(frame: microPhnContainer!.bounds)
         dustbin.image = UIImage(named: "trashBin")
-//        dustbin.isHidden = true
+        dustbin.isHidden = true
         microPhnContainer?.addSubview(dustbin)
         let duration  = animationDuration
+        
+        slideToCancelBtn?.alpha = 0
+        timerLbl?.alpha = 0
+        
         UIView.animate(withDuration: duration, animations: {
             self.microPhnImageView?.transform = CGAffineTransform(translationX: 0, y: -180)
         }) { (_) in
@@ -266,8 +277,7 @@ extension ComposeMessageToolBar{
     }
     
     func sendMsgButton()->UIButton{
-        let button = createButton(with: "", Image: UIImage(named: "sendMessage"), action: #selector(addbtnAction))
-        button.backgroundColor = .blue
+        let button = createButton(with: "", Image: UIImage(named: "sendMessage"), action: #selector(sendMsgbtnAction))
         return button
     }
     func createButton(with title: String, Image: UIImage?, action: Selector?)->UIButton{
@@ -286,7 +296,7 @@ extension ComposeMessageToolBar{
         
         let textView = UITextView()
         textView.delegate = self
-        textViewHeightConstraint = NSLayoutConstraint(item: textView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 39)
+        textViewHeightConstraint = NSLayoutConstraint(item: textView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: height-10)
         textView.addConstraint(textViewHeightConstraint!)
         textView.layer.cornerRadius = 20
         textView.layer.borderColor = UIColor.seperatorColor.cgColor
@@ -333,7 +343,9 @@ extension ComposeMessageToolBar {
         case .cancelled:break
         case .ended:
             if stopWatch.isStopWatchAtZero(){
+                self.stopWatch.triggerAction = nil
                 self.showHint()
+                self.closeTheAudioMsg()
             }
             closeAudioMsg = true
             intialMicroPhnBtnLocation = .zero
@@ -347,7 +359,8 @@ extension ComposeMessageToolBar {
         let message = textView?.text.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         if message.count > 0{
             composeMsgdelegate?.textMessageSent(self, message: message)
-            textView?.text = ""
+            textView?.text = nil
+            textViewDidChange(textView!)
         }
     }
 }
@@ -376,24 +389,46 @@ extension ComposeMessageToolBar : UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         let numberOfLines = textView.calculateMaxLines()
         if numberOfLines == 1{
-            textViewHeightConstraint?.constant = 39
+            textViewHeightConstraint?.constant = height-10
         }else if numberOfLines <= 5{
             textViewHeightConstraint?.constant = textView.contentSize.height
         }
         
+        let previousHeight =  bottomToolbarHeight.constant
         bottomToolbarHeight.constant = (textViewHeightConstraint?.constant ?? 0) + 10
+
+        let newHeight =  bottomToolbarHeight.constant
+
+        if newHeight != previousHeight{
+            let change = (bottomToolbarHeight.constant - height)
+            heightChange?(change)
+            print("change")
+        }
+        
+
         
         guard let messageTyped = textView.text, messageTyped.count > 0 else{
             
-            self.microphoneBtn?.isHidden = false
-            self.cameraBtn?.isHidden = false
-            self.sendMessageBtn?.isHidden = true
+            UIView.animate(withDuration: 0.2, animations: {
+                self.microphoneBtn?.isHidden = false
+                self.cameraBtn?.isHidden = false
+                self.sendMessageBtn?.isHidden = true
+            }) { (_) in
+                self.microphoneBtn?.isHidden = false
+                self.cameraBtn?.isHidden = false
+                self.sendMessageBtn?.isHidden = true
+            }
             return
         }
-        [self.cameraBtn,self.microphoneBtn].forEach { (button) in
-            button?.isHidden = true
+        UIView.animate(withDuration: 0.2, animations: {
+            self.microphoneBtn?.isHidden = true
+            self.cameraBtn?.isHidden = true
+            self.sendMessageBtn?.isHidden = false
+        }) { (_) in
+            self.microphoneBtn?.isHidden = true
+            self.cameraBtn?.isHidden = true
+            self.sendMessageBtn?.isHidden = false
         }
-        self.sendMessageBtn?.isHidden = false
         
     }
     

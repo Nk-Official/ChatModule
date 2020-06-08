@@ -26,6 +26,7 @@ class MenuPopOverViewController: UIViewController {
         super.updateViewConstraints()
         tableHeightCConstraint.constant = tableView.contentSize.height
         preferredContentSize = CGSize(width: 150, height: tableView.contentSize.height)
+        view.layoutIfNeeded()
     }
 
 }
