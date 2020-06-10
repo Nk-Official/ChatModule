@@ -117,6 +117,8 @@
 		CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */; };
 		CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB28246D793300EC901F /* ContactInfoTableData.swift */; };
 		CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */; };
+		CE95C1992490EB6F0092388A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C1982490EB6F0092388A /* PhotoGallery.swift */; };
+		CE95C19B2490EC780092388A /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C19A2490EC780092388A /* Bundle.swift */; };
 		CEEF4DD9247E88EF00C2370A /* ExComposeMessageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */; };
 		CEFCF699246BCA85004F4502 /* MessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */; };
 		CEFCF69A246BCA85004F4502 /* MessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */; };
@@ -239,6 +241,8 @@
 		CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		CE64DB28246D793300EC901F /* ContactInfoTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableData.swift; sourceTree = "<group>"; };
 		CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewModel.swift; sourceTree = "<group>"; };
+		CE95C1982490EB6F0092388A /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
+		CE95C19A2490EC780092388A /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExComposeMessageToolBar.swift; sourceTree = "<group>"; };
 		CEFCF697246BCA85004F4502 /* MessageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageHeaderView.xib; sourceTree = "<group>"; };
 		CEFCF698246BCA85004F4502 /* MessageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHeaderView.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 				1B876ACE23F3C466001A722D /* ExUIImageView.swift */,
 				1B0604FB24038EC00045E442 /* ExViewController.swift */,
 				1B641CF12407D39D00D989C5 /* ExUITextView.swift */,
+				CE95C19A2490EC780092388A /* Bundle.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -665,6 +670,7 @@
 		1BE9B73623FE757B00B8C994 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CE95C1972490EB5A0092388A /* AppGallery */,
 				CE02DDC1248130FC00CA0E48 /* MessagePopOverView */,
 				CE02DDC0248130EC00CA0E48 /* StopWatch */,
 				CEFCF69B246C03F6004F4502 /* Color */,
@@ -773,6 +779,14 @@
 				CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		CE95C1972490EB5A0092388A /* AppGallery */ = {
+			isa = PBXGroup;
+			children = (
+				CE95C1982490EB6F0092388A /* PhotoGallery.swift */,
+			);
+			path = AppGallery;
 			sourceTree = "<group>";
 		};
 		CEFCF696246BCA85004F4502 /* Message Header View */ = {
@@ -928,6 +942,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1B09CF23F2AC3B009238B7 /* CommonFunctions.swift in Sources */,
+				CE95C19B2490EC780092388A /* Bundle.swift in Sources */,
 				CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */,
 				1B57658123F2D406001EBC01 /* ContactsViewModel.swift in Sources */,
 				1B25901F24051E86002F880C /* OutGoingContactTableViewCell.swift in Sources */,
@@ -1010,6 +1025,7 @@
 				1B3BD52823F55CE3005A3C35 /* ChatDataSource.swift in Sources */,
 				1B10EE5E23828279005A94E2 /* ComposeMessageView.swift in Sources */,
 				1B2590142404F2BA002F880C /* LocationViewerCoordinator.swift in Sources */,
+				CE95C1992490EB6F0092388A /* PhotoGallery.swift in Sources */,
 				1B8F8C2D24064D2C00557C6E /* ContactManager.swift in Sources */,
 				1B1B09D223F2AE5F009238B7 /* DateManager.swift in Sources */,
 				1B0605072403A0BC0045E442 /* LocationManager.swift in Sources */,

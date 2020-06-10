@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
 
         openApp()
+       let dm = DocumentDirectoryManager()
+        let fileurl =     dm.getAppAlbum()
+        let url = dm.getFilesAtPath(url: fileurl)
+        print(url)
         return true
     }
 

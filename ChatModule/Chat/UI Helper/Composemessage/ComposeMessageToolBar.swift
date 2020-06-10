@@ -41,7 +41,7 @@ class ComposeMessageToolBar: UIToolbar{
 
     //MARK: - STORED PROPERTY
     lazy var stopWatch: StopWatch = StopWatch()
-    var closeAudioMsg: Bool = false
+    
     
     var ifTextMessageAnimateddViewSetUp: Bool{
         return stackView != nil
@@ -58,6 +58,14 @@ class ComposeMessageToolBar: UIToolbar{
     let lockviewWidth: CGFloat = 60
 
     var intialMicroPhnBtnLocation: CGPoint = .zero
+    
+    
+    var photoGallery: PhotoGallery?
+    
+    //MARK: - DECISION MAKER PROPERTY
+    var closeAudioMsg: Bool = false
+    var doSendAudioMsg: Bool = false /// Do not send audion whose duration < 0 , check in audiomanager delegate
+    
     //MARK: - Closure callback
     
     var heightChange: ((CGFloat)->())? // callback is change in height
@@ -68,6 +76,7 @@ class ComposeMessageToolBar: UIToolbar{
         if stackView == nil{
             makeTextMessageComposerVisible()
         }
+        audioRecodermngr.delegate = self
     }
     
     //MARK: - UI METHODS
@@ -190,6 +199,8 @@ extension ComposeMessageToolBar{
     }
     
     func closeTheAudioMsg(){
+        doSendAudioMsg = false
+        audioRecodermngr.finishRecording()
         self.stopWatch.stopTimer()
         if self.stopWatch.isStopWatchAtZero(){
              self.closeAudioRecorderAnimation()
@@ -200,6 +211,15 @@ extension ComposeMessageToolBar{
         self.timerLbl?.text = ""
         closeLockView()
 
+    }
+    func sendAudioAndClose(){
+        doSendAudioMsg = true
+        audioRecodermngr.finishRecording()
+        stopWatch.stopTimer()
+        closeAudioRecorderAnimation()
+        stopWatch.resetTimer()
+        timerLbl?.text = ""
+        closeLockView()
     }
     
     func moveSwipeToClose(with gesture: UIGestureRecognizer){
@@ -214,6 +234,16 @@ extension ComposeMessageToolBar{
             }
             slideToCancelBtn?.transform = CGAffineTransform(translationX: -differenceInLocation, y: 0)
             slideToCancelBtn?.alpha = 1-(differenceInLocation/(timerLblWidth+10))
+        }
+    }
+    func swipeUpRecogniser(with gesture: UIGestureRecognizer){
+        guard lockview != nil else{return}
+        let nextLocation = gesture.location(in: self)
+        let differenceInLocation = intialMicroPhnBtnLocation.y - nextLocation.y
+        if differenceInLocation > 0{
+            print("swipe up")
+//            lockView.lockTheView()
+            gesture.state = .cancelled
         }
     }
     func blinkMicropPhoneImage(){
@@ -318,6 +348,7 @@ extension ComposeMessageToolBar{
 extension ComposeMessageToolBar {
     
     @objc func addbtnAction(_ sender: UIButton){
+        photoGallery = PhotoGallery.sharedInstance
         actionSheetMng.delegate = self
         actionSheetMng.locationPickerDelegate = locationPickerDelegate
         actionSheetMng.presentActionSheet()
@@ -328,6 +359,7 @@ extension ComposeMessageToolBar {
     @objc func microPhoneTouchesHandle(_ gesture: UILongPressGestureRecognizer){
         switch gesture.state{
         case .began:
+            startTheRecording()
             intialMicroPhnBtnLocation = gesture.location(in: self)
             
             openAudioRecorderAnimation()
@@ -338,10 +370,16 @@ extension ComposeMessageToolBar {
                 (timeValue) in
                 DispatchQueue.main.async {
                     if self.closeAudioMsg{
-                        self.closeTheAudioMsg()
+                        if self.stopWatch.second > 0{
+                            self.sendAudioAndClose()
+                        }else{
+                            self.closeTheAudioMsg()
+                        }
+                        
                     }else{
                         if self.stopWatch.second > 1{
-                            self.showLockView()
+                            ///uncomment below line for animate lockview
+//                            self.showLockView()
                         }
                         self.blinkMicropPhoneImage()
                         self.timerLbl?.text = timeValue
@@ -349,6 +387,7 @@ extension ComposeMessageToolBar {
                 }
             }
         case .changed: moveSwipeToClose(with: gesture)
+            swipeUpRecogniser(with: gesture)
         case .cancelled:break
         case .ended:
             if stopWatch.isStopWatchAtZero(){
@@ -398,7 +437,7 @@ extension ComposeMessageToolBar {
 
         let margins = superview!.layoutMarginsGuide
 
-        lockview!.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -height-1).isActive = true
+        lockview!.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -height-1+(lockviewWidth/2)).isActive = true
         lockview!.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 20).isActive = true
         
         let width = NSLayoutConstraint(item: lockview!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: lockviewWidth)
@@ -477,6 +516,7 @@ extension ComposeMessageToolBar: AttachmentActionSheetDelegate{
     
     
     func didPickImage(sheet: AttachmentActionSheet, image: UIImage) {
+        photoGallery?.save(image: image)
         composeMsgdelegate?.imageMessageSent(self, images: [image])
     }
     
@@ -494,12 +534,23 @@ extension ComposeMessageToolBar: AttachmentActionSheetDelegate{
     }
 }
 
+//MARK: - AUDIO MESSAGE
+extension ComposeMessageToolBar{
+    
+    func startTheRecording(){
+        if !audioRecodermngr.recordingInProcess{
+            audioRecodermngr.startRecording()
+        }
+    }
+    
+}
+
 //MARK: - AudioRecorderManagerDelegate
 extension  ComposeMessageToolBar : AudioRecorderManagerDelegate{
     func didRecordedAudio(manager: AudioRecorderManager, audioUrl: URL?, error: Error?) {
         print("url",audioUrl as Any)
 //        manager.deleteAudio()
-        if let url = audioUrl{
+        if let url = audioUrl, doSendAudioMsg{
             composeMsgdelegate?.audioMessageSent(self, audioUrl: url)
         }
     }

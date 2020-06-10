@@ -8,6 +8,8 @@
 
 import FirebaseAuth
 typealias Closure = (()->())
+let albumName =  Bundle.main.displayName ?? "OwsmNamrata"
+
 
 struct CommonFunctions {
     

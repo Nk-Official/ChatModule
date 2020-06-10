@@ -126,7 +126,7 @@ extension ChatViewController {
     
     @objc func contactInfoTap(){
         
-        if receiver.isGroup == 1{
+        if receiver.isGroup == 0{
            let coordinator = ContactInfoCoordinator(navigationController: navigationController!)
            coordinator.start()
        }

@@ -24,6 +24,10 @@ open class DocumentDirectoryManager{
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    func getAppAlbum() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
     func getFileURL(name : String, typeExtension : String) -> URL {
         let path = getDocumentsDirectory().appendingPathComponent(name+typeExtension)
         return path as URL
@@ -48,5 +52,18 @@ open class DocumentDirectoryManager{
        catch(let err){
            print("error while deleting file at url",path,err.localizedDescription)
        }
+    }
+    func getFilesAtPath(url: URL)->[URL]{
+        
+        let fileManager = FileManager.default
+        
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+            return fileURLs
+        }
+        catch{
+            print("Error while enumerating files \(url.path): \(error.localizedDescription)")
+            return []
+        }
     }
 }

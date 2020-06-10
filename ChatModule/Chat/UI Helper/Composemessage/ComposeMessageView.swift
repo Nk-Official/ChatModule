@@ -28,7 +28,7 @@ protocol ComposeMssageUIDelegate {
 //    @IBOutlet weak private var msgTextVHeightConstraint : NSLayoutConstraint!
 //    @IBOutlet weak private var microphnBtn : UIButton!
 //    @IBOutlet weak private var sendMsgBtn : UIButton!
-// 
+//
 //    //MARK: - ACTIONS
 //    @IBAction private func sendMsgBtn(_ sender : UIButton){
 //         let message = msgTextV.getText().trimmingCharacters(in: .whitespacesAndNewlines)
@@ -37,9 +37,9 @@ protocol ComposeMssageUIDelegate {
 //            msgTextV.setText(text: "")
 //        }
 //    }
-//    
+//
 //    @IBAction private func  cameraBtn(_ sender : UIButton){
-//        
+//
 //    }
 //    @IBAction private func  attachMnetBtn(_ sender : UIButton){
 //        let actionSheetMng = AttachmentActionSheet()
@@ -74,7 +74,7 @@ protocol ComposeMssageUIDelegate {
 //        self.addSubview(contentV)
 //        contentV.frame = self.bounds
 //        contentV.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-//        
+//
 //        msgTextV.editingChanged = {
 //            (text,_) in
 //            // trigger your animation here
@@ -82,10 +82,10 @@ protocol ComposeMssageUIDelegate {
 //        }
 //        audioRecodermngr.delegate = self
 //    }
-//    
+//
 //    override func layoutSubviews() {
 //        super.layoutSubviews()
-//        
+//
 //        // we need to adjust the frame of the subview to no longer match the size used
 //        // in the XIB file BUT the actual frame we got assinged from the superview
 //        self.contentV.frame = self.bounds
@@ -99,7 +99,7 @@ protocol ComposeMssageUIDelegate {
 //        let enable = ((text == nil) || (text?.count ?? 0 == 0))
 //        self.setSendTextMessageBtn(enable: !enable)
 //    }
-//    
+//
 //}
 ////MARK: - AudioRecorderManagerDelegate
 //extension  ComposeMessageView : AudioRecorderManagerDelegate{

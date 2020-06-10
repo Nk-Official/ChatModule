@@ -25,7 +25,7 @@ class MenuPopOverViewController: UIViewController {
     override func updateViewConstraints() {
         super.updateViewConstraints()
         tableHeightCConstraint.constant = tableView.contentSize.height
-        preferredContentSize = CGSize(width: 150, height: tableView.contentSize.height)
+        preferredContentSize = CGSize(width: 150, height: tableView.contentSize.height+10)
         view.layoutIfNeeded()
     }
 
@@ -63,5 +63,7 @@ extension MenuPopOverViewController: UITableViewDelegate{
         let item = menuItems[row]
         item.tapAction(row,item)
         dismiss(animated: true, completion: nil)
+        let popOver = popoverPresentationController
+        popOver?.delegate?.popoverPresentationControllerDidDismissPopover?(popOver!)
     }
 }
