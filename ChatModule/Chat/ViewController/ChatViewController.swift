@@ -111,7 +111,7 @@ class ChatViewController: UIViewController {
             let contentOffset = self.tableView.contentOffset.y+change
             self.tableView.setContentOffset(CGPoint(x: 0, y: contentOffset) , animated: false)
 
-            
+//            self.scrollToBottom()
         }
     }
     func registerCell(){

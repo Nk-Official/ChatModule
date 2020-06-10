@@ -28,9 +28,9 @@ class ComposeMessageToolBar: UIToolbar{
     var microPhnImageView: UIImageView?
     var slideToCancelBtn: UIButton?
     var timerLbl: UILabel?
-    let timerLblWidth: CGFloat = 50
+    var lockview: LockAudioMessageView?
 
-    var intialMicroPhnBtnLocation: CGPoint = .zero
+
 
     //MARK: - CALLBACKS
     var composeMsgdelegate: ComposeMssageDelegate?
@@ -53,7 +53,11 @@ class ComposeMessageToolBar: UIToolbar{
     let animationDuration: Double = 0.5
     let height: CGFloat = 49
     var updatedHeight: CGFloat = 49
-    
+    let timerLblWidth: CGFloat = 50
+    let lockviewHeight: CGFloat = 140
+    let lockviewWidth: CGFloat = 60
+
+    var intialMicroPhnBtnLocation: CGPoint = .zero
     //MARK: - Closure callback
     
     var heightChange: ((CGFloat)->())? // callback is change in height
@@ -194,6 +198,8 @@ extension ComposeMessageToolBar{
         }
         stopWatch.resetTimer()
         self.timerLbl?.text = ""
+        closeLockView()
+
     }
     
     func moveSwipeToClose(with gesture: UIGestureRecognizer){
@@ -334,6 +340,9 @@ extension ComposeMessageToolBar {
                     if self.closeAudioMsg{
                         self.closeTheAudioMsg()
                     }else{
+                        if self.stopWatch.second > 1{
+                            self.showLockView()
+                        }
                         self.blinkMicropPhoneImage()
                         self.timerLbl?.text = timeValue
                     }
@@ -380,6 +389,37 @@ extension ComposeMessageToolBar {
         popover.backgroundColor = UIColor(0x1478F6)
         viewController.present(vc, animated: true, completion: nil)
     }
+    func showLockView(){
+        if lockview != nil{return}
+//        let superview = viewController.view
+        lockview = LockAudioMessageView()
+        lockview?.translatesAutoresizingMaskIntoConstraints = false
+        superview!.insertSubview(lockview!, belowSubview: self)
+
+        let margins = superview!.layoutMarginsGuide
+
+        lockview!.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -height-1).isActive = true
+        lockview!.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 20).isActive = true
+        
+        let width = NSLayoutConstraint(item: lockview!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: lockviewWidth)
+        let height = NSLayoutConstraint(item: lockview!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: lockviewHeight)
+        width.isActive = true
+        height.isActive = true
+        lockview!.addConstraints([width,height])
+    }
+    func openLockViewWithAnimation(){
+        
+    }
+    func closeLockView(){
+        if lockview == nil{return}
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.lockview?.transform = CGAffineTransform(translationX: 0, y: self.lockviewHeight)
+        }) { (_) in
+            self.lockview?.removeFromSuperview()
+            self.lockview = nil
+        }
+    }
 }
 
 //MARK: - UITextViewDelegate
@@ -402,7 +442,6 @@ extension ComposeMessageToolBar : UITextViewDelegate{
         if newHeight != previousHeight{
             let change = (bottomToolbarHeight.constant - height)
             heightChange?(change)
-            print("change")
         }
         
 

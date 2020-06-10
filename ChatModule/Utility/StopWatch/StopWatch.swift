@@ -45,7 +45,7 @@ class StopWatch {
         return String(format:"%01i:%02i", minutes, seconds)
     }
     func isStopWatchAtZero()->Bool{
-        return second == 0
+        return second <= 0
     }
     func stopTimer(){
         timer?.invalidate()
