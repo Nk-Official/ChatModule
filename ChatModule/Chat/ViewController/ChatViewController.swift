@@ -52,6 +52,10 @@ class ChatViewController: UIViewController {
     var messageInterprator: MessageInterprator?
     var tableViewFullStrechHeight : CGFloat = 0
     
+    //MARK: - DECISION PARAMETER
+    var messageLongPressEnable : Bool = true
+
+    
     override var canBecomeFirstResponder: Bool{
         return true
     }

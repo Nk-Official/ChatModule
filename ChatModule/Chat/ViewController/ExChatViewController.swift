@@ -22,8 +22,10 @@ extension ChatViewController{
     }
     //MARK: - LONG PRESS GESTURE
     func longPressGestureToMesages(){
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
-        self.view.addGestureRecognizer(longPressRecognizer)
+        if messageLongPressEnable{
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+            self.view.addGestureRecognizer(longPressRecognizer)
+        }
     }
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
 
