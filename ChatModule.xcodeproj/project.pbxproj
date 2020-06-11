@@ -117,6 +117,7 @@
 		CE64DB27246D5A4200EC901F /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */; };
 		CE64DB29246D793300EC901F /* ContactInfoTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB28246D793300EC901F /* ContactInfoTableData.swift */; };
 		CE64DB2B246D79E700EC901F /* ContactInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */; };
+		CE914FDD2491FE1B00D7867E /* MessageAccessiblityPresentorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE914FDC2491FE1B00D7867E /* MessageAccessiblityPresentorDelegate.swift */; };
 		CE95C1992490EB6F0092388A /* PhotoGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C1982490EB6F0092388A /* PhotoGallery.swift */; };
 		CE95C19B2490EC780092388A /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE95C19A2490EC780092388A /* Bundle.swift */; };
 		CEEF4DD9247E88EF00C2370A /* ExComposeMessageToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */; };
@@ -241,6 +242,7 @@
 		CE64DB26246D5A4200EC901F /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		CE64DB28246D793300EC901F /* ContactInfoTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoTableData.swift; sourceTree = "<group>"; };
 		CE64DB2A246D79E700EC901F /* ContactInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoViewModel.swift; sourceTree = "<group>"; };
+		CE914FDC2491FE1B00D7867E /* MessageAccessiblityPresentorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAccessiblityPresentorDelegate.swift; sourceTree = "<group>"; };
 		CE95C1982490EB6F0092388A /* PhotoGallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallery.swift; sourceTree = "<group>"; };
 		CE95C19A2490EC780092388A /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		CEEF4DD8247E88EF00C2370A /* ExComposeMessageToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExComposeMessageToolBar.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 			children = (
 				1BF797052408FAA6005C2217 /* MessageInterprator.swift */,
 				1BF797002408E61B005C2217 /* MessageAccessiblityPresentor.swift */,
+				CE914FDC2491FE1B00D7867E /* MessageAccessiblityPresentorDelegate.swift */,
 			);
 			path = LongPressHandle;
 			sourceTree = "<group>";
@@ -1037,6 +1040,7 @@
 				CE5138D9246C325700CAD960 /* ContactInfoViewController.swift in Sources */,
 				1B10EE2C2382574C005A94E2 /* AppDelegate.swift in Sources */,
 				1B1DE9DA23F666280078C132 /* DummyTableViewCell.swift in Sources */,
+				CE914FDD2491FE1B00D7867E /* MessageAccessiblityPresentorDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,4 +26,4 @@ Controls On message bubbles
 ## Message Long Press Action: 
 * Enable action with property messageLongPressEnable in ChatViewController
 * Set PopupMenu items with ChatViewController -> messageInterprator -> popUpItems
- 
+* Access MenuItem Action  through ChatViewController -> messageInterprator -> menuItemDelegate (MessageAccessiblityPresentorDelegate)

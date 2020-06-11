@@ -17,6 +17,7 @@ class MessageInterprator {
     private var dimView: UIView?
     
     var popUpItems: [PopUpMenuItem]?
+    var menuItemDelegate: MessageAccessiblityPresentorDelegate?
     
     init(chat viewController: ChatViewController, tableView: UITableView, messageCell: MessageTableViewCell) {
         chatViewController = viewController
@@ -72,6 +73,7 @@ class MessageInterprator {
     private func presentMenuOption(message : Message, anchorView: UIView){
         let incoming =  message.senderId != chatViewController.userid
         let menuOptionPresentor = MessageAccessiblityPresentor(presentOver: chatViewController, message: message, incomingMesage: incoming)
+        menuOptionPresentor.delegate = menuItemDelegate
         menuOptionPresentor.presentMenuPopUp(anchorView: anchorView, menuItems: popUpItems)
     }
     

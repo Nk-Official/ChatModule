@@ -20,35 +20,36 @@ class MessageAccessiblityPresentor {
     var message: Message
     var incoming: Bool
     var viewController: ChatViewController
+    var delegate: MessageAccessiblityPresentorDelegate?
     //MARK: - MENU ITEM
     lazy var starItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Star", image: UIImage(named: "filledStar_black")) { (row, item) in
-            
+            self.delegate?.starItemSelected(self)
         }
     }()
     lazy var replyItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Reply", image: UIImage(named: "reply_black")) { (row, item) in
-            
+            self.delegate?.replyItemSelected(self)
         }
     }()
     lazy var forwardItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Forward", image: UIImage(named: "forward_black")) { (row, item) in
-            
+            self.delegate?.forwardItemSelected(self)
         }
     }()
     lazy var copyItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Copy", image: UIImage(named: "copy_black")) { (row, item) in
-            
+            self.delegate?.copyItemSelected(self)
         }
     }()
     lazy var infoItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Info", image: UIImage(named: "info_black")) { (row, item) in
-            
+            self.delegate?.infoItemSelected(self)
         }
     }()
     lazy var deleteItem : PopUpMenuItem = {
         PopUpMenuItem(title: "Delete", image: UIImage(named: "delete_black")) { (row, item) in
-            
+            self.delegate?.deleteItemSelected(self)
         }
     }()
     
