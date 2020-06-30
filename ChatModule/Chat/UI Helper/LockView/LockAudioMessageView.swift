@@ -65,8 +65,6 @@ class LockAudioMessageView: UIView {
                 let height = (self.frame.size.width/self.frame.size.height)
                 self.transform = self.transform.scaledBy(x: 1, y: height)
                 print(self.frame,height)
-                
-                
             }) { (_) in
                 UIView.animate(withDuration: 0.3, animations: {
 //                 self.transform = self.transform.scaledBy(x: 2, y: 2)

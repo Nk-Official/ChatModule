@@ -242,7 +242,7 @@ extension ComposeMessageToolBar{
         let differenceInLocation = intialMicroPhnBtnLocation.y - nextLocation.y
         if differenceInLocation > 0{
             print("swipe up")
-//            lockView.lockTheView()
+            lockview?.lockTheView()
             gesture.state = .cancelled
         }
     }
@@ -379,7 +379,7 @@ extension ComposeMessageToolBar {
                     }else{
                         if self.stopWatch.second > 1{
                             ///uncomment below line for animate lockview
-//                            self.showLockView()
+                            self.showLockView()
                         }
                         self.blinkMicropPhoneImage()
                         self.timerLbl?.text = timeValue
