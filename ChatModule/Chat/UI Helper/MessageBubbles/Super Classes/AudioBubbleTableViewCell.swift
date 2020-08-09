@@ -61,6 +61,11 @@ class AudioBubbleTableViewCell : MessageTableViewCell{
     func stop(){
         playerManager?.stopAudio()
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerManager?.stopAudio()
+        playerManager = nil
+    }
 }
 //MARK: - AudioPlayerManagerDelegate
 extension AudioBubbleTableViewCell: AudioPlayerManagerDelegate{

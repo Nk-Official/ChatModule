@@ -50,6 +50,10 @@ class AudioPlayerManager : NSObject{
     @objc func playerDidFinishPlaying(note: NSNotification) {
         delegate?.didFinishPlayingAudio(self, url: urlToPlay)
     }
+    deinit {
+        stopAudio()
+        audioPlayer = nil
+    }
 }
 
 
